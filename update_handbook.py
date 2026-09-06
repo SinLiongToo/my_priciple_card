@@ -1328,16 +1328,162 @@ def main():
             display: block !important;
         }}
 
+        /* RWD Responsive Design */
+        @media (max-width: 992px) {{
+            .card-grid {{
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 1.2rem;
+            }}
+        }}
+
         @media (max-width: 768px) {{
-            header {{ padding: 1.5rem 1rem; }}
-            header h1 {{ font-size: 1.75rem; }}
-            .controls-container {{ flex-direction: column; align-items: stretch; }}
-            .tabs {{ overflow-x: auto; }}
-            .search-bar {{ width: 100%; }}
-            .card-grid {{ grid-template-columns: 1fr; }}
-            .flip-card-container {{ height: 420px; }}
-            .display-toggles-bar {{ flex-direction: column; align-items: flex-start; gap: 0.6rem; }}
-            .preset-links {{ margin-top: 0.25rem; }}
+            header {{
+                padding: 1.25rem 1rem 1rem;
+            }}
+            header h1 {{
+                font-size: 1.65rem;
+            }}
+            header p {{
+                font-size: 0.88rem;
+                margin-bottom: 1rem;
+            }}
+            .controls-container {{
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
+            }}
+            .action-tools {{
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 0.6rem;
+                width: 100%;
+            }}
+            .tabs {{
+                width: 100%;
+                display: flex;
+                overflow-x: auto;
+                white-space: nowrap;
+                justify-content: space-between;
+                -webkit-overflow-scrolling: touch;
+            }}
+            .tab-btn {{
+                padding: 0.5rem 0.85rem;
+                font-size: 0.85rem;
+                flex: 1;
+                text-align: center;
+                white-space: nowrap;
+            }}
+            .search-bar {{
+                flex: 1;
+                min-width: 180px;
+            }}
+            .filter-tags {{
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+                padding-bottom: 0.4rem;
+                margin-bottom: 1rem;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }}
+            .filter-tags::-webkit-scrollbar {{
+                display: none;
+            }}
+            .filter-tag {{
+                flex-shrink: 0;
+            }}
+            .card-grid {{
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }}
+            .principle-card {{
+                padding: 1.25rem 1.1rem;
+            }}
+            .card-title {{
+                font-size: 1.1rem;
+            }}
+            main {{
+                margin: 1.2rem auto;
+                padding: 0 1rem;
+            }}
+            .display-toggles-bar {{
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.65rem;
+                padding-top: 0.75rem;
+            }}
+            .toggle-group-left {{
+                width: 100%;
+            }}
+            .toggle-chips {{
+                width: 100%;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+                padding-bottom: 0.25rem;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }}
+            .toggle-chips::-webkit-scrollbar {{
+                display: none;
+            }}
+            .toggle-chip {{
+                flex-shrink: 0;
+            }}
+            .preset-links {{
+                width: 100%;
+                justify-content: flex-start;
+                margin-top: 0.15rem;
+            }}
+            /* Random card mobile optimizations */
+            .flip-card-container {{
+                height: 480px;
+                max-width: 100%;
+            }}
+            .card-face {{
+                padding: 1.3rem 1.1rem;
+            }}
+            .front-title {{
+                font-size: 1.2rem;
+                line-height: 1.5;
+            }}
+            .back-body {{
+                overflow-y: auto;
+                padding-right: 0.2rem;
+                gap: 0.85rem;
+            }}
+            .lang-section {{
+                font-size: 0.9rem;
+            }}
+            .draw-btn {{
+                width: 100%;
+                justify-content: center;
+                padding: 0.85rem 1.5rem;
+            }}
+        }}
+
+        @media (max-width: 480px) {{
+            header h1 {{
+                font-size: 1.4rem;
+            }}
+            .principle-card {{
+                padding: 1.1rem 0.9rem;
+            }}
+            .card-num, .card-principle-badge {{
+                font-size: 0.72rem;
+                padding: 0.2rem 0.45rem;
+            }}
+            .ref-item-chip {{
+                font-size: 0.72rem;
+                padding: 0.2rem 0.45rem;
+            }}
+            .flip-card-container {{
+                height: 500px;
+            }}
+            .card-face {{
+                padding: 1.1rem 0.85rem;
+            }}
         }}
     </style>
 </head>
