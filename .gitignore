@@ -1,0 +1,32 @@
+# Environment & Secret Keys
+.env
+*.env
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Operating System & Shortcuts
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Editor & IDE configs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Temporary & Log files
+*.log
+*.tmp
+mismatched_pptx.json
+scratch/
+plan.md
+implementation_plan*.md
+* - 複製.pptx
+*_old.pptx*
