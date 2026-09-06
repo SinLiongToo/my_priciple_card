@@ -16,9 +16,12 @@ description: >-
 [工作原則-書.pptx.pptx] (簡報源檔)
          │
          ▼
-[update_handbook.py] ◄───► [translation_db.json] (快取資料庫)
+[update_handbook.py] ◄───► [manual_overrides.json] (👑 最高優先級：人工手動覆蓋庫)
+         ▲                         │
+         │                         ▼
+         │ ◄──────────────► [translation_db.json] (快取資料庫)
          │                         ▲
-         │ (呼叫 Gemini 2.5 Flash API 翻譯新項目)
+         │ (僅新項目呼叫 Gemini 3.8 Flash API 翻譯)
          │
          ├───► [工作原則整理與潤稿.md] (三語手冊)
          ├───► [工作原則整理與潤稿.odt] (實體印刷書籍)
@@ -67,7 +70,40 @@ git push origin main
 
 ---
 
-## 三、三語翻譯標準與要求
+## 三、手動自訂翻譯覆蓋機制 (Manual Overrides)
+
+專案支援 `manual_overrides.json`，提供獨立維護人工潤飾版本的能力。在此設定的條目權重**永遠高於 `translation_db.json` 與 AI 翻譯**，且腳本更新時**絕不會被覆蓋或沖刷**。
+
+### 使用語法範例 (`manual_overrides.json`)：
+
+```json
+{
+  "_README": "在此設定的文字權重最高，絕不會被 AI 或更新腳本覆蓋。",
+  
+  "12": {
+    "mandarin": "自訂編號 12 的優化中文...",
+    "taiwanese": "自訂編號 12 的道地台語漢字..."
+  },
+  
+  "399-1": {
+    "taiwanese": "自訂子項目的台語漢字..."
+  },
+  
+  "principle_1": {
+    "title": "自訂核心原則 1 標題",
+    "mandarin": "自訂核心原則 1 的中文內容..."
+  }
+}
+```
+
+- **卡牌覆蓋**：以簡報卡牌編號作為 Key（例如 `"12"`、`"399-1"`），亦可使用英文原文作為 Key。
+- **原則覆蓋**：以 `"principle_1"` 至 `"principle_20"` 作為 Key。
+- **欄位支援**：可僅覆蓋單一欄位（如僅改 `"taiwanese"`），未覆蓋的欄位將自動沿用既有快取庫翻譯。
+- **生效方式**：編輯存檔後，執行 `python update_handbook.py` 即可同步產出至 HTML、MD 與 ODT。
+
+---
+
+## 四、三語翻譯標準與要求
 
 所有翻譯項目必須恪守以下規範：
 1. **優化中文 (國語 / Mandarin)**：
@@ -81,11 +117,11 @@ git push origin main
 
 ---
 
-## 四、常見問題排查 (Troubleshooting)
+## 五、常見問題排查 (Troubleshooting)
 
 ### 1. 新增的項目沒有翻譯或顯示 `[TBD]`
 - **原因**：環境中缺少 `GEMINI_API_KEY` 或 API 呼叫受限。
-- **解法**：檢查根目錄 `.env` 檔案，確保金鑰有效。或手動將高品質翻譯補入 `translation_db.json` 後重新執行 `python update_handbook.py`。
+- **解法**：檢查根目錄 `.env` 檔案，確保金鑰有效（系統預設使用 `gemini-3.8-flash`）。或手動將自訂翻譯寫入 `manual_overrides.json` 後重新執行 `python update_handbook.py`。
 
 ### 2. 投影片編號跳號或子項目被拆開
 - **原因**：簡報在同一張 Slide 中使用了多個不同大小的文字框。

@@ -103,16 +103,31 @@ def parse_pptx_items(pptx_path):
     return parsed_items
 
 def parse_existing_md(md_path):
-    """Parse Part 1 (Principles 1-20) and other metadata from the existing markdown file."""
+    """Parse Part 1 (Principles 1-20), chapters with golden quotes, and other metadata from markdown."""
     if not os.path.exists(md_path):
-        return "", []
+        return "", [], []
         
-    with open(md_path, "r", encoding="utf-8") as f:
+    with open(md_path, "r", encoding="utf-8-sig") as f:
         content = f.read()
         
     parts = content.split("## 第二部分：簡報對照與逐條潤稿 (簡報版)")
     part1_content = parts[0]
     
+    # Parse chapters and their golden quotes
+    chapters = []
+    chap_matches = list(re.finditer(r"## (第[一二三四五六]篇[^\n]+)", part1_content))
+    for i, m in enumerate(chap_matches):
+        chap_title = m.group(1).strip()
+        start_pos = m.end()
+        end_pos = chap_matches[i+1].start() if i+1 < len(chap_matches) else len(part1_content)
+        chap_body = part1_content[start_pos:end_pos]
+        quotes = re.findall(r">\s*-\s*\*\*☆(.*?)☆\*\*", chap_body)
+        chapters.append({
+            "id": str(i+1),
+            "title": chap_title,
+            "quotes": [f"☆{q.strip()}☆" for q in quotes]
+        })
+
     # Parse principles
     principle_pattern = re.compile(r"#### 原則 (\d+)：(.*?)\n(.*?)(?=\n#### 原則|\n##|\n---|\Z)", re.DOTALL)
     principles = []
@@ -149,7 +164,7 @@ def parse_existing_md(md_path):
             "ref": ref
         })
         
-    return part1_content, principles
+    return part1_content, principles, chapters
 
 def translate_via_gemini(original_text):
     """Translate original English text into Mandarin, English, and Taiwanese using Gemini API."""
@@ -173,8 +188,9 @@ You must return a JSON object with exactly the following keys:
 
 Return ONLY the raw JSON string without markdown blocks or explanation.
 """
+        model_name = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model=model_name,
             contents=prompt,
         )
         
@@ -191,7 +207,7 @@ Return ONLY the raw JSON string without markdown blocks or explanation.
         print(f"Error calling Gemini API: {e}")
         return None
 
-def generate_odt_handbook(principles, final_items, odt_path):
+def generate_odt_handbook(principles, final_items, odt_path, chapters=None):
     """Generate a well-formatted ODT document for the handbook ready for printing/book publishing."""
     from odf.opendocument import OpenDocumentText
     from odf.style import Style, TextProperties, ParagraphProperties, PageLayout, PageLayoutProperties, MasterPage
@@ -316,6 +332,15 @@ def generate_odt_handbook(principles, final_items, odt_path):
             h_chap.addText(current_chapter)
             doc.text.addElement(h_chap)
             
+            if chapters:
+                chap_id = '1' if num <= 4 else ('2' if num <= 8 else ('3' if num <= 11 else ('4' if num <= 14 else ('5' if num <= 17 else '6'))))
+                matched_chap = next((c for c in chapters if c['id'] == chap_id), None)
+                if matched_chap and matched_chap.get('quotes'):
+                    for q in matched_chap['quotes']:
+                        p_q = P(stylename=principle_body_style)
+                        p_q.addText(f"• {q}")
+                        doc.text.addElement(p_q)
+            
         # Add Principle Title (Always starts on new page)
         h_pr = H(outlinelevel=2, stylename=principle_title_style)
         h_pr.addText(f"原則 {num}：{p_item['title']}")
@@ -398,12 +423,24 @@ def main():
     pptx_items = parse_pptx_items(pptx_path)
     print(f"Found {len(pptx_items)} items in PPTX.")
     
-    print("\nStep 2: Loading translation database...")
+    print("\nStep 2: Loading translation database and manual overrides...")
     db = {}
     if os.path.exists(db_path):
-        with open(db_path, "r", encoding="utf-8") as f:
+        with open(db_path, "r", encoding="utf-8-sig") as f:
             db = json.load(f)
     print(f"Loaded {len(db)} entries from database.")
+    
+    overrides_path = "manual_overrides.json"
+    overrides = {}
+    if os.path.exists(overrides_path):
+        try:
+            with open(overrides_path, "r", encoding="utf-8-sig") as f:
+                raw_overrides = json.load(f)
+                overrides = {k: v for k, v in raw_overrides.items() if not k.startswith("_")}
+            if overrides:
+                print(f"Loaded {len(overrides)} active manual override rules from {overrides_path}.")
+        except Exception as e:
+            print(f"Warning: Could not parse {overrides_path}: {e}")
     
     # Track missing or modified items to translate
     missing_items = []
@@ -416,6 +453,9 @@ def main():
         key = item['key']
         original = item['text']
         
+        # Check manual overrides first (by key, e.g. "12", or by original text)
+        override_match = overrides.get(str(key)) or overrides.get(original)
+        
         # Check database by original text match
         db_match = db.get(original)
         
@@ -427,14 +467,25 @@ def main():
                     db_match = db_val
                     break
                     
-        if db_match:
+        if db_match or override_match:
+            base_eng = db_match['english'] if db_match else original
+            base_man = db_match['mandarin'] if db_match else ""
+            base_tai = db_match['taiwanese'] if db_match else ""
+            
+            if override_match and isinstance(override_match, dict):
+                eng = override_match.get('english', base_eng)
+                man = override_match.get('mandarin', base_man)
+                tai = override_match.get('taiwanese', base_tai)
+            else:
+                eng, man, tai = base_eng, base_man, base_tai
+
             final_items.append({
                 "key": key,
                 "slide": item['slide'],
                 "original": original,
-                "english": db_match['english'],
-                "mandarin": db_match['mandarin'],
-                "taiwanese": db_match['taiwanese']
+                "english": eng,
+                "mandarin": man,
+                "taiwanese": tai
             })
         else:
             # We need to translate this
@@ -503,7 +554,22 @@ def main():
     final_items.sort(key=get_key_sort)
     
     print("\nStep 4: Parsing Part 1 (Principles) from existing markdown...")
-    part1_content, principles = parse_existing_md(md_path)
+    part1_content, principles, chapters = parse_existing_md(md_path)
+    
+    # Apply manual overrides to core principles if specified
+    for p in principles:
+        p_num = p['num']
+        p_override = (
+            overrides.get(f"principle_{p_num}")
+            or overrides.get(f"P{p_num}")
+            or overrides.get(f"原則_{p_num}")
+            or overrides.get(f"原則{p_num}")
+        )
+        if p_override and isinstance(p_override, dict):
+            if 'title' in p_override: p['title'] = p_override['title']
+            if 'mandarin' in p_override: p['mandarin'] = p_override['mandarin']
+            if 'english' in p_override: p['english'] = p_override['english']
+            if 'taiwanese' in p_override: p['taiwanese'] = p_override['taiwanese']
     
     if not part1_content:
         # Fallback default title/toc if file does not exist
@@ -552,6 +618,7 @@ def main():
     # We serialize slides and principles as JSON variables in HTML
     principles_json = json.dumps(principles, ensure_ascii=False)
     slides_json = json.dumps(final_items, ensure_ascii=False)
+    chapters_json = json.dumps(chapters, ensure_ascii=False)
 
     slide_groups = {}
     for item in final_items:
@@ -824,6 +891,141 @@ def main():
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 1.5rem;
+        }}
+
+        /* Chapter Header Banner with Golden Quotes */
+        .chapter-header-banner {{
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.85) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: 16px;
+            padding: 1.4rem 1.6rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.25rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }}
+
+        .chapter-header-banner:first-child {{
+            margin-top: 0;
+        }}
+
+        .light-mode .chapter-header-banner {{
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.9) 100%);
+            border-color: rgba(99, 102, 241, 0.2);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.06);
+        }}
+
+        .chapter-banner-top {{
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }}
+
+        .chapter-badge {{
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+        }}
+
+        .chapter-title {{
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 0;
+            letter-spacing: -0.01em;
+        }}
+
+        .chapter-range-chip {{
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+            padding: 0.25rem 0.65rem;
+            border-radius: 99px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }}
+
+        .light-mode .chapter-range-chip {{
+            background: rgba(99, 102, 241, 0.08);
+        }}
+
+        .chapter-quotes-area {{
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px dashed rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            padding: 0.9rem 1.1rem;
+        }}
+
+        .light-mode .chapter-quotes-area {{
+            background: rgba(255, 255, 255, 0.75);
+            border-color: rgba(99, 102, 241, 0.2);
+        }}
+
+        .chapter-quotes-header {{
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #818cf8;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }}
+
+        .light-mode .chapter-quotes-header {{
+            color: #4f46e5;
+        }}
+
+        .chapter-quotes-pills {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }}
+
+        .quote-pill {{
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-main);
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 99px;
+            padding: 0.35rem 0.8rem;
+            letter-spacing: 0.02em;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+            user-select: none;
+        }}
+
+        .light-mode .quote-pill {{
+            background: #ffffff;
+            border-color: rgba(99, 102, 241, 0.2);
+            color: #334155;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }}
+
+        .quote-pill:hover {{
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.18);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+            color: var(--primary);
+        }}
+
+        .light-mode .quote-pill:hover {{
+            background: rgba(99, 102, 241, 0.08);
+            color: var(--primary);
         }}
 
         .principle-card {{
@@ -1628,6 +1830,7 @@ def main():
         // Embed parsed JSON data
         const PRINCIPLES = {principles_json};
         const SLIDES = {slides_json};
+        const CHAPTERS = {chapters_json};
 
         let currentActiveView = 'principles';
         let principlesFilter = 'all';
@@ -1781,43 +1984,79 @@ def main():
                 return;
             }}
 
-            filtered.forEach(p => {{
-                const card = document.createElement('div');
-                card.className = 'principle-card';
-                card.id = `card-principle-${{p.num}}`;
+            // Render by Chapter Groups with Chapter Banner and Golden Quotes
+            CHAPTERS.forEach(chap => {{
+                const chapPrinciples = filtered.filter(p => getChapterId(p.num) === chap.id);
+                if (chapPrinciples.length === 0) return;
 
-                const refKeys = p.ref.split(',').map(r => r.trim()).filter(Boolean);
-                const refChipsHTML = refKeys.map(key => 
-                    `<button class="ref-item-chip" onclick="jumpToSlideCard('${{key}}')" title="點擊直接查看簡報卡牌 No. ${{key}}">No. ${{key}}</button>`
+                // 1. Chapter Header Banner with Golden Quotes
+                const banner = document.createElement('div');
+                banner.className = 'chapter-header-banner';
+
+                const quotesPillsHTML = chap.quotes.map(q => 
+                    `<span class="quote-pill" title="篇章核心指引金句">${{q}}</span>`
                 ).join(' ');
 
-                card.innerHTML = `
-                    <div class="card-header">
-                        <span class="card-num">原則 ${{p.num}}</span>
-                        <span class="card-meta">${{getChapterName(p.num)}}</span>
+                const minNum = Math.min(...chapPrinciples.map(p => p.num));
+                const maxNum = Math.max(...chapPrinciples.map(p => p.num));
+                const rangeText = minNum === maxNum ? `原則 ${{minNum}}` : `原則 ${{minNum}} - ${{maxNum}}`;
+
+                banner.innerHTML = `
+                    <div class="chapter-banner-top">
+                        <span class="chapter-badge">Chapter 0${{chap.id}}</span>
+                        <h2 class="chapter-title">${{chap.title}}</h2>
+                        <span class="chapter-range-chip">${{rangeText}} (共 ${{chapPrinciples.length}} 條原則)</span>
                     </div>
-                    <h3 class="card-title">${{p.title}}</h3>
-                    <div class="lang-section lang-mandarin">
-                        <span class="lang-label">國語 (Mandarin)</span>
-                        <p class="lang-txt">${{p.mandarin}}</p>
-                    </div>
-                    <div class="lang-section lang-english">
-                        <span class="lang-label">English</span>
-                        <p class="lang-txt">${{p.english}}</p>
-                    </div>
-                    <div class="lang-section lang-taiwanese">
-                        <span class="lang-label">台語 (Taiwanese)</span>
-                        <p class="lang-txt">${{p.taiwanese}}</p>
-                    </div>
-                    <div class="all-hidden-notice">⚠️ 所有三語翻譯欄位均已關閉</div>
-                    <div class="ref-items-container">
-                        <span class="ref-items-label">🔗 對照筆記卡牌 (${{refKeys.length}} 條項目，點擊跳轉)</span>
-                        <div class="ref-chips-grid">
-                            ${{refChipsHTML}}
+                    <div class="chapter-quotes-area">
+                        <div class="chapter-quotes-header">
+                            <span>✨ 篇章核心指引金句 (${{chap.quotes.length}} 則)</span>
+                        </div>
+                        <div class="chapter-quotes-pills">
+                            ${{quotesPillsHTML}}
                         </div>
                     </div>
                 `;
-                grid.appendChild(card);
+                grid.appendChild(banner);
+
+                // 2. Principle Cards for this Chapter
+                chapPrinciples.forEach(p => {{
+                    const card = document.createElement('div');
+                    card.className = 'principle-card';
+                    card.id = `card-principle-${{p.num}}`;
+
+                    const refKeys = p.ref.split(',').map(r => r.trim()).filter(Boolean);
+                    const refChipsHTML = refKeys.map(key => 
+                        `<button class="ref-item-chip" onclick="jumpToSlideCard('${{key}}')" title="點擊直接查看簡報卡牌 No. ${{key}}">No. ${{key}}</button>`
+                    ).join(' ');
+
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <span class="card-num">原則 ${{p.num}}</span>
+                            <span class="card-meta">${{getChapterName(p.num)}}</span>
+                        </div>
+                        <h3 class="card-title">${{p.title}}</h3>
+                        <div class="lang-section lang-mandarin">
+                            <span class="lang-label">國語 (Mandarin)</span>
+                            <p class="lang-txt">${{p.mandarin}}</p>
+                        </div>
+                        <div class="lang-section lang-english">
+                            <span class="lang-label">English</span>
+                            <p class="lang-txt">${{p.english}}</p>
+                        </div>
+                        <div class="lang-section lang-taiwanese">
+                            <span class="lang-label">台語 (Taiwanese)</span>
+                            <p class="lang-txt">${{p.taiwanese}}</p>
+                        </div>
+                        <div class="all-hidden-notice">⚠️ 所有三語翻譯欄位均已關閉</div>
+                        <div class="ref-items-container">
+                            <span class="ref-items-label">🔗 對照筆記卡牌 (${{refKeys.length}} 條項目，點擊跳轉)</span>
+                            <div class="ref-chips-grid">
+                                ${{refChipsHTML}}
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                }});
             }});
         }}
 
@@ -2059,7 +2298,7 @@ def main():
     
     # Generate ODT handbook as well
     odt_path = "工作原則整理與潤稿.odt"
-    generate_odt_handbook(principles, final_items, odt_path)
+    generate_odt_handbook(principles, final_items, odt_path, chapters=chapters)
     
     print("\nWorkflow completed successfully!")
 
