@@ -55,12 +55,13 @@
 2. **在 GitHub 建立 Repository 並推送**：
    ```bash
    git branch -M main
-   git remote add origin https://github.com/<您的帳號>/<倉庫名>.git
+   git remote add origin https://github.com/SinLiongToo/my_priciple_card.git
    git push -u origin main
    ```
 3. **在 GitHub 開啟 Pages**：
    進入倉庫的 **Settings** -> **Pages**，將 **Source** 設為 **Deploy from a branch**（Branch: `main` / `/ (root)`）後按 Save。
-   1~2 分鐘後即可用專屬網址隨時隨地用手機或電腦閱讀卡牌！
+   1~2 分鐘後即可使用專屬網址隨時隨地用手機或電腦閱讀卡牌：
+   `https://sinliongtoo.github.io/my_priciple_card/`
 
 ---
 
@@ -114,12 +115,12 @@ Double-click `index.html` to open it in a browser, then enjoy these interactive 
 2. **Create repository on GitHub & push**:
    ```bash
    git branch -M main
-   git remote add origin https://github.com/<your-username>/<repo-name>.git
+   git remote add origin https://github.com/SinLiongToo/my_priciple_card.git
    git push -u origin main
    ```
 3. **Enable GitHub Pages**:
    Go to **Settings** -> **Pages** in your GitHub repository, choose **Deploy from a branch** (Branch: `main` / `/ (root)`), then click Save.
-   Your live site will be ready at: `https://<your-username>.github.io/<repo-name>/`.
+   Your live site will be ready at: `https://sinliongtoo.github.io/my_priciple_card/`.
 
 ---
 
@@ -173,9 +174,10 @@ Double-click `index.html` to open it in a browser, then enjoy these interactive 
 2. **佇 GitHub 開新倉庫並推送**：
    ```bash
    git branch -M main
-   git remote add origin https://github.com/<您的帳號>/<倉庫名>.git
+   git remote add origin https://github.com/SinLiongToo/my_priciple_card.git
    git push -u origin main
    ```
 3. **佇 GitHub 開啟 Pages 功能**：
    入去倉庫的 **Settings** -> **Pages**，將 **Source** 選做 **Deploy from a branch**（Branch: `main` / `/ (root)`）並點 Save。
-   一兩分鐘了後，就會有個人網址，用手機抑是電腦攏會用得隨時抽卡閱讀！
+   一兩分鐘了後，就會有個人網址，用手機抑是電腦攏會用得隨時抽卡閱讀：
+   `https://sinliongtoo.github.io/my_priciple_card/`

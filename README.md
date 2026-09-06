@@ -98,7 +98,7 @@ git commit -m "feat: 工作的管見三語對照卡牌系統與 GitHub Pages 設
 3. 依照 GitHub 提示將本地倉庫連結並推送到遠端：
 ```bash
 git branch -M main
-git remote add origin https://github.com/<您的GitHub帳號>/<倉庫名稱>.git
+git remote add origin https://github.com/SinLiongToo/my_priciple_card.git
 git push -u origin main
 ```
 
@@ -108,7 +108,7 @@ git push -u origin main
 3. 在 **Build and deployment** 下方的 **Source** 選擇 **Deploy from a branch**。
 4. Branch 選擇 `main`，資料夾保持預設 `/ (root)`，點擊 **Save**。
 5. 等候約 1~2 分鐘，上方即會出現專屬公開網址：
-   `https://<您的GitHub帳號>.github.io/<倉庫名稱>/`
+   `https://sinliongtoo.github.io/my_priciple_card/`
    *(您可以將此網址加入手機主畫面，隨時隨地像 App 一樣抽卡閱讀！)*
 
 ---
