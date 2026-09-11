@@ -3,6 +3,7 @@ import os
 import sys
 import json
 import pptx
+from datetime import datetime
 
 # Reconfigure stdout to use UTF-8
 sys.stdout.reconfigure(encoding='utf-8')
@@ -631,6 +632,8 @@ def main():
         max_k = slide_groups[s][-1]
         slide_buttons.append(f'<button class="filter-tag" onclick="filterSlides(\'{s}\')">Slide {s} ({min_k}-{max_k})</button>')
     slides_filter_html = "\n                ".join(slide_buttons)
+    
+    build_timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
     
     # HTML template with embedded styling and logic
     html_content = f"""<!DOCTYPE html>
@@ -1349,6 +1352,27 @@ def main():
             margin-top: auto;
         }}
 
+        .update-badge {{
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            padding: 0.2rem 0.65rem;
+            border-radius: 99px;
+            letter-spacing: 0.02em;
+            vertical-align: middle;
+        }}
+
+        .light-mode .update-badge {{
+            background: rgba(99, 102, 241, 0.08);
+            border-color: rgba(99, 102, 241, 0.2);
+            color: #4f46e5;
+        }}
+
         /* Visibility Controls & Toggles */
         .display-toggles-bar {{
             max-width: 1200px;
@@ -1694,7 +1718,10 @@ def main():
     <header>
         <div class="controls-container">
             <div>
-                <h1>工作的管見</h1>
+                <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.25rem;">
+                    <h1>工作的管見</h1>
+                    <span class="update-badge" title="最後建置與更新時間">🕒 最後更新：{build_timestamp}</span>
+                </div>
                 <p>職場生存與成長的避坑指南 (中・英・台三語對照卡牌)</p>
             </div>
             
@@ -1823,7 +1850,7 @@ def main():
     </main>
 
     <footer>
-        <p>© 2026 工作的管見 - 避坑指南與商務工作原則整理與潤稿系統</p>
+        <p>© 2026 工作的管見 - 避坑指南與商務工作原則整理與潤稿系統 · 最後更新：{build_timestamp}</p>
     </footer>
 
     <script>
