@@ -1422,6 +1422,72 @@ def main():
             align-items: center;
         }}
 
+        .graph-mode-switch {{
+            display: inline-flex;
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid var(--border);
+            border-radius: 99px;
+            padding: 2px;
+            gap: 2px;
+        }}
+
+        .light-mode .graph-mode-switch {{
+            background: rgba(0, 0, 0, 0.05);
+        }}
+
+        .graph-mode-btn {{
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.76rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            border-radius: 99px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-family: inherit;
+        }}
+
+        .graph-mode-btn.active {{
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
+        }}
+
+        .graph-mode-btn:not(.active):hover {{
+            color: var(--text-main);
+        }}
+
+        .drawer-action-btn {{
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: var(--primary);
+            font-size: 0.74rem;
+            font-weight: 600;
+            padding: 0.22rem 0.65rem;
+            border-radius: 99px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-family: inherit;
+        }}
+
+        .drawer-action-btn:hover {{
+            background: var(--primary);
+            color: #ffffff;
+        }}
+
+        .drawer-action-btn.active {{
+            background: #10b981;
+            border-color: #10b981;
+            color: #ffffff;
+        }}
+
         .graph-toolbar-right {{
             display: flex;
             align-items: center;
@@ -2267,6 +2333,10 @@ def main():
                 <div class="graph-toolbar">
                     <div class="graph-toolbar-left">
                         <span class="graph-title">🕸️ 知識關聯圖譜</span>
+                        <div class="graph-mode-switch" id="graphModeSwitch">
+                            <button class="graph-mode-btn active" id="btnModePrinciples" onclick="setGraphMode('principles')">🌐 原則骨幹 (20)</button>
+                            <button class="graph-mode-btn" id="btnModeGalaxy" onclick="setGraphMode('galaxy')">✨ 全景星系 (458卡牌)</button>
+                        </div>
                         <div class="graph-filters" id="graphFilterChips">
                             <button class="filter-tag active" onclick="filterGraphChapter('all')">全部章節</button>
                             <button class="filter-tag" onclick="filterGraphChapter('1')">第一篇</button>
@@ -2293,10 +2363,11 @@ def main():
                         <div class="legend-chip"><span class="legend-dot" style="background:#f59e0b;"></span>Ch.4 職場生存</div>
                         <div class="legend-chip"><span class="legend-dot" style="background:#8b5cf6;"></span>Ch.5 職涯成長</div>
                         <div class="legend-chip"><span class="legend-dot" style="background:#ec4899;"></span>Ch.6 韌性平衡</div>
+                        <div class="legend-chip"><span class="legend-dot" style="background:#fbbf24; border: 1px solid #ffffff;"></span>跨界交匯卡</div>
                     </div>
 
                     <div class="graph-hint">
-                        💡 拖曳背景移動視角 · 滾輪縮放 · 拖曳節點重組 · 點擊節點查看詳情
+                        💡 拖曳平移 · 滾輪縮放 · 雙擊原則展開/收合卡牌 · 點擊原則或卡牌查看詳情
                     </div>
 
                     <!-- Slide-in Detail Drawer -->
@@ -2306,7 +2377,10 @@ def main():
                                 <span class="drawer-badge" id="drawerBadge">原則 1</span>
                                 <span class="drawer-meta" id="drawerMeta">第一篇：效能與工具</span>
                             </div>
-                            <button class="drawer-close-btn" onclick="closeGraphDrawer()" title="關閉面板">✕</button>
+                            <div style="display: flex; align-items: center; gap: 0.4rem;">
+                                <button class="drawer-action-btn" id="btnDrawerSatellite" onclick="toggleCurrentPrincipleSatellite()" title="在畫布上展開或收合此原則的卡牌衛星">🪐 展開卡牌</button>
+                                <button class="drawer-close-btn" onclick="closeGraphDrawer()" title="關閉面板">✕</button>
+                            </div>
                         </div>
                         <div class="drawer-body">
                             <h3 class="drawer-title" id="drawerTitle">原則標題</h3>
@@ -2845,6 +2919,8 @@ def main():
         let graphAnimationId = null;
         let isGraphSimulating = true;
         let graphChapterFilter = 'all';
+        let graphMode = 'principles'; // 'principles' or 'galaxy'
+        let expandedPrinciples = new Set(); // Set of principle numbers (e.g. 1, 6)
 
         let graphCam = {{ x: 0, y: 0, scale: 1.0 }};
         let isPanning = false;
@@ -2856,6 +2932,9 @@ def main():
         let selectedNode = null;
 
         function buildGraphData() {{
+            const prevPos = new Map();
+            graphNodes.forEach(n => prevPos.set(n.id, {{ x: n.x, y: n.y, vx: n.vx, vy: n.vy }}));
+
             graphNodes = [];
             graphEdges = [];
 
@@ -2863,7 +2942,14 @@ def main():
             CHAPTERS.forEach((chap, idx) => {{
                 const id = chap.id;
                 const angle = (idx / 6) * Math.PI * 2 - Math.PI / 2;
-                const ringRadius = 260;
+                const ringRadius = 280;
+                let nx = Math.cos(angle) * ringRadius;
+                let ny = Math.sin(angle) * ringRadius;
+                let nvx = 0, nvy = 0;
+                if (prevPos.has(`c${{id}}`)) {{
+                    const p = prevPos.get(`c${{id}}`);
+                    nx = p.x; ny = p.y; nvx = p.vx; nvy = p.vy;
+                }}
                 graphNodes.push({{
                     id: `c${{id}}`,
                     chapterId: id,
@@ -2872,11 +2958,11 @@ def main():
                     title: chap.title,
                     color: CHAPTER_THEMES[id].color,
                     radius: 34,
-                    mass: 4.5,
-                    x: Math.cos(angle) * ringRadius,
-                    y: Math.sin(angle) * ringRadius,
-                    vx: 0,
-                    vy: 0
+                    mass: 5.0,
+                    x: nx,
+                    y: ny,
+                    vx: nvx,
+                    vy: nvy
                 }});
             }});
 
@@ -2889,6 +2975,14 @@ def main():
                 const jitterAngle = Math.random() * Math.PI * 2;
                 const jitterDist = 80 + Math.random() * 70;
 
+                let nx = chapNode ? chapNode.x + Math.cos(jitterAngle) * jitterDist : (Math.random() - 0.5) * 350;
+                let ny = chapNode ? chapNode.y + Math.sin(jitterAngle) * jitterDist : (Math.random() - 0.5) * 350;
+                let nvx = 0, nvy = 0;
+                if (prevPos.has(`p${{p.num}}`)) {{
+                    const prev = prevPos.get(`p${{p.num}}`);
+                    nx = prev.x; ny = prev.y; nvx = prev.vx; nvy = prev.vy;
+                }}
+
                 const pNode = {{
                     id: `p${{p.num}}`,
                     chapterId: chapId,
@@ -2899,11 +2993,11 @@ def main():
                     color: CHAPTER_THEMES[chapId].color,
                     refCount: refCount,
                     radius: Math.min(28, Math.max(20, 18 + refCount * 0.35)),
-                    mass: 1.2,
-                    x: chapNode ? chapNode.x + Math.cos(jitterAngle) * jitterDist : (Math.random() - 0.5) * 350,
-                    y: chapNode ? chapNode.y + Math.sin(jitterAngle) * jitterDist : (Math.random() - 0.5) * 350,
-                    vx: 0,
-                    vy: 0
+                    mass: 1.5,
+                    x: nx,
+                    y: ny,
+                    vx: nvx,
+                    vy: nvy
                 }};
                 graphNodes.push(pNode);
 
@@ -2912,7 +3006,7 @@ def main():
                     source: `c${{chapId}}`,
                     target: `p${{p.num}}`,
                     type: 'chapter',
-                    distance: 135,
+                    distance: 140,
                     strength: 0.04,
                     color: CHAPTER_THEMES[chapId].color
                 }});
@@ -2933,7 +3027,7 @@ def main():
                             type: 'shared',
                             sharedCards: common,
                             sharedCount: common.length,
-                            distance: 160,
+                            distance: 170,
                             strength: 0.022 * Math.min(3, common.length),
                             color: '#94a3b8'
                         }});
@@ -2952,11 +3046,83 @@ def main():
                         source: `p${{n1}}`,
                         target: `p${{n2}}`,
                         type: 'synergy',
-                        distance: 210,
+                        distance: 220,
                         strength: 0.015,
                         color: '#c084fc'
                     }});
                 }}
+            }});
+
+            // 5. Card Satellite Nodes (458 Cards)
+            const activeCardKeys = new Set();
+            if (graphMode === 'galaxy') {{
+                SLIDES.forEach(s => activeCardKeys.add(s.key));
+            }} else {{
+                PRINCIPLES.forEach(p => {{
+                    if (expandedPrinciples.has(p.num)) {{
+                        SLIDES.forEach(s => {{
+                            if (getMatchedPrinciples(s.key).includes(p.num)) {{
+                                activeCardKeys.add(s.key);
+                            }}
+                        }});
+                    }}
+                }});
+            }}
+
+            activeCardKeys.forEach(key => {{
+                const s = SLIDES.find(item => item.key === key);
+                if (!s) return;
+                const matched = getMatchedPrinciples(key);
+                const primaryPNum = matched[0] || 1;
+                const primaryChapId = getChapterId(primaryPNum);
+                const isBridge = matched.length > 1;
+                const cardColor = isBridge ? '#fbbf24' : CHAPTER_THEMES[primaryChapId].color;
+
+                let nx, ny, nvx = 0, nvy = 0;
+                if (prevPos.has(`s${{key}}`)) {{
+                    const prev = prevPos.get(`s${{key}}`);
+                    nx = prev.x; ny = prev.y; nvx = prev.vx; nvy = prev.vy;
+                }} else {{
+                    const pNode = graphNodes.find(n => n.id === `p${{primaryPNum}}`);
+                    const angle = Math.random() * Math.PI * 2;
+                    const dist = 55 + Math.random() * 45;
+                    nx = pNode ? pNode.x + Math.cos(angle) * dist : (Math.random() - 0.5) * 400;
+                    ny = pNode ? pNode.y + Math.sin(angle) * dist : (Math.random() - 0.5) * 400;
+                }}
+
+                graphNodes.push({{
+                    id: `s${{key}}`,
+                    type: 'card',
+                    key: key,
+                    num: s.num,
+                    slide: s.slide,
+                    title: `No. ${{key}}`,
+                    data: s,
+                    chapterId: primaryChapId,
+                    principles: matched,
+                    isBridge: isBridge,
+                    color: cardColor,
+                    radius: isBridge ? 8 : 6.5,
+                    mass: 0.45,
+                    x: nx,
+                    y: ny,
+                    vx: nvx,
+                    vy: nvy
+                }});
+
+                // Edge from each matching principle to this card
+                matched.forEach(pNum => {{
+                    if (graphNodes.some(n => n.id === `p${{pNum}}`)) {{
+                        graphEdges.push({{
+                            source: `p${{pNum}}`,
+                            target: `s${{key}}`,
+                            type: 'card',
+                            distance: 72,
+                            strength: 0.048,
+                            color: CHAPTER_THEMES[getChapterId(pNum)].color
+                        }});
+                    }}
+                }});
             }});
         }}
 
@@ -3010,7 +3176,8 @@ def main():
                 if (graphChapterFilter !== 'all' && n.chapterId !== graphChapterFilter) continue;
                 const dx = wx - n.x;
                 const dy = wy - n.y;
-                if (dx * dx + dy * dy <= (n.radius + 6) * (n.radius + 6)) {{
+                const hitMargin = n.type === 'card' ? 8 : 6;
+                if (dx * dx + dy * dy <= (n.radius + hitMargin) * (n.radius + hitMargin)) {{
                     return n;
                 }}
             }}
@@ -3021,6 +3188,15 @@ def main():
             const canvas = document.getElementById('graphCanvas');
             const container = document.getElementById('graphCanvasContainer');
             if (!canvas) return;
+
+            // Double click to toggle principle satellite
+            canvas.addEventListener('dblclick', e => {{
+                const pos = getCanvasMousePos(e);
+                const hit = findNodeAtWorldPos(pos.worldX, pos.worldY);
+                if (hit && hit.type === 'principle') {{
+                    togglePrincipleSatellite(hit.num);
+                }}
+            }});
 
             canvas.addEventListener('mousedown', e => {{
                 const pos = getCanvasMousePos(e);
@@ -3061,18 +3237,15 @@ def main():
 
             window.addEventListener('mouseup', e => {{
                 if (currentActiveView !== 'graph') return;
-                const pos = getCanvasMousePos(e);
-                
                 if (draggedNode) {{
-                    if (!mouseMovedDuringClick) {{
-                        handleNodeClick(draggedNode);
-                    }}
+                    if (!mouseMovedDuringClick) handleNodeClick(draggedNode);
                     draggedNode = null;
-                }} else if (isPanning) {{
-                    if (!mouseMovedDuringClick) {{
-                        const hit = findNodeAtWorldPos(pos.worldX, pos.worldY);
-                        if (hit) handleNodeClick(hit);
-                    }}
+                }} else if (isPanning && !mouseMovedDuringClick) {{
+                    const pos = getCanvasMousePos(e);
+                    const hit = findNodeAtWorldPos(pos.worldX, pos.worldY);
+                    if (hit) handleNodeClick(hit);
+                }}
+                if (isPanning) {{
                     isPanning = false;
                     container.classList.remove('panning');
                 }}
@@ -3082,7 +3255,7 @@ def main():
                 e.preventDefault();
                 const pos = getCanvasMousePos(e);
                 const zoomFactor = e.deltaY < 0 ? 1.12 : 0.89;
-                const newScale = Math.max(0.35, Math.min(2.5, graphCam.scale * zoomFactor));
+                const newScale = Math.max(0.35, Math.min(2.8, graphCam.scale * zoomFactor));
 
                 graphCam.x -= (pos.worldX * newScale - pos.worldX * graphCam.scale);
                 graphCam.y -= (pos.worldY * newScale - pos.worldY * graphCam.scale);
@@ -3133,7 +3306,7 @@ def main():
                     const newDist = Math.sqrt(dx * dx + dy * dy);
                     if (touchDist > 0) {{
                         const factor = newDist / touchDist;
-                        graphCam.scale = Math.max(0.35, Math.min(2.5, graphCam.scale * factor));
+                        graphCam.scale = Math.max(0.35, Math.min(2.8, graphCam.scale * factor));
                     }}
                     touchDist = newDist;
                 }}
@@ -3162,7 +3335,58 @@ def main():
                 filterGraphChapter(node.chapterId);
             }} else if (node.type === 'principle') {{
                 openPrincipleDrawer(node);
+            }} else if (node.type === 'card') {{
+                openCardDrawer(node);
             }}
+        }}
+
+        function setGraphMode(mode) {{
+            graphMode = mode;
+            const btnP = document.getElementById('btnModePrinciples');
+            const btnG = document.getElementById('btnModeGalaxy');
+            if (btnP) btnP.classList.toggle('active', mode === 'principles');
+            if (btnG) btnG.classList.toggle('active', mode === 'galaxy');
+            buildGraphData();
+            isGraphSimulating = true;
+            updateSatelliteButtonState();
+        }}
+
+        function togglePrincipleSatellite(pNum) {{
+            if (expandedPrinciples.has(pNum)) {{
+                expandedPrinciples.delete(pNum);
+            }} else {{
+                expandedPrinciples.add(pNum);
+            }}
+            if (graphMode === 'principles') {{
+                buildGraphData();
+                isGraphSimulating = true;
+            }}
+            updateSatelliteButtonState();
+        }}
+
+        function toggleCurrentPrincipleSatellite() {{
+            if (!selectedNode || selectedNode.type !== 'principle') return;
+            if (graphMode === 'galaxy') {{
+                setGraphMode('principles');
+                expandedPrinciples = new Set([selectedNode.num]);
+                buildGraphData();
+            }} else {{
+                togglePrincipleSatellite(selectedNode.num);
+            }}
+            updateSatelliteButtonState();
+        }}
+
+        function updateSatelliteButtonState() {{
+            const satBtn = document.getElementById('btnDrawerSatellite');
+            if (!satBtn) return;
+            if (!selectedNode || selectedNode.type !== 'principle') {{
+                satBtn.style.display = 'none';
+                return;
+            }}
+            satBtn.style.display = 'inline-flex';
+            const isExp = graphMode === 'galaxy' || expandedPrinciples.has(selectedNode.num);
+            satBtn.innerText = isExp ? '🪐 收合卡牌' : '🪐 展開卡牌';
+            satBtn.classList.toggle('active', isExp);
         }}
 
         function openPrincipleDrawer(node) {{
@@ -3227,6 +3451,52 @@ def main():
                 cardsList.appendChild(item);
             }});
 
+            updateSatelliteButtonState();
+            drawer.classList.add('open');
+        }}
+
+        function openCardDrawer(node) {{
+            selectedNode = node;
+            const drawer = document.getElementById('graphDrawer');
+            if (!drawer) return;
+
+            document.getElementById('drawerBadge').innerText = `卡牌 No. ${{node.key}}`;
+            const chapName = CHAPTER_THEMES[node.chapterId] ? CHAPTER_THEMES[node.chapterId].name : '簡報卡牌';
+            document.getElementById('drawerMeta').innerText = `Slide ${{node.data.slide}} · ${{chapName}}`;
+            document.getElementById('drawerTitle').innerText = node.isBridge ? `跨界交匯卡牌 No. ${{node.key}} (關聯 ${{node.principles.length}} 原則)` : `簡報卡牌 No. ${{node.key}}`;
+
+            document.getElementById('drawerMandarin').innerText = node.data.mandarin || '無中文潤稿';
+            document.getElementById('drawerEnglish').innerText = node.data.english || node.data.original || '';
+            document.getElementById('drawerTaiwanese').innerText = node.data.taiwanese || '無台文潤稿';
+
+            // Connected principles
+            const connChipsContainer = document.getElementById('drawerConnectedPrinciples');
+            connChipsContainer.innerHTML = '';
+            node.principles.forEach(pNum => {{
+                const pObj = PRINCIPLES.find(p => p.num === pNum);
+                const btn = document.createElement('button');
+                btn.className = 'drawer-conn-chip';
+                btn.innerText = `原則 ${{pNum}}${{pObj ? ' ' + pObj.title.slice(0, 7) + '..' : ''}}`;
+                btn.title = `聚焦至原則 ${{pNum}}`;
+                btn.onclick = () => focusPrincipleInGraph(pNum);
+                connChipsContainer.appendChild(btn);
+            }});
+
+            document.getElementById('drawerCardsLabel').innerText = `🔗 原文摘錄與導航`;
+            const cardsList = document.getElementById('drawerCardsList');
+            cardsList.innerHTML = `
+                <div class="drawer-card-item" onclick="jumpToSlideCard('${{node.key}}')" style="background: rgba(99, 102, 241, 0.1); border-color: var(--primary);">
+                    <div class="drawer-card-item-top">
+                        <span class="drawer-card-key">🗂️ 前往「簡報卡牌」視角檢視完整卡牌</span>
+                        <span class="drawer-card-jump">點擊跳轉 ↗</span>
+                    </div>
+                    <div class="drawer-card-mandarin" style="color: var(--text-muted); font-size: 0.78rem;">
+                        <b>投影片原文：</b>${{node.data.original || ''}}
+                    </div>
+                </div>
+            `;
+
+            updateSatelliteButtonState();
             drawer.classList.add('open');
         }}
 
@@ -3234,6 +3504,7 @@ def main():
             const drawer = document.getElementById('graphDrawer');
             if (drawer) drawer.classList.remove('open');
             selectedNode = null;
+            updateSatelliteButtonState();
         }}
 
         function focusPrincipleInGraph(num) {{
@@ -3282,18 +3553,25 @@ def main():
         function stepPhysics() {{
             if (!isGraphSimulating) return;
 
-            const kRepel = 2400;
-            // 1. Repulsion between all nodes
+            const kRepel = 2200;
+            const maxRepelDist = 180;
+            const maxRepelDistSq = maxRepelDist * maxRepelDist;
+
+            // 1. Repulsion with spatial distance pruning
             for (let i = 0; i < graphNodes.length; i++) {{
                 const n1 = graphNodes[i];
                 for (let j = i + 1; j < graphNodes.length; j++) {{
                     const n2 = graphNodes[j];
                     const dx = n2.x - n1.x;
                     const dy = n2.y - n1.y;
-                    let distSq = dx * dx + dy * dy;
-                    if (distSq < 1) distSq = 1;
+                    const distSq = dx * dx + dy * dy;
+
+                    // Prune far card-to-card pairs for 60fps performance
+                    if (distSq > maxRepelDistSq && n1.type === 'card' && n2.type === 'card') continue;
+                    if (distSq < 1) continue;
+
                     const dist = Math.sqrt(distSq);
-                    const force = (kRepel * (n1.mass * n2.mass)) / (distSq + 400);
+                    const force = (kRepel * (n1.mass * n2.mass)) / (distSq + 240);
                     const fx = (dx / dist) * force;
                     const fy = (dy / dist) * force;
 
@@ -3327,16 +3605,17 @@ def main():
             graphNodes.forEach(node => {{
                 if (node === draggedNode) return;
                 
-                node.vx += (-node.x) * 0.0025;
-                node.vy += (-node.y) * 0.0025;
+                const pull = node.type === 'card' ? 0.0008 : 0.0025;
+                node.vx += (-node.x) * pull;
+                node.vy += (-node.y) * pull;
 
-                node.vx *= 0.88;
-                node.vy *= 0.88;
+                node.vx *= 0.86;
+                node.vy *= 0.86;
 
                 const speed = Math.sqrt(node.vx * node.vx + node.vy * node.vy);
-                if (speed > 10) {{
-                    node.vx = (node.vx / speed) * 10;
-                    node.vy = (node.vy / speed) * 10;
+                if (speed > 8) {{
+                    node.vx = (node.vx / speed) * 8;
+                    node.vy = (node.vy / speed) * 8;
                 }}
 
                 node.x += node.vx;
@@ -3380,10 +3659,10 @@ def main():
                 const isConnected = activeNode && (e.source === activeNode.id || e.target === activeNode.id);
                 let alpha = 0.28;
                 if (activeNode) {{
-                    alpha = isConnected ? 0.95 : 0.08;
+                    alpha = isConnected ? 0.95 : 0.06;
                 }} else if (graphChapterFilter !== 'all') {{
                     const inChap = (s.chapterId === graphChapterFilter || t.chapterId === graphChapterFilter);
-                    alpha = inChap ? 0.5 : 0.08;
+                    alpha = inChap ? 0.5 : 0.06;
                 }}
 
                 ctx.save();
@@ -3401,6 +3680,10 @@ def main():
                     ctx.strokeStyle = '#c084fc';
                     ctx.lineWidth = isConnected ? 2.5 : 1.2;
                     ctx.setLineDash([6, 3]);
+                }} else if (e.type === 'card') {{
+                    ctx.strokeStyle = isConnected ? e.color : (isLight ? '#cbd5e1' : '#475569');
+                    ctx.lineWidth = isConnected ? 2.0 : 0.8;
+                    ctx.setLineDash([]);
                 }}
 
                 ctx.beginPath();
@@ -3433,9 +3716,9 @@ def main():
                 const isFiltered = (graphChapterFilter !== 'all' && node.chapterId !== graphChapterFilter);
                 let alpha = 1.0;
                 if (isFiltered) {{
-                    alpha = 0.18;
+                    alpha = 0.15;
                 }} else if (activeNode) {{
-                    alpha = connectedNodeIds.has(node.id) ? 1.0 : 0.22;
+                    alpha = connectedNodeIds.has(node.id) ? 1.0 : 0.18;
                 }}
 
                 const isSelected = selectedNode && selectedNode.id === node.id;
@@ -3465,13 +3748,26 @@ def main():
 
                     ctx.font = '9px "Noto Sans TC", sans-serif';
                     ctx.fillText(node.title.slice(0, 4), node.x, node.y + 9);
-                }} else {{
+                }} else if (node.type === 'principle') {{
                     // Principle Node
+                    const isExp = graphMode === 'galaxy' || expandedPrinciples.has(node.num);
+
                     if (isSelected || isHovered) {{
                         ctx.beginPath();
                         ctx.arc(node.x, node.y, node.radius + 6, 0, Math.PI * 2);
                         ctx.fillStyle = isLight ? 'rgba(99, 102, 241, 0.2)' : 'rgba(99, 102, 241, 0.35)';
                         ctx.fill();
+                    }}
+
+                    // Satellite orbit indicator if expanded
+                    if (isExp) {{
+                        ctx.beginPath();
+                        ctx.arc(node.x, node.y, node.radius + 5, 0, Math.PI * 2);
+                        ctx.strokeStyle = node.color;
+                        ctx.lineWidth = 1.2;
+                        ctx.setLineDash([3, 3]);
+                        ctx.stroke();
+                        ctx.setLineDash([]);
                     }}
 
                     ctx.beginPath();
@@ -3498,10 +3794,82 @@ def main():
                         const displayTitle = node.title.length > 7 ? node.title.slice(0, 6) + '..' : node.title;
                         ctx.fillText(displayTitle, node.x, node.y + node.radius + 4);
                     }}
+                }} else if (node.type === 'card') {{
+                    // Card Satellite Node
+                    if (isSelected || isHovered) {{
+                        ctx.beginPath();
+                        ctx.arc(node.x, node.y, node.radius + 4, 0, Math.PI * 2);
+                        ctx.fillStyle = node.isBridge ? 'rgba(251, 191, 36, 0.35)' : 'rgba(99, 102, 241, 0.3)';
+                        ctx.fill();
+                    }}
+
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, node.radius + (isHovered ? 2 : 0), 0, Math.PI * 2);
+                    ctx.fillStyle = node.isBridge ? '#fbbf24' : node.color;
+                    ctx.fill();
+
+                    ctx.lineWidth = isSelected ? 2.5 : (node.isBridge ? 2 : 1.2);
+                    ctx.strokeStyle = isLight ? '#ffffff' : '#0f172a';
+                    ctx.stroke();
+
+                    // Inner dot for bridge card
+                    if (node.isBridge) {{
+                        ctx.beginPath();
+                        ctx.arc(node.x, node.y, 2.2, 0, Math.PI * 2);
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fill();
+                    }}
+
+                    // Card key text when zoomed in or hovered
+                    if (graphCam.scale >= 0.85 || isHovered || isSelected) {{
+                        ctx.fillStyle = isLight ? '#334155' : '#e2e8f0';
+                        ctx.font = 'bold 8px Outfit, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'top';
+                        ctx.fillText(node.key, node.x, node.y + node.radius + 3);
+                    }}
                 }}
 
                 ctx.restore();
             }});
+
+            // Draw hover tooltip for card node
+            if (hoveredNode && hoveredNode.type === 'card') {{
+                const tipText = hoveredNode.data.mandarin ? hoveredNode.data.mandarin.slice(0, 24) + '..' : `卡牌 No. ${{hoveredNode.key}}`;
+                const tipTitle = `No. ${{hoveredNode.key}}${{hoveredNode.isBridge ? ' (跨界交匯卡)' : ''}}`;
+                
+                ctx.save();
+                ctx.font = 'bold 10px Outfit, sans-serif';
+                const titleWidth = ctx.measureText(tipTitle).width;
+                ctx.font = '9px "Noto Sans TC", sans-serif';
+                const textWidth = ctx.measureText(tipText).width;
+                const boxW = Math.max(titleWidth, textWidth) + 20;
+                const boxH = 36;
+                const boxX = hoveredNode.x - boxW / 2;
+                const boxY = hoveredNode.y - hoveredNode.radius - boxH - 8;
+
+                ctx.fillStyle = isLight ? 'rgba(255, 255, 255, 0.96)' : 'rgba(15, 23, 42, 0.95)';
+                ctx.shadowColor = 'rgba(0,0,0,0.3)';
+                ctx.shadowBlur = 8;
+                ctx.beginPath();
+                ctx.roundRect(boxX, boxY, boxW, boxH, 6);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                ctx.strokeStyle = hoveredNode.isBridge ? '#fbbf24' : hoveredNode.color;
+                ctx.lineWidth = 1.2;
+                ctx.stroke();
+
+                ctx.fillStyle = hoveredNode.isBridge ? (isLight ? '#b45309' : '#fbbf24') : hoveredNode.color;
+                ctx.font = 'bold 9.5px Outfit, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'top';
+                ctx.fillText(tipTitle, boxX + 9, boxY + 5);
+
+                ctx.fillStyle = isLight ? '#334155' : '#cbd5e1';
+                ctx.font = '8.5px "Noto Sans TC", sans-serif';
+                ctx.fillText(tipText, boxX + 9, boxY + 19);
+                ctx.restore();
+            }}
 
             ctx.restore();
         }}
