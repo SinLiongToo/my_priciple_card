@@ -1369,6 +1369,382 @@ def main():
             opacity: 0;
         }}
 
+        /* VIEW 4: Connection Graph (關係圖譜) */
+        .graph-wrapper {{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }}
+
+        .graph-toolbar {{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1.25rem;
+            background: rgba(0, 0, 0, 0.18);
+            border-bottom: 1px solid var(--border);
+        }}
+
+        .light-mode .graph-toolbar {{
+            background: rgba(0, 0, 0, 0.03);
+        }}
+
+        .graph-toolbar-left {{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.85rem;
+        }}
+
+        .graph-title {{
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }}
+
+        .graph-filters {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            align-items: center;
+        }}
+
+        .graph-toolbar-right {{
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }}
+
+        .graph-btn {{
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0.35rem 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-family: inherit;
+        }}
+
+        .light-mode .graph-btn {{
+            background: rgba(79, 70, 229, 0.08);
+            border-color: rgba(79, 70, 229, 0.2);
+            color: var(--primary);
+        }}
+
+        .graph-btn:hover {{
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }}
+
+        .graph-canvas-container {{
+            position: relative;
+            width: 100%;
+            height: 720px;
+            overflow: hidden;
+            background: radial-gradient(circle at center, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.8) 100%);
+            cursor: grab;
+        }}
+
+        .light-mode .graph-canvas-container {{
+            background: radial-gradient(circle at center, rgba(241, 245, 249, 0.8) 0%, rgba(226, 232, 240, 0.5) 100%);
+        }}
+
+        .graph-canvas-container.panning {{
+            cursor: grabbing;
+        }}
+
+        #graphCanvas {{
+            display: block;
+            width: 100%;
+            height: 100%;
+        }}
+
+        .graph-legend {{
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.8rem;
+            background: rgba(15, 23, 42, 0.82);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.4rem 0.85rem;
+            font-size: 0.76rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            pointer-events: none;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }}
+
+        .light-mode .graph-legend {{
+            background: rgba(255, 255, 255, 0.88);
+            color: var(--text-main);
+        }}
+
+        .legend-chip {{
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }}
+
+        .legend-dot {{
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }}
+
+        .graph-hint {{
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            pointer-events: none;
+            z-index: 5;
+        }}
+
+        .light-mode .graph-hint {{
+            background: rgba(255, 255, 255, 0.85);
+            color: #64748b;
+        }}
+
+        /* Sliding Detail Drawer */
+        .graph-drawer {{
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 440px;
+            max-width: 92%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-left: 1px solid var(--border);
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: -8px 0 35px rgba(0, 0, 0, 0.35);
+        }}
+
+        .light-mode .graph-drawer {{
+            background: rgba(255, 255, 255, 0.96);
+        }}
+
+        .graph-drawer.open {{
+            transform: translateX(0);
+        }}
+
+        .drawer-header {{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.1rem 1.4rem;
+            border-bottom: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.15);
+        }}
+
+        .light-mode .drawer-header {{
+            background: rgba(0, 0, 0, 0.02);
+        }}
+
+        .drawer-title-group {{
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }}
+
+        .drawer-badge {{
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            background: rgba(99, 102, 241, 0.12);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+        }}
+
+        .drawer-meta {{
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }}
+
+        .drawer-close-btn {{
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            line-height: 1;
+        }}
+
+        .drawer-close-btn:hover {{
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.1);
+        }}
+
+        .drawer-body {{
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }}
+
+        .drawer-title {{
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.45;
+        }}
+
+        .drawer-connected-section, .drawer-cards-section {{
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            padding-top: 0.8rem;
+            border-top: 1px dashed var(--border);
+        }}
+
+        .drawer-section-label {{
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }}
+
+        .drawer-connected-chips {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+        }}
+
+        .drawer-conn-chip {{
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            border-radius: 99px;
+            border: 1px solid var(--border);
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }}
+
+        .drawer-conn-chip:hover {{
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }}
+
+        .drawer-cards-list {{
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            max-height: 280px;
+            overflow-y: auto;
+            padding-right: 0.3rem;
+        }}
+
+        .drawer-card-item {{
+            background: rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.65rem 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }}
+
+        .light-mode .drawer-card-item {{
+            background: rgba(0, 0, 0, 0.02);
+        }}
+
+        .drawer-card-item:hover {{
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.08);
+            transform: translateX(3px);
+        }}
+
+        .drawer-card-item-top {{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.3rem;
+            font-size: 0.75rem;
+        }}
+
+        .drawer-card-key {{
+            font-weight: 700;
+            color: var(--primary);
+        }}
+
+        .drawer-card-jump {{
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }}
+
+        .drawer-card-mandarin {{
+            font-size: 0.82rem;
+            color: var(--text-main);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }}
+
+        @media (max-width: 768px) {{
+            .graph-canvas-container {{
+                height: 520px;
+            }}
+            .graph-drawer {{
+                width: 100%;
+                max-width: 100%;
+            }}
+            .graph-legend {{
+                display: none;
+            }}
+        }}
+
         /* Footer block */
         footer {{
             text-align: center;
@@ -1766,6 +2142,7 @@ def main():
                     <button class="tab-btn active" onclick="switchView('principles')">核心原則 (20)</button>
                     <button class="tab-btn" onclick="switchView('slides')">簡報卡牌 ({len(final_items)})</button>
                     <button class="tab-btn" onclick="switchView('random')">隨機抽卡</button>
+                    <button class="tab-btn" onclick="switchView('graph')">關係圖譜 🕸️</button>
                 </div>
                 
                 <div class="search-bar" id="searchBarContainer">
@@ -1883,6 +2260,83 @@ def main():
                 </button>
             </div>
         </section>
+
+        <!-- VIEW 4: Connection Graph (關係圖譜) -->
+        <section id="view-graph" class="section-view">
+            <div class="graph-wrapper">
+                <div class="graph-toolbar">
+                    <div class="graph-toolbar-left">
+                        <span class="graph-title">🕸️ 知識關聯圖譜</span>
+                        <div class="graph-filters" id="graphFilterChips">
+                            <button class="filter-tag active" onclick="filterGraphChapter('all')">全部章節</button>
+                            <button class="filter-tag" onclick="filterGraphChapter('1')">第一篇</button>
+                            <button class="filter-tag" onclick="filterGraphChapter('2')">第二篇</button>
+                            <button class="filter-tag" onclick="filterGraphChapter('3')">第三篇</button>
+                            <button class="filter-tag" onclick="filterGraphChapter('4')">第四篇</button>
+                            <button class="filter-tag" onclick="filterGraphChapter('5')">第五篇</button>
+                            <button class="filter-tag" onclick="filterGraphChapter('6')">第六篇</button>
+                        </div>
+                    </div>
+                    <div class="graph-toolbar-right">
+                        <button class="graph-btn" id="btnGraphFreeze" onclick="toggleGraphSimulation()" title="暫停 / 恢復節點物理模擬">⏸️ 暫停模擬</button>
+                        <button class="graph-btn" onclick="resetGraphView()" title="重置視角與縮放">🎯 重置視角</button>
+                    </div>
+                </div>
+                
+                <div class="graph-canvas-container" id="graphCanvasContainer">
+                    <canvas id="graphCanvas"></canvas>
+                    
+                    <div class="graph-legend">
+                        <div class="legend-chip"><span class="legend-dot" style="background:#6366f1;"></span>Ch.1 效能工具</div>
+                        <div class="legend-chip"><span class="legend-dot" style="background:#0ea5e9;"></span>Ch.2 思考決策</div>
+                        <div class="legend-chip"><span class="legend-dot" style="background:#10b981;"></span>Ch.3 溝通協作</div>
+                        <div class="legend-chip"><span class="legend-dot" style="background:#f59e0b;"></span>Ch.4 職場生存</div>
+                        <div class="legend-chip"><span class="legend-dot" style="background:#8b5cf6;"></span>Ch.5 職涯成長</div>
+                        <div class="legend-chip"><span class="legend-dot" style="background:#ec4899;"></span>Ch.6 韌性平衡</div>
+                    </div>
+
+                    <div class="graph-hint">
+                        💡 拖曳背景移動視角 · 滾輪縮放 · 拖曳節點重組 · 點擊節點查看詳情
+                    </div>
+
+                    <!-- Slide-in Detail Drawer -->
+                    <div class="graph-drawer" id="graphDrawer">
+                        <div class="drawer-header">
+                            <div class="drawer-title-group">
+                                <span class="drawer-badge" id="drawerBadge">原則 1</span>
+                                <span class="drawer-meta" id="drawerMeta">第一篇：效能與工具</span>
+                            </div>
+                            <button class="drawer-close-btn" onclick="closeGraphDrawer()" title="關閉面板">✕</button>
+                        </div>
+                        <div class="drawer-body">
+                            <h3 class="drawer-title" id="drawerTitle">原則標題</h3>
+                            <div class="lang-section lang-mandarin">
+                                <span class="lang-label">國語 (Mandarin)</span>
+                                <p class="lang-txt" id="drawerMandarin"></p>
+                            </div>
+                            <div class="lang-section lang-english">
+                                <span class="lang-label">English</span>
+                                <p class="lang-txt" id="drawerEnglish"></p>
+                            </div>
+                            <div class="lang-section lang-taiwanese">
+                                <span class="lang-label">台語 (Taiwanese)</span>
+                                <p class="lang-txt" id="drawerTaiwanese"></p>
+                            </div>
+
+                            <div class="drawer-connected-section">
+                                <span class="drawer-section-label">🔗 關聯原則 (點擊聚焦)</span>
+                                <div class="drawer-connected-chips" id="drawerConnectedPrinciples"></div>
+                            </div>
+
+                            <div class="drawer-cards-section">
+                                <span class="drawer-section-label" id="drawerCardsLabel">📑 對照簡報卡牌 (0 則)</span>
+                                <div class="drawer-cards-list" id="drawerCardsList"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -1973,16 +2427,19 @@ def main():
             const tabButtons = document.querySelectorAll('.tab-btn');
             tabButtons.forEach(btn => btn.classList.remove('active'));
             
-            const tabIndexMap = {{ 'principles': 0, 'slides': 1, 'random': 2 }};
-            tabButtons[tabIndexMap[viewName]].classList.add('active');
+            const tabIndexMap = {{ 'principles': 0, 'slides': 1, 'random': 2, 'graph': 3 }};
+            if (tabIndexMap[viewName] !== undefined && tabButtons[tabIndexMap[viewName]]) {{
+                tabButtons[tabIndexMap[viewName]].classList.add('active');
+            }}
             
             // Toggle view containers
             document.querySelectorAll('.section-view').forEach(view => view.classList.remove('active'));
-            document.getElementById(`view-${{viewName}}`).classList.add('active');
+            const targetView = document.getElementById(`view-${{viewName}}`);
+            if (targetView) targetView.classList.add('active');
             
             // Show/hide search bar based on view
             const searchBar = document.getElementById('searchBarContainer');
-            if (viewName === 'random') {{
+            if (viewName === 'random' || viewName === 'graph') {{
                 searchBar.style.display = 'none';
             }} else {{
                 searchBar.style.display = 'flex';
@@ -1990,6 +2447,15 @@ def main():
                 document.getElementById('searchInput').value = '';
                 searchQuery = '';
                 handleSearch();
+            }}
+
+            if (viewName === 'graph') {{
+                initOrResizeGraph();
+            }} else {{
+                if (typeof graphAnimationId !== 'undefined' && graphAnimationId) {{
+                    cancelAnimationFrame(graphAnimationId);
+                    graphAnimationId = null;
+                }}
             }}
         }}
 
@@ -2347,6 +2813,706 @@ def main():
                 setTimeout(() => {{
                     particle.remove();
                 }}, 1000);
+            }}
+        }}
+
+        // ==========================================
+        // VIEW 4: Interactive Connection Graph (關係圖譜) Engine
+        // ==========================================
+        const CHAPTER_THEMES = {{
+            '1': {{ color: '#6366f1', name: '第一篇：效能與工具' }},
+            '2': {{ color: '#0ea5e9', name: '第二篇：思考與決策' }},
+            '3': {{ color: '#10b981', name: '第三篇：溝通與協作' }},
+            '4': {{ color: '#f59e0b', name: '第四篇：職場生存與防線' }},
+            '5': {{ color: '#8b5cf6', name: '第五篇：職涯與個人成長' }},
+            '6': {{ color: '#ec4899', name: '第六篇：能量、韌性與生活平衡' }}
+        }};
+
+        const SEMANTIC_SYNERGIES = [
+            [1, 19], [19, 20], [1, 20],
+            [11, 13], [12, 13],
+            [3, 4], [7, 8],
+            [6, 18],
+            [15, 17],
+            [9, 14],
+            [2, 5],
+            [10, 16]
+        ];
+
+        let graphNodes = [];
+        let graphEdges = [];
+        let graphInitialized = false;
+        let graphAnimationId = null;
+        let isGraphSimulating = true;
+        let graphChapterFilter = 'all';
+
+        let graphCam = {{ x: 0, y: 0, scale: 1.0 }};
+        let isPanning = false;
+        let panStartX = 0;
+        let panStartY = 0;
+        let mouseMovedDuringClick = false;
+        let draggedNode = null;
+        let hoveredNode = null;
+        let selectedNode = null;
+
+        function buildGraphData() {{
+            graphNodes = [];
+            graphEdges = [];
+
+            // 1. Chapter Hub Nodes (6)
+            CHAPTERS.forEach((chap, idx) => {{
+                const id = chap.id;
+                const angle = (idx / 6) * Math.PI * 2 - Math.PI / 2;
+                const ringRadius = 260;
+                graphNodes.push({{
+                    id: `c${{id}}`,
+                    chapterId: id,
+                    type: 'chapter',
+                    num: parseInt(id),
+                    title: chap.title,
+                    color: CHAPTER_THEMES[id].color,
+                    radius: 34,
+                    mass: 4.5,
+                    x: Math.cos(angle) * ringRadius,
+                    y: Math.sin(angle) * ringRadius,
+                    vx: 0,
+                    vy: 0
+                }});
+            }});
+
+            // 2. Principle Nodes (20)
+            PRINCIPLES.forEach(p => {{
+                const chapId = getChapterId(p.num);
+                const chapNode = graphNodes.find(n => n.id === `c${{chapId}}`);
+                const refCount = p.ref.split(',').map(r => r.trim()).filter(Boolean).length;
+                
+                const jitterAngle = Math.random() * Math.PI * 2;
+                const jitterDist = 80 + Math.random() * 70;
+
+                const pNode = {{
+                    id: `p${{p.num}}`,
+                    chapterId: chapId,
+                    type: 'principle',
+                    num: p.num,
+                    title: p.title,
+                    data: p,
+                    color: CHAPTER_THEMES[chapId].color,
+                    refCount: refCount,
+                    radius: Math.min(28, Math.max(20, 18 + refCount * 0.35)),
+                    mass: 1.2,
+                    x: chapNode ? chapNode.x + Math.cos(jitterAngle) * jitterDist : (Math.random() - 0.5) * 350,
+                    y: chapNode ? chapNode.y + Math.sin(jitterAngle) * jitterDist : (Math.random() - 0.5) * 350,
+                    vx: 0,
+                    vy: 0
+                }};
+                graphNodes.push(pNode);
+
+                // Chapter -> Principle structural edge
+                graphEdges.push({{
+                    source: `c${{chapId}}`,
+                    target: `p${{p.num}}`,
+                    type: 'chapter',
+                    distance: 135,
+                    strength: 0.04,
+                    color: CHAPTER_THEMES[chapId].color
+                }});
+            }});
+
+            // 3. Shared Slide Cards Edges (Principle <-> Principle)
+            for (let i = 0; i < PRINCIPLES.length; i++) {{
+                const p1 = PRINCIPLES[i];
+                const refs1 = new Set(p1.ref.split(',').map(r => r.trim()).filter(Boolean));
+                for (let j = i + 1; j < PRINCIPLES.length; j++) {{
+                    const p2 = PRINCIPLES[j];
+                    const refs2 = p2.ref.split(',').map(r => r.trim()).filter(Boolean);
+                    const common = refs2.filter(r => refs1.has(r));
+                    if (common.length > 0) {{
+                        graphEdges.push({{
+                            source: `p${{p1.num}}`,
+                            target: `p${{p2.num}}`,
+                            type: 'shared',
+                            sharedCards: common,
+                            sharedCount: common.length,
+                            distance: 160,
+                            strength: 0.022 * Math.min(3, common.length),
+                            color: '#94a3b8'
+                        }});
+                    }}
+                }}
+            }}
+
+            // 4. Semantic Synergies (Principle <-> Principle)
+            SEMANTIC_SYNERGIES.forEach(([n1, n2]) => {{
+                const existing = graphEdges.find(e => 
+                    (e.source === `p${{n1}}` && e.target === `p${{n2}}`) ||
+                    (e.source === `p${{n2}}` && e.target === `p${{n1}}`)
+                );
+                if (!existing) {{
+                    graphEdges.push({{
+                        source: `p${{n1}}`,
+                        target: `p${{n2}}`,
+                        type: 'synergy',
+                        distance: 210,
+                        strength: 0.015,
+                        color: '#c084fc'
+                    }});
+                }}
+            }});
+        }}
+
+        function initOrResizeGraph() {{
+            const canvas = document.getElementById('graphCanvas');
+            const container = document.getElementById('graphCanvasContainer');
+            if (!canvas || !container) return;
+
+            const dpr = window.devicePixelRatio || 1;
+            const w = container.clientWidth;
+            const h = container.clientHeight;
+
+            canvas.width = w * dpr;
+            canvas.height = h * dpr;
+            canvas.style.width = `${{w}}px`;
+            canvas.style.height = `${{h}}px`;
+
+            if (!graphInitialized) {{
+                buildGraphData();
+                setupGraphInteractions();
+                graphInitialized = true;
+            }}
+
+            if (!graphAnimationId) {{
+                graphAnimationLoop();
+            }}
+        }}
+
+        function getCanvasMousePos(evt) {{
+            const canvas = document.getElementById('graphCanvas');
+            const rect = canvas.getBoundingClientRect();
+            let clientX = evt.clientX;
+            let clientY = evt.clientY;
+            if (evt.touches && evt.touches[0]) {{
+                clientX = evt.touches[0].clientX;
+                clientY = evt.touches[0].clientY;
+            }} else if (evt.changedTouches && evt.changedTouches[0]) {{
+                clientX = evt.changedTouches[0].clientX;
+                clientY = evt.changedTouches[0].clientY;
+            }}
+            const sx = clientX - rect.left;
+            const sy = clientY - rect.top;
+            const wx = (sx - rect.width / 2 - graphCam.x) / graphCam.scale;
+            const wy = (sy - rect.height / 2 - graphCam.y) / graphCam.scale;
+            return {{ screenX: sx, screenY: sy, worldX: wx, worldY: wy }};
+        }}
+
+        function findNodeAtWorldPos(wx, wy) {{
+            for (let i = graphNodes.length - 1; i >= 0; i--) {{
+                const n = graphNodes[i];
+                if (graphChapterFilter !== 'all' && n.chapterId !== graphChapterFilter) continue;
+                const dx = wx - n.x;
+                const dy = wy - n.y;
+                if (dx * dx + dy * dy <= (n.radius + 6) * (n.radius + 6)) {{
+                    return n;
+                }}
+            }}
+            return null;
+        }}
+
+        function setupGraphInteractions() {{
+            const canvas = document.getElementById('graphCanvas');
+            const container = document.getElementById('graphCanvasContainer');
+            if (!canvas) return;
+
+            canvas.addEventListener('mousedown', e => {{
+                const pos = getCanvasMousePos(e);
+                const hit = findNodeAtWorldPos(pos.worldX, pos.worldY);
+                mouseMovedDuringClick = false;
+                if (hit) {{
+                    draggedNode = hit;
+                }} else {{
+                    isPanning = true;
+                    panStartX = pos.screenX - graphCam.x;
+                    panStartY = pos.screenY - graphCam.y;
+                    container.classList.add('panning');
+                }}
+            }});
+
+            window.addEventListener('mousemove', e => {{
+                if (currentActiveView !== 'graph') return;
+                const pos = getCanvasMousePos(e);
+                
+                if (isPanning) {{
+                    mouseMovedDuringClick = true;
+                    graphCam.x = pos.screenX - panStartX;
+                    graphCam.y = pos.screenY - panStartY;
+                }} else if (draggedNode) {{
+                    mouseMovedDuringClick = true;
+                    draggedNode.x = pos.worldX;
+                    draggedNode.y = pos.worldY;
+                    draggedNode.vx = 0;
+                    draggedNode.vy = 0;
+                }} else {{
+                    const hit = findNodeAtWorldPos(pos.worldX, pos.worldY);
+                    if (hit !== hoveredNode) {{
+                        hoveredNode = hit;
+                        canvas.style.cursor = hit ? 'pointer' : 'grab';
+                    }}
+                }}
+            }});
+
+            window.addEventListener('mouseup', e => {{
+                if (currentActiveView !== 'graph') return;
+                const pos = getCanvasMousePos(e);
+                
+                if (draggedNode) {{
+                    if (!mouseMovedDuringClick) {{
+                        handleNodeClick(draggedNode);
+                    }}
+                    draggedNode = null;
+                }} else if (isPanning) {{
+                    if (!mouseMovedDuringClick) {{
+                        const hit = findNodeAtWorldPos(pos.worldX, pos.worldY);
+                        if (hit) handleNodeClick(hit);
+                    }}
+                    isPanning = false;
+                    container.classList.remove('panning');
+                }}
+            }});
+
+            canvas.addEventListener('wheel', e => {{
+                e.preventDefault();
+                const pos = getCanvasMousePos(e);
+                const zoomFactor = e.deltaY < 0 ? 1.12 : 0.89;
+                const newScale = Math.max(0.35, Math.min(2.5, graphCam.scale * zoomFactor));
+
+                graphCam.x -= (pos.worldX * newScale - pos.worldX * graphCam.scale);
+                graphCam.y -= (pos.worldY * newScale - pos.worldY * graphCam.scale);
+                graphCam.scale = newScale;
+            }}, {{ passive: false }});
+
+            // Touch events for mobile
+            let touchDist = 0;
+            canvas.addEventListener('touchstart', e => {{
+                if (e.touches.length === 1) {{
+                    const pos = getCanvasMousePos(e);
+                    const hit = findNodeAtWorldPos(pos.worldX, pos.worldY);
+                    mouseMovedDuringClick = false;
+                    if (hit) {{
+                        draggedNode = hit;
+                    }} else {{
+                        isPanning = true;
+                        panStartX = pos.screenX - graphCam.x;
+                        panStartY = pos.screenY - graphCam.y;
+                    }}
+                }} else if (e.touches.length === 2) {{
+                    isPanning = false;
+                    draggedNode = null;
+                    const dx = e.touches[0].clientX - e.touches[1].clientX;
+                    const dy = e.touches[0].clientY - e.touches[1].clientY;
+                    touchDist = Math.sqrt(dx * dx + dy * dy);
+                }}
+            }}, {{ passive: false }});
+
+            canvas.addEventListener('touchmove', e => {{
+                e.preventDefault();
+                if (e.touches.length === 1) {{
+                    const pos = getCanvasMousePos(e);
+                    if (isPanning) {{
+                        mouseMovedDuringClick = true;
+                        graphCam.x = pos.screenX - panStartX;
+                        graphCam.y = pos.screenY - panStartY;
+                    }} else if (draggedNode) {{
+                        mouseMovedDuringClick = true;
+                        draggedNode.x = pos.worldX;
+                        draggedNode.y = pos.worldY;
+                        draggedNode.vx = 0;
+                        draggedNode.vy = 0;
+                    }}
+                }} else if (e.touches.length === 2) {{
+                    const dx = e.touches[0].clientX - e.touches[1].clientX;
+                    const dy = e.touches[0].clientY - e.touches[1].clientY;
+                    const newDist = Math.sqrt(dx * dx + dy * dy);
+                    if (touchDist > 0) {{
+                        const factor = newDist / touchDist;
+                        graphCam.scale = Math.max(0.35, Math.min(2.5, graphCam.scale * factor));
+                    }}
+                    touchDist = newDist;
+                }}
+            }}, {{ passive: false }});
+
+            canvas.addEventListener('touchend', e => {{
+                if (draggedNode) {{
+                    if (!mouseMovedDuringClick) handleNodeClick(draggedNode);
+                    draggedNode = null;
+                }} else if (isPanning && !mouseMovedDuringClick && e.changedTouches[0]) {{
+                    const pos = getCanvasMousePos(e);
+                    const hit = findNodeAtWorldPos(pos.worldX, pos.worldY);
+                    if (hit) handleNodeClick(hit);
+                }}
+                isPanning = false;
+                touchDist = 0;
+            }});
+
+            window.addEventListener('resize', () => {{
+                if (currentActiveView === 'graph') initOrResizeGraph();
+            }});
+        }}
+
+        function handleNodeClick(node) {{
+            if (node.type === 'chapter') {{
+                filterGraphChapter(node.chapterId);
+            }} else if (node.type === 'principle') {{
+                openPrincipleDrawer(node);
+            }}
+        }}
+
+        function openPrincipleDrawer(node) {{
+            selectedNode = node;
+            const drawer = document.getElementById('graphDrawer');
+            if (!drawer) return;
+
+            document.getElementById('drawerBadge').innerText = `原則 ${{node.num}}`;
+            document.getElementById('drawerMeta').innerText = CHAPTER_THEMES[node.chapterId].name;
+            document.getElementById('drawerTitle').innerText = node.data.title;
+            document.getElementById('drawerMandarin').innerText = node.data.mandarin;
+            document.getElementById('drawerEnglish').innerText = node.data.english;
+            document.getElementById('drawerTaiwanese').innerText = node.data.taiwanese;
+
+            // Find connected principles
+            const connSet = new Set();
+            graphEdges.forEach(e => {{
+                if (e.source === node.id && e.target.startsWith('p')) {{
+                    const targetNum = parseInt(e.target.replace('p', ''));
+                    connSet.add(targetNum);
+                }} else if (e.target === node.id && e.source.startsWith('p')) {{
+                    const sourceNum = parseInt(e.source.replace('p', ''));
+                    connSet.add(sourceNum);
+                }}
+            }});
+
+            const connChipsContainer = document.getElementById('drawerConnectedPrinciples');
+            connChipsContainer.innerHTML = '';
+            if (connSet.size === 0) {{
+                connChipsContainer.innerHTML = `<span style="font-size:0.78rem; color:var(--text-muted);">無跨原則直接重疊</span>`;
+            }} else {{
+                Array.from(connSet).sort((a, b) => a - b).forEach(num => {{
+                    const btn = document.createElement('button');
+                    btn.className = 'drawer-conn-chip';
+                    btn.innerText = `原則 ${{num}}`;
+                    btn.title = `聚焦至原則 ${{num}}`;
+                    btn.onclick = () => focusPrincipleInGraph(num);
+                    connChipsContainer.appendChild(btn);
+                }});
+            }}
+
+            // Render list of referenced slide cards
+            const refKeys = node.data.ref.split(',').map(r => r.trim()).filter(Boolean);
+            document.getElementById('drawerCardsLabel').innerText = `📑 對照簡報卡牌 (${{refKeys.length}} 則，點擊跳轉)`;
+            
+            const cardsList = document.getElementById('drawerCardsList');
+            cardsList.innerHTML = '';
+            refKeys.forEach(k => {{
+                const s = SLIDES.find(item => item.key === k);
+                const mandarinTxt = s ? s.mandarin : '查看簡報筆記項目';
+                const item = document.createElement('div');
+                item.className = 'drawer-card-item';
+                item.title = `點擊跳轉至簡報卡牌 No. ${{k}}`;
+                item.innerHTML = `
+                    <div class="drawer-card-item-top">
+                        <span class="drawer-card-key">No. ${{k}}</span>
+                        <span class="drawer-card-jump">跳轉卡牌 ↗</span>
+                    </div>
+                    <div class="drawer-card-mandarin">${{mandarinTxt}}</div>
+                `;
+                item.onclick = () => jumpToSlideCard(k);
+                cardsList.appendChild(item);
+            }});
+
+            drawer.classList.add('open');
+        }}
+
+        function closeGraphDrawer() {{
+            const drawer = document.getElementById('graphDrawer');
+            if (drawer) drawer.classList.remove('open');
+            selectedNode = null;
+        }}
+
+        function focusPrincipleInGraph(num) {{
+            const target = graphNodes.find(n => n.id === `p${{num}}`);
+            if (target) {{
+                graphCam.x = -target.x * graphCam.scale;
+                graphCam.y = -target.y * graphCam.scale;
+                openPrincipleDrawer(target);
+            }}
+        }}
+
+        function filterGraphChapter(chapterId) {{
+            graphChapterFilter = chapterId;
+            const filterButtons = document.querySelectorAll('#graphFilterChips .filter-tag');
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            if (event && event.target && event.target.classList.contains('filter-tag')) {{
+                event.target.classList.add('active');
+            }} else {{
+                const idx = chapterId === 'all' ? 0 : parseInt(chapterId);
+                if (filterButtons[idx]) filterButtons[idx].classList.add('active');
+            }}
+
+            if (chapterId !== 'all') {{
+                const chapNode = graphNodes.find(n => n.id === `c${{chapterId}}`);
+                if (chapNode) {{
+                    graphCam.x = -chapNode.x * graphCam.scale;
+                    graphCam.y = -chapNode.y * graphCam.scale;
+                }}
+            }}
+        }}
+
+        function resetGraphView() {{
+            graphCam = {{ x: 0, y: 0, scale: 1.0 }};
+            selectedNode = null;
+            closeGraphDrawer();
+        }}
+
+        function toggleGraphSimulation() {{
+            isGraphSimulating = !isGraphSimulating;
+            const btn = document.getElementById('btnGraphFreeze');
+            if (btn) {{
+                btn.innerText = isGraphSimulating ? '⏸️ 暫停模擬' : '▶️ 繼續模擬';
+            }}
+        }}
+
+        function stepPhysics() {{
+            if (!isGraphSimulating) return;
+
+            const kRepel = 2400;
+            // 1. Repulsion between all nodes
+            for (let i = 0; i < graphNodes.length; i++) {{
+                const n1 = graphNodes[i];
+                for (let j = i + 1; j < graphNodes.length; j++) {{
+                    const n2 = graphNodes[j];
+                    const dx = n2.x - n1.x;
+                    const dy = n2.y - n1.y;
+                    let distSq = dx * dx + dy * dy;
+                    if (distSq < 1) distSq = 1;
+                    const dist = Math.sqrt(distSq);
+                    const force = (kRepel * (n1.mass * n2.mass)) / (distSq + 400);
+                    const fx = (dx / dist) * force;
+                    const fy = (dy / dist) * force;
+
+                    n1.vx -= fx / n1.mass;
+                    n1.vy -= fy / n1.mass;
+                    n2.vx += fx / n2.mass;
+                    n2.vy += fy / n2.mass;
+                }}
+            }}
+
+            // 2. Spring force along edges
+            graphEdges.forEach(e => {{
+                const s = graphNodes.find(n => n.id === e.source);
+                const t = graphNodes.find(n => n.id === e.target);
+                if (!s || !t) return;
+                const dx = t.x - s.x;
+                const dy = t.y - s.y;
+                const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                const delta = dist - e.distance;
+                const force = delta * e.strength;
+                const fx = (dx / dist) * force;
+                const fy = (dy / dist) * force;
+
+                s.vx += fx / s.mass;
+                s.vy += fy / s.mass;
+                t.vx -= fx / t.mass;
+                t.vy -= fy / t.mass;
+            }});
+
+            // 3. Center gravity and damping
+            graphNodes.forEach(node => {{
+                if (node === draggedNode) return;
+                
+                node.vx += (-node.x) * 0.0025;
+                node.vy += (-node.y) * 0.0025;
+
+                node.vx *= 0.88;
+                node.vy *= 0.88;
+
+                const speed = Math.sqrt(node.vx * node.vx + node.vy * node.vy);
+                if (speed > 10) {{
+                    node.vx = (node.vx / speed) * 10;
+                    node.vy = (node.vy / speed) * 10;
+                }}
+
+                node.x += node.vx;
+                node.y += node.vy;
+            }});
+        }}
+
+        function renderGraph() {{
+            const canvas = document.getElementById('graphCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const w = canvas.width / dpr;
+            const h = canvas.height / dpr;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.save();
+            ctx.scale(dpr, dpr);
+            ctx.translate(w / 2 + graphCam.x, h / 2 + graphCam.y);
+            ctx.scale(graphCam.scale, graphCam.scale);
+
+            const activeNode = selectedNode || hoveredNode;
+            const connectedNodeIds = new Set();
+            if (activeNode) {{
+                connectedNodeIds.add(activeNode.id);
+                graphEdges.forEach(e => {{
+                    if (e.source === activeNode.id) connectedNodeIds.add(e.target);
+                    if (e.target === activeNode.id) connectedNodeIds.add(e.source);
+                }});
+            }}
+
+            const isLight = document.body.classList.contains('light-mode');
+
+            // Draw Edges
+            graphEdges.forEach(e => {{
+                const s = graphNodes.find(n => n.id === e.source);
+                const t = graphNodes.find(n => n.id === e.target);
+                if (!s || !t) return;
+
+                const isConnected = activeNode && (e.source === activeNode.id || e.target === activeNode.id);
+                let alpha = 0.28;
+                if (activeNode) {{
+                    alpha = isConnected ? 0.95 : 0.08;
+                }} else if (graphChapterFilter !== 'all') {{
+                    const inChap = (s.chapterId === graphChapterFilter || t.chapterId === graphChapterFilter);
+                    alpha = inChap ? 0.5 : 0.08;
+                }}
+
+                ctx.save();
+                ctx.globalAlpha = alpha;
+
+                if (e.type === 'chapter') {{
+                    ctx.strokeStyle = e.color;
+                    ctx.lineWidth = isConnected ? 2.8 : 1.2;
+                    ctx.setLineDash([4, 4]);
+                }} else if (e.type === 'shared') {{
+                    ctx.strokeStyle = isLight ? '#64748b' : '#94a3b8';
+                    ctx.lineWidth = isConnected ? 3.2 : (1.4 + Math.min(2.5, e.sharedCount * 0.7));
+                    ctx.setLineDash([]);
+                }} else if (e.type === 'synergy') {{
+                    ctx.strokeStyle = '#c084fc';
+                    ctx.lineWidth = isConnected ? 2.5 : 1.2;
+                    ctx.setLineDash([6, 3]);
+                }}
+
+                ctx.beginPath();
+                ctx.moveTo(s.x, s.y);
+                ctx.lineTo(t.x, t.y);
+                ctx.stroke();
+
+                // Draw badge on shared edges if sharedCount >= 2 and active
+                if (e.type === 'shared' && e.sharedCount >= 2 && (isConnected || !activeNode)) {{
+                    const mx = (s.x + t.x) / 2;
+                    const my = (s.y + t.y) / 2;
+                    ctx.fillStyle = isLight ? 'rgba(255,255,255,0.9)' : 'rgba(15,23,42,0.9)';
+                    ctx.beginPath();
+                    ctx.arc(mx, my, 8, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.strokeStyle = '#94a3b8';
+                    ctx.stroke();
+                    ctx.fillStyle = isLight ? '#0f172a' : '#f8fafc';
+                    ctx.font = 'bold 8px Outfit, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(e.sharedCount, mx, my);
+                }}
+
+                ctx.restore();
+            }});
+
+            // Draw Nodes
+            graphNodes.forEach(node => {{
+                const isFiltered = (graphChapterFilter !== 'all' && node.chapterId !== graphChapterFilter);
+                let alpha = 1.0;
+                if (isFiltered) {{
+                    alpha = 0.18;
+                }} else if (activeNode) {{
+                    alpha = connectedNodeIds.has(node.id) ? 1.0 : 0.22;
+                }}
+
+                const isSelected = selectedNode && selectedNode.id === node.id;
+                const isHovered = hoveredNode && hoveredNode.id === node.id;
+
+                ctx.save();
+                ctx.globalAlpha = alpha;
+
+                if (node.type === 'chapter') {{
+                    // Chapter Hub Node
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, node.radius + (isHovered ? 4 : 0), 0, Math.PI * 2);
+                    ctx.fillStyle = node.color;
+                    ctx.fill();
+
+                    // Outer ring
+                    ctx.lineWidth = 3;
+                    ctx.strokeStyle = isLight ? '#ffffff' : 'rgba(255,255,255,0.85)';
+                    ctx.stroke();
+
+                    // Label
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = 'bold 12px Outfit, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(`Ch.0${{node.num}}`, node.x, node.y - 4);
+
+                    ctx.font = '9px "Noto Sans TC", sans-serif';
+                    ctx.fillText(node.title.slice(0, 4), node.x, node.y + 9);
+                }} else {{
+                    // Principle Node
+                    if (isSelected || isHovered) {{
+                        ctx.beginPath();
+                        ctx.arc(node.x, node.y, node.radius + 6, 0, Math.PI * 2);
+                        ctx.fillStyle = isLight ? 'rgba(99, 102, 241, 0.2)' : 'rgba(99, 102, 241, 0.35)';
+                        ctx.fill();
+                    }}
+
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = isLight ? '#ffffff' : 'rgba(30, 41, 59, 0.95)';
+                    ctx.fill();
+
+                    ctx.lineWidth = isSelected ? 3.5 : (isHovered ? 2.5 : 1.8);
+                    ctx.strokeStyle = node.color;
+                    ctx.stroke();
+
+                    // Principle number
+                    ctx.fillStyle = isLight ? node.color : '#f8fafc';
+                    ctx.font = 'bold 12px Outfit, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(`P${{node.num}}`, node.x, node.y);
+
+                    // Short title under node
+                    if (alpha > 0.4) {{
+                        ctx.fillStyle = isLight ? '#334155' : '#cbd5e1';
+                        ctx.font = '10px "Noto Sans TC", sans-serif';
+                        ctx.textBaseline = 'top';
+                        const displayTitle = node.title.length > 7 ? node.title.slice(0, 6) + '..' : node.title;
+                        ctx.fillText(displayTitle, node.x, node.y + node.radius + 4);
+                    }}
+                }}
+
+                ctx.restore();
+            }});
+
+            ctx.restore();
+        }}
+
+        function graphAnimationLoop() {{
+            if (currentActiveView === 'graph') {{
+                stepPhysics();
+                renderGraph();
+                graphAnimationId = requestAnimationFrame(graphAnimationLoop);
+            }} else {{
+                graphAnimationId = null;
             }}
         }}
     </script>
