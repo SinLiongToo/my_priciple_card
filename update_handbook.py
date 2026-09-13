@@ -300,11 +300,11 @@ def generate_odt_handbook(principles, final_items, odt_path, chapters=None):
     
     # ------------------ BUILD COVER PAGE ------------------
     p = P(stylename=title_style)
-    p.addText("工作的管見")
+    p.addText("工作的管見 (My Two Cents)")
     doc.text.addElement(p)
     
     p = P(stylename=subtitle_style)
-    p.addText("職場生存與成長的避坑指南 (三語對照手冊)")
+    p.addText("From the Floor: My Two Cents on Practical Work Principles\n職場生存與成長的避坑指南 (三語對照手冊)")
     doc.text.addElement(p)
     
     p = P(stylename=meta_style)
@@ -641,8 +641,8 @@ def main():
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>工作的管見 - 工作原則卡牌</title>
-    <meta name="description" content="工作的管見：職場生存與成長的避坑指南 - 三語對照數位原則卡牌與隨機閱讀器">
+    <title>工作的管見 (My Two Cents) - 工作原則卡牌</title>
+    <meta name="description" content="工作的管見 (My Two Cents)：From the Floor: My Two Cents on Practical Work Principles - 職場生存與成長的避坑指南">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {{
@@ -712,7 +712,11 @@ def main():
             background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 50%, #818cf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.35rem;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }}
 
         .light-mode header h1 {{
@@ -721,12 +725,35 @@ def main():
             -webkit-text-fill-color: transparent;
         }}
 
+        .en-title {{
+            font-size: 1.35rem;
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 0.01em;
+            opacity: 0.9;
+        }}
+
         header p {{
             color: var(--text-muted);
-            font-size: 1rem;
-            font-weight: 300;
-            max-width: 600px;
-            margin: 0 auto 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 400;
+            line-height: 1.5;
+            text-align: left;
+        }}
+
+        .header-sub-en {{
+            display: block;
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 500;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 0.01em;
+            margin-top: 0.2rem;
+            opacity: 0.95;
+        }}
+
+        .light-mode .header-sub-en {{
+            color: #4f46e5;
         }}
 
         /* Navigation and tools */
@@ -1691,7 +1718,16 @@ def main():
 
         @media (max-width: 480px) {{
             header h1 {{
-                font-size: 1.4rem;
+                font-size: 1.35rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.15rem;
+            }}
+            .en-title {{
+                font-size: 1rem;
+            }}
+            .header-sub-en {{
+                font-size: 0.78rem;
             }}
             .principle-card {{
                 padding: 1.1rem 0.9rem;
@@ -1719,10 +1755,10 @@ def main():
         <div class="controls-container">
             <div>
                 <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.25rem;">
-                    <h1>工作的管見</h1>
+                    <h1>工作的管見 <span class="en-title">My Two Cents</span></h1>
                     <span class="update-badge" title="最後建置與更新時間">🕒 最後更新：{build_timestamp}</span>
                 </div>
-                <p>職場生存與成長的避坑指南 (中・英・台三語對照卡牌)</p>
+                <p>職場生存與成長的避坑指南 (中・英・台三語對照卡牌)<span class="header-sub-en">From the Floor: My Two Cents on Practical Work Principles</span></p>
             </div>
             
             <div class="action-tools">
