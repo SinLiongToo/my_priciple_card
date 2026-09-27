@@ -1221,6 +1221,211 @@ def main():
             margin-bottom: 0.2rem;
         }}
 
+        .lang-header {{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.2rem;
+        }}
+
+        .lang-header .lang-label {{
+            margin-bottom: 0;
+        }}
+
+        /* Audio Playback Button */
+        .audio-play-btn {{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 1px solid rgba(99, 102, 241, 0.35);
+            background: rgba(99, 102, 241, 0.12);
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 0;
+            line-height: 1;
+            user-select: none;
+        }}
+
+        .light-mode .audio-play-btn {{
+            background: rgba(79, 70, 229, 0.08);
+            border-color: rgba(79, 70, 229, 0.25);
+        }}
+
+        .audio-play-btn:hover {{
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            transform: scale(1.12);
+        }}
+
+        .audio-play-btn.speaking {{
+            background: #ef4444 !important;
+            border-color: #ef4444 !important;
+            color: #ffffff !important;
+            animation: audio-pulse 1.2s infinite;
+        }}
+
+        @keyframes audio-pulse {{
+            0% {{ box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }}
+            70% {{ box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }}
+            100% {{ box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }}
+        }}
+
+        /* Slides Autoplay Player Bar */
+        .slides-player-bar {{
+            max-width: 1200px;
+            margin: 0 auto 1.5rem auto;
+            background: rgba(30, 41, 59, 0.75);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.85rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }}
+
+        .light-mode .slides-player-bar {{
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }}
+
+        .player-bar-left {{
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            flex-wrap: wrap;
+        }}
+
+        .player-btn-main {{
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 0.45rem 1.05rem;
+            border-radius: 99px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.35);
+            font-family: inherit;
+        }}
+
+        .player-btn-main:hover {{
+            filter: brightness(1.12);
+            transform: translateY(-1px);
+        }}
+
+        .player-btn-secondary {{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 0.45rem 0.75rem;
+            border-radius: 99px;
+            font-weight: 600;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }}
+
+        .light-mode .player-btn-secondary {{
+            background: rgba(0, 0, 0, 0.04);
+        }}
+
+        .player-btn-secondary:hover:not(:disabled) {{
+            background: rgba(99, 102, 241, 0.15);
+            border-color: var(--primary);
+            color: var(--primary);
+        }}
+
+        .player-btn-secondary:disabled {{
+            opacity: 0.35;
+            cursor: not-allowed;
+        }}
+
+        .player-rate-select {{
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 0.4rem 0.6rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            font-family: inherit;
+        }}
+
+        .light-mode .player-rate-select {{
+            background: rgba(0, 0, 0, 0.04);
+        }}
+
+        .player-bar-status {{
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            flex: 1;
+            min-width: 220px;
+            justify-content: flex-end;
+        }}
+
+        .player-status-badge {{
+            font-weight: 600;
+            color: var(--text-main);
+        }}
+
+        .player-progress-track {{
+            width: 130px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 99px;
+            overflow: hidden;
+            position: relative;
+        }}
+
+        .light-mode .player-progress-track {{
+            background: rgba(0, 0, 0, 0.1);
+        }}
+
+        .player-progress-bar {{
+            height: 100%;
+            width: 0%;
+            background: var(--primary);
+            border-radius: 99px;
+            transition: width 0.3s ease;
+        }}
+
+        /* Now playing card halo */
+        .principle-card.now-playing {{
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.45) !important;
+            animation: card-speaking-glow 2s infinite ease-in-out;
+        }}
+
+        @keyframes card-speaking-glow {{
+            0%, 100% {{ transform: scale(1); box-shadow: 0 0 20px rgba(99, 102, 241, 0.35); }}
+            50% {{ transform: scale(1.015); box-shadow: 0 0 35px rgba(99, 102, 241, 0.65); }}
+        }}
+
         .lang-txt {{
             color: var(--text-main);
         }}
@@ -2270,6 +2475,39 @@ def main():
             <div class="filter-tags" id="slidesFilters">
                 {slides_filter_html}
             </div>
+
+            <!-- Slides Autoplay Player Bar -->
+            <div class="slides-player-bar" id="slidesPlayerBar">
+                <div class="player-bar-left">
+                    <button class="player-btn-main" id="playerBtnPlay" onclick="toggleSlidesAutoplay()" title="依序自動連續朗讀當前卡牌之優化英文">
+                        <span>▶️</span> 自動連續播放
+                    </button>
+                    <button class="player-btn-secondary" id="playerBtnStop" onclick="stopSlidesAutoplay()" title="停止語音朗讀">
+                        ⏹️ 停止
+                    </button>
+                    <button class="player-btn-secondary" id="playerBtnPrev" onclick="prevSlideCardAudio()" title="上一張卡牌" disabled>
+                        ⏮️
+                    </button>
+                    <button class="player-btn-secondary" id="playerBtnNext" onclick="nextSlideCardAudio()" title="下一張卡牌" disabled>
+                        ⏭️
+                    </button>
+                    <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted); margin-left: 0.25rem;">
+                        <span>語速：</span>
+                        <select class="player-rate-select" id="playerRateSelect" onchange="changePlaybackRate(this.value)" title="調整語音朗讀速度">
+                            <option value="0.85">0.85x 慢速</option>
+                            <option value="1.0" selected>1.0x 標準</option>
+                            <option value="1.15">1.15x 快速</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="player-bar-status">
+                    <span class="player-status-badge" id="playerStatusText">準備就緒</span>
+                    <div class="player-progress-track" title="朗讀進度">
+                        <div class="player-progress-bar" id="playerProgressBar"></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="card-grid" id="slidesGrid"></div>
         </section>
 
@@ -2308,7 +2546,10 @@ def main():
                                     <p class="lang-txt" id="randomBackMandarin">中文翻譯與潤稿內容</p>
                                 </div>
                                 <div class="lang-section lang-english" id="randomBackEnglishSection">
-                                    <span class="lang-label">優化英文 (Polished English)</span>
+                                    <div class="lang-header">
+                                        <span class="lang-label">優化英文 (Polished English)</span>
+                                        <button class="audio-play-btn" id="randomBackAudioBtn" onclick="playRandomCardAudio(event, this)" title="播放優化英文語音">🔊</button>
+                                    </div>
                                     <p class="lang-txt" id="randomBackEnglish">English polished text</p>
                                 </div>
                                 <div class="lang-section lang-taiwanese" id="randomBackTaiwaneseSection">
@@ -2389,7 +2630,10 @@ def main():
                                 <p class="lang-txt" id="drawerMandarin"></p>
                             </div>
                             <div class="lang-section lang-english">
-                                <span class="lang-label">English</span>
+                                <div class="lang-header">
+                                    <span class="lang-label">English</span>
+                                    <button class="audio-play-btn" id="drawerAudioBtn" onclick="playDrawerEnglishAudio(event, this)" title="播放優化英文語音">🔊</button>
+                                </div>
                                 <p class="lang-txt" id="drawerEnglish"></p>
                             </div>
                             <div class="lang-section lang-taiwanese">
@@ -2496,6 +2740,9 @@ def main():
 
         function switchView(viewName) {{
             currentActiveView = viewName;
+            if (viewName !== 'slides') {{
+                stopAllAudio();
+            }}
             
             // Toggle active tabs
             const tabButtons = document.querySelectorAll('.tab-btn');
@@ -2643,7 +2890,10 @@ def main():
                             <p class="lang-txt">${{p.mandarin}}</p>
                         </div>
                         <div class="lang-section lang-english">
-                            <span class="lang-label">English</span>
+                            <div class="lang-header">
+                                <span class="lang-label">English</span>
+                                <button class="audio-play-btn" onclick="playPrincipleAudio(event, this, ${{p.num}})" title="播放優化英文語音">🔊</button>
+                            </div>
                             <p class="lang-txt">${{p.english}}</p>
                         </div>
                         <div class="lang-section lang-taiwanese">
@@ -2693,6 +2943,7 @@ def main():
 
             if (filtered.length === 0) {{
                 grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem;">無符合搜尋條件的卡牌</div>`;
+                updatePlayerBarUI();
                 return;
             }}
 
@@ -2716,7 +2967,10 @@ def main():
                         <p class="lang-txt">${{s.mandarin}}</p>
                     </div>
                     <div class="lang-section lang-english">
-                        <span class="lang-label">優化英文 (Polished English)</span>
+                        <div class="lang-header">
+                            <span class="lang-label">優化英文 (Polished English)</span>
+                            <button class="audio-play-btn" onclick="playSlideAudio(event, this, '${{s.key}}')" title="播放優化英文語音">🔊</button>
+                        </div>
                         <p class="lang-txt">${{s.english}}</p>
                     </div>
                     <div class="lang-section lang-taiwanese">
@@ -2727,6 +2981,8 @@ def main():
                 `;
                 grid.appendChild(card);
             }});
+
+            updatePlayerBarUI();
         }}
 
         function jumpToSlideCard(key) {{
@@ -2792,6 +3048,7 @@ def main():
             document.querySelectorAll('#slidesFilters .filter-tag').forEach(tag => tag.classList.remove('active'));
             event.target.classList.add('active');
             renderSlides();
+            if (isAutoplaying) stopAllAudio();
         }}
 
         function handleSearch() {{
@@ -2800,6 +3057,358 @@ def main():
                 renderPrinciples();
             }} else if (currentActiveView === 'slides') {{
                 renderSlides();
+                if (isAutoplaying) stopAllAudio();
+            }}
+        }}
+
+        // ==========================================
+        // Speech Synthesis & Slides Autoplay Engine
+        // ==========================================
+        const speechSynth = window.speechSynthesis;
+        let speechVoice = null;
+        let playbackRate = 1.0;
+        let isAutoplaying = false;
+        let isPaused = false;
+        let autoplayQueue = [];
+        let currentQueueIndex = -1;
+        let currentlyPlayingCardId = null;
+        let currentRandomCard = null;
+
+        function initSpeechVoices() {{
+            if (!speechSynth) return;
+            const updateVoice = () => {{
+                try {{
+                    const voices = speechSynth.getVoices();
+                    if (!voices || voices.length === 0) return;
+                    // Preference order: Google US English, Natural en-US, Samantha/Alex, any en-US, any en
+                    speechVoice = voices.find(v => v.lang === 'en-US' && (v.name.includes('Google') || v.name.includes('Natural'))) ||
+                                  voices.find(v => v.name.includes('Samantha') || v.name.includes('Alex')) ||
+                                  voices.find(v => v.lang === 'en-US') ||
+                                  voices.find(v => v.lang.startsWith('en')) ||
+                                  voices[0];
+                }} catch(e) {{}}
+            }};
+            updateVoice();
+            if (speechSynth.onvoiceschanged !== undefined) {{
+                speechSynth.onvoiceschanged = updateVoice;
+            }}
+        }}
+        initSpeechVoices();
+
+        function stopAllAudio() {{
+            if (speechSynth) {{
+                try {{ speechSynth.cancel(); }} catch(e) {{}}
+            }}
+            isAutoplaying = false;
+            isPaused = false;
+            currentlyPlayingCardId = null;
+            currentQueueIndex = -1;
+
+            // Reset all audio buttons
+            document.querySelectorAll('.audio-play-btn').forEach(btn => {{
+                btn.classList.remove('speaking');
+                btn.innerHTML = '🔊';
+                btn.title = '播放優化英文語音';
+            }});
+
+            // Remove card now-playing highlight
+            document.querySelectorAll('.principle-card.now-playing').forEach(c => {{
+                c.classList.remove('now-playing');
+            }});
+
+            updatePlayerBarUI();
+        }}
+
+        function playEnglishAudio(evt, btn, text, cardId) {{
+            if (evt) evt.stopPropagation();
+            if (!speechSynth) {{
+                alert('您的瀏覽器不支援 Web Speech API 語音發音功能。');
+                return;
+            }}
+
+            if (!text || text.trim() === '') return;
+
+            // If this card is already playing, clicking again stops it
+            if (currentlyPlayingCardId === cardId && speechSynth.speaking) {{
+                stopAllAudio();
+                return;
+            }}
+
+            // Stop any autoplay or other card playing
+            stopAllAudio();
+
+            currentlyPlayingCardId = cardId;
+            if (btn) {{
+                btn.classList.add('speaking');
+                btn.innerHTML = '⏹️';
+                btn.title = '點擊停止語音';
+            }}
+
+            // Highlight card in slides or principles view
+            let cardEl = document.getElementById(`card-slide-${{cardId}}`) || document.getElementById(`card-principle-${{cardId}}`);
+            if (cardEl) cardEl.classList.add('now-playing');
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            if (speechVoice) utterance.voice = speechVoice;
+            utterance.lang = 'en-US';
+            utterance.rate = playbackRate;
+
+            utterance.onend = () => {{
+                if (btn) {{
+                    btn.classList.remove('speaking');
+                    btn.innerHTML = '🔊';
+                    btn.title = '播放優化英文語音';
+                }}
+                if (cardEl) cardEl.classList.remove('now-playing');
+                currentlyPlayingCardId = null;
+            }};
+
+            utterance.onerror = () => {{
+                if (btn) {{
+                    btn.classList.remove('speaking');
+                    btn.innerHTML = '🔊';
+                    btn.title = '播放優化英文語音';
+                }}
+                if (cardEl) cardEl.classList.remove('now-playing');
+                currentlyPlayingCardId = null;
+            }};
+
+            speechSynth.speak(utterance);
+        }}
+
+        function playSlideAudio(evt, btn, key) {{
+            const item = SLIDES.find(s => s.key === key);
+            if (item) {{
+                playEnglishAudio(evt, btn, item.english || item.original, key);
+            }}
+        }}
+
+        function playPrincipleAudio(evt, btn, num) {{
+            const p = PRINCIPLES.find(pr => pr.num === num);
+            if (p) {{
+                playEnglishAudio(evt, btn, p.english, 'p' + num);
+            }}
+        }}
+
+        function playRandomCardAudio(evt, btn) {{
+            if (currentRandomCard) {{
+                playEnglishAudio(evt, btn, currentRandomCard.english || currentRandomCard.original, currentRandomCard.key);
+            }}
+        }}
+
+        function playDrawerEnglishAudio(evt, btn) {{
+            if (selectedNode && selectedNode.data) {{
+                const text = selectedNode.data.english || selectedNode.data.original || '';
+                playEnglishAudio(evt, btn, text, 'drawer-' + selectedNode.id);
+            }}
+        }}
+
+        // Slides Autoplay Controller
+        function toggleSlidesAutoplay() {{
+            if (isAutoplaying) {{
+                if (isPaused) {{
+                    resumeSlidesAutoplay();
+                }} else {{
+                    pauseSlidesAutoplay();
+                }}
+            }} else {{
+                startSlidesAutoplay();
+            }}
+        }}
+
+        function startSlidesAutoplay() {{
+            if (!speechSynth) {{
+                alert('您的瀏覽器不支援 Web Speech API 語音發音功能。');
+                return;
+            }}
+
+            const cards = getCurrentlyFilteredSlides();
+            if (cards.length === 0) {{
+                alert('當前無符合條件的卡牌可供播放。');
+                return;
+            }}
+
+            stopAllAudio();
+
+            autoplayQueue = cards;
+            currentQueueIndex = 0;
+            isAutoplaying = true;
+            isPaused = false;
+
+            updatePlayerBarUI();
+            playCurrentQueueItem();
+        }}
+
+        function playCurrentQueueItem() {{
+            if (!isAutoplaying || currentQueueIndex < 0 || currentQueueIndex >= autoplayQueue.length) {{
+                stopAllAudio();
+                return;
+            }}
+
+            const item = autoplayQueue[currentQueueIndex];
+            currentlyPlayingCardId = item.key;
+            updatePlayerBarUI();
+
+            // Clear previous highlights
+            document.querySelectorAll('.principle-card.now-playing').forEach(c => c.classList.remove('now-playing'));
+            document.querySelectorAll('.audio-play-btn.speaking').forEach(b => {{
+                b.classList.remove('speaking');
+                b.innerHTML = '🔊';
+            }});
+
+            // Smooth scroll & highlight card
+            const cardEl = document.getElementById(`card-slide-${{item.key}}`);
+            if (cardEl) {{
+                cardEl.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
+                cardEl.classList.add('now-playing');
+                const btn = cardEl.querySelector('.audio-play-btn');
+                if (btn) {{
+                    btn.classList.add('speaking');
+                    btn.innerHTML = '⏹️';
+                }}
+            }}
+
+            const utterance = new SpeechSynthesisUtterance(item.english || item.original || '');
+            if (speechVoice) utterance.voice = speechVoice;
+            utterance.lang = 'en-US';
+            utterance.rate = playbackRate;
+
+            utterance.onend = () => {{
+                if (!isAutoplaying || isPaused) return;
+                // Natural pause 1.0s between cards
+                setTimeout(() => {{
+                    if (!isAutoplaying || isPaused) return;
+                    currentQueueIndex++;
+                    if (currentQueueIndex < autoplayQueue.length) {{
+                        playCurrentQueueItem();
+                    }} else {{
+                        stopAllAudio();
+                    }}
+                }}, 1000);
+            }};
+
+            utterance.onerror = () => {{
+                if (!isAutoplaying || isPaused) return;
+                currentQueueIndex++;
+                if (currentQueueIndex < autoplayQueue.length) {{
+                    playCurrentQueueItem();
+                }} else {{
+                    stopAllAudio();
+                }}
+            }};
+
+            speechSynth.speak(utterance);
+        }}
+
+        function pauseSlidesAutoplay() {{
+            if (!isAutoplaying || isPaused) return;
+            if (speechSynth) speechSynth.pause();
+            isPaused = true;
+            updatePlayerBarUI();
+        }}
+
+        function resumeSlidesAutoplay() {{
+            if (!isAutoplaying || !isPaused) return;
+            if (speechSynth) speechSynth.resume();
+            isPaused = false;
+            updatePlayerBarUI();
+        }}
+
+        function stopSlidesAutoplay() {{
+            stopAllAudio();
+        }}
+
+        function nextSlideCardAudio() {{
+            if (!isAutoplaying) {{
+                startSlidesAutoplay();
+                return;
+            }}
+            if (speechSynth) speechSynth.cancel();
+            if (currentQueueIndex < autoplayQueue.length - 1) {{
+                currentQueueIndex++;
+                isPaused = false;
+                playCurrentQueueItem();
+            }} else {{
+                stopAllAudio();
+            }}
+        }}
+
+        function prevSlideCardAudio() {{
+            if (!isAutoplaying) return;
+            if (speechSynth) speechSynth.cancel();
+            if (currentQueueIndex > 0) {{
+                currentQueueIndex--;
+                isPaused = false;
+                playCurrentQueueItem();
+            }} else {{
+                playCurrentQueueItem();
+            }}
+        }}
+
+        function changePlaybackRate(rate) {{
+            playbackRate = parseFloat(rate) || 1.0;
+            if (speechSynth && speechSynth.speaking && isAutoplaying) {{
+                speechSynth.cancel();
+                playCurrentQueueItem();
+            }}
+        }}
+
+        function getCurrentlyFilteredSlides() {{
+            return SLIDES.filter(s => {{
+                const matchesSlide = (slidesFilter === 'all' || slidesFilter === String(s.slide));
+                const matched = getMatchedPrinciples(s.key);
+                const matchesPrincipleSearch = matched.some(num => {{
+                    const p = PRINCIPLES.find(pr => pr.num === num);
+                    if (!p) return false;
+                    const searchLower = searchQuery.toLowerCase();
+                    return `原則 ${{num}}`.toLowerCase().includes(searchLower) ||
+                           `原則${{num}}`.toLowerCase().includes(searchLower) ||
+                           p.title.toLowerCase().includes(searchLower);
+                }});
+
+                const matchesSearch = !searchQuery || 
+                    s.key.toLowerCase().includes(searchQuery) ||
+                    s.original.toLowerCase().includes(searchQuery) ||
+                    s.mandarin.toLowerCase().includes(searchQuery) ||
+                    s.english.toLowerCase().includes(searchQuery) ||
+                    s.taiwanese.toLowerCase().includes(searchQuery) ||
+                    matchesPrincipleSearch;
+                return matchesSlide && matchesSearch;
+            }});
+        }}
+
+        function updatePlayerBarUI() {{
+            const playBtn = document.getElementById('playerBtnPlay');
+            const statusTxt = document.getElementById('playerStatusText');
+            const progress = document.getElementById('playerProgressBar');
+            const prevBtn = document.getElementById('playerBtnPrev');
+            const nextBtn = document.getElementById('playerBtnNext');
+
+            if (!playBtn) return;
+
+            if (isAutoplaying) {{
+                if (isPaused) {{
+                    playBtn.innerHTML = '<span>▶️</span> 繼續播放';
+                    playBtn.title = '繼續播放';
+                }} else {{
+                    playBtn.innerHTML = '<span>⏸️</span> 暫停播放';
+                    playBtn.title = '暫停播放';
+                }}
+                const total = autoplayQueue.length;
+                const curr = currentQueueIndex + 1;
+                const pct = total > 0 ? (curr / total) * 100 : 0;
+                if (statusTxt) statusTxt.innerText = `🎧 朗讀中 No. ${{currentlyPlayingCardId || ''}} (${{curr}} / ${{total}})`;
+                if (progress) progress.style.width = `${{pct}}%`;
+                if (prevBtn) prevBtn.disabled = currentQueueIndex <= 0;
+                if (nextBtn) nextBtn.disabled = currentQueueIndex >= total - 1;
+            }} else {{
+                playBtn.innerHTML = '<span>▶️</span> 自動連續播放';
+                playBtn.title = '依序自動連續朗讀當前篩選的所有卡牌';
+                const total = getCurrentlyFilteredSlides().length;
+                if (statusTxt) statusTxt.innerText = `準備就緒 (共 ${{total}} 張卡牌)`;
+                if (progress) progress.style.width = '0%';
+                if (prevBtn) prevBtn.disabled = true;
+                if (nextBtn) nextBtn.disabled = true;
             }}
         }}
 
@@ -2811,6 +3420,14 @@ def main():
             // Choose a random slide card
             const randomIndex = Math.floor(Math.random() * SLIDES.length);
             const cardData = SLIDES[randomIndex];
+            currentRandomCard = cardData;
+
+            // Reset random audio button state
+            const rAudioBtn = document.getElementById('randomBackAudioBtn');
+            if (rAudioBtn) {{
+                rAudioBtn.classList.remove('speaking');
+                rAudioBtn.innerHTML = '🔊';
+            }}
             
             // Create sparkle particles
             createSparkles();
@@ -3400,6 +4017,11 @@ def main():
             document.getElementById('drawerMandarin').innerText = node.data.mandarin;
             document.getElementById('drawerEnglish').innerText = node.data.english;
             document.getElementById('drawerTaiwanese').innerText = node.data.taiwanese;
+            const drawerAudioBtn = document.getElementById('drawerAudioBtn');
+            if (drawerAudioBtn) {{
+                drawerAudioBtn.classList.remove('speaking');
+                drawerAudioBtn.innerHTML = '🔊';
+            }}
 
             // Find connected principles
             const connSet = new Set();
@@ -3468,6 +4090,11 @@ def main():
             document.getElementById('drawerMandarin').innerText = node.data.mandarin || '無中文潤稿';
             document.getElementById('drawerEnglish').innerText = node.data.english || node.data.original || '';
             document.getElementById('drawerTaiwanese').innerText = node.data.taiwanese || '無台文潤稿';
+            const drawerAudioBtn = document.getElementById('drawerAudioBtn');
+            if (drawerAudioBtn) {{
+                drawerAudioBtn.classList.remove('speaking');
+                drawerAudioBtn.innerHTML = '🔊';
+            }}
 
             // Connected principles
             const connChipsContainer = document.getElementById('drawerConnectedPrinciples');
@@ -3503,6 +4130,14 @@ def main():
         function closeGraphDrawer() {{
             const drawer = document.getElementById('graphDrawer');
             if (drawer) drawer.classList.remove('open');
+            if (currentlyPlayingCardId && currentlyPlayingCardId.startsWith('drawer-')) {{
+                stopAllAudio();
+            }}
+            const drawerAudioBtn = document.getElementById('drawerAudioBtn');
+            if (drawerAudioBtn) {{
+                drawerAudioBtn.classList.remove('speaking');
+                drawerAudioBtn.innerHTML = '🔊';
+            }}
             selectedNode = null;
             updateSatelliteButtonState();
         }}
