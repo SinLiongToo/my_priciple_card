@@ -694,8 +694,7 @@ def main():
 
         /* Header block */
         header {{
-            padding: 2.5rem 1.5rem 1.5rem;
-            text-align: center;
+            padding: 0.85rem 1.5rem 0.65rem;
             border-bottom: 1px solid var(--border);
             background: var(--bg-glass);
             backdrop-filter: blur(20px);
@@ -705,67 +704,88 @@ def main():
             z-index: 100;
         }}
 
-        header h1 {{
-            font-size: 2.2rem;
+        .brand-block {{
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }}
+
+        .brand-title-row {{
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }}
+
+        header h1.brand-title {{
+            font-size: 1.45rem;
             font-weight: 800;
             letter-spacing: -0.025em;
             background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 50%, #818cf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 0.35rem;
+            margin: 0;
             display: inline-flex;
             align-items: baseline;
-            gap: 0.5rem;
-            flex-wrap: wrap;
+            gap: 0.45rem;
         }}
 
-        .light-mode header h1 {{
+        .light-mode header h1.brand-title {{
             background: linear-gradient(135deg, #4f46e5 0%, #312e81 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }}
 
         .en-title {{
-            font-size: 1.35rem;
+            font-size: 1.05rem;
             font-weight: 600;
             font-family: 'Outfit', sans-serif;
             letter-spacing: 0.01em;
-            opacity: 0.9;
+            opacity: 0.88;
         }}
 
-        header p {{
+        .brand-sub {{
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.82rem;
             font-weight: 400;
-            line-height: 1.5;
-            text-align: left;
+            line-height: 1.35;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }}
 
         .header-sub-en {{
-            display: block;
-            font-size: 0.85rem;
+            display: inline-block;
+            font-size: 0.78rem;
             color: var(--primary);
             font-weight: 500;
             font-family: 'Outfit', sans-serif;
             letter-spacing: 0.01em;
-            margin-top: 0.2rem;
-            opacity: 0.95;
+            opacity: 0.9;
         }}
 
         .light-mode .header-sub-en {{
             color: #4f46e5;
         }}
 
-        /* Navigation and tools */
+        /* Row 1: Brand & View Navigation */
         .controls-container {{
             max-width: 1200px;
             width: 100%;
             margin: 0 auto;
             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
             align-items: center;
             justify-content: space-between;
+            gap: 1rem;
+        }}
+
+        .nav-tools-group {{
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-shrink: 0;
         }}
 
         .tabs {{
@@ -784,12 +804,13 @@ def main():
             background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: 0.6rem 1.4rem;
-            font-size: 0.95rem;
+            padding: 0.42rem 1.05rem;
+            font-size: 0.88rem;
             font-weight: 600;
             border-radius: 99px;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
         }}
 
         .tab-btn.active {{
@@ -798,25 +819,62 @@ def main():
             box-shadow: 0 4px 12px var(--glow);
         }}
 
-        .action-tools {{
+        .icon-btn {{
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-main);
+            outline: none;
+            font-size: 1rem;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }}
+
+        .light-mode .icon-btn {{
+            background: rgba(255, 255, 255, 0.9);
+        }}
+
+        .icon-btn:hover {{
+            border-color: var(--primary);
+            color: var(--primary);
+        }}
+
+        /* Row 2: Sub controls (Display toggles + Search) */
+        .sub-controls-bar {{
+            max-width: 1200px;
+            width: 100%;
+            margin: 0.55rem auto 0;
+            padding-top: 0.55rem;
+            border-top: 1px dashed var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
         }}
 
         .search-bar {{
             position: relative;
-            min-width: 260px;
+            display: flex;
+            align-items: center;
+            min-width: 220px;
+            max-width: 300px;
+            flex-shrink: 0;
         }}
 
         .search-input {{
             width: 100%;
-            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            padding: 0.42rem 0.85rem 0.42rem 2.2rem;
             background: rgba(0, 0, 0, 0.2);
             border: 1px solid var(--border);
             border-radius: 99px;
             color: var(--text-main);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             outline: none;
             transition: all 0.2s;
         }}
@@ -832,36 +890,12 @@ def main():
 
         .search-icon {{
             position: absolute;
-            left: 1rem;
+            left: 0.8rem;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
             pointer-events: none;
-            font-size: 0.9rem;
-        }}
-
-        .icon-btn {{
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--border);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--text-main);
-            outline: none;
-            font-size: 1.1rem;
-        }}
-
-        .light-mode .icon-btn {{
-            background: rgba(255, 255, 255, 0.9);
-        }}
-
-        .icon-btn:hover {{
-            border-color: var(--primary);
-            color: var(--primary);
+            font-size: 0.85rem;
         }}
 
         /* Main layouts */
@@ -2049,17 +2083,13 @@ def main():
 
         /* Visibility Controls & Toggles */
         .display-toggles-bar {{
-            max-width: 1200px;
-            width: 100%;
-            margin: 1.2rem auto 0;
-            padding-top: 0.9rem;
-            border-top: 1px dashed var(--border);
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
-            font-size: 0.85rem;
+            justify-content: flex-start;
+            gap: 0.6rem;
+            font-size: 0.82rem;
+            flex: 1;
         }}
 
         .toggle-group-left {{
@@ -2238,45 +2268,67 @@ def main():
 
         @media (max-width: 768px) {{
             header {{
-                padding: 1.25rem 1rem 1rem;
-            }}
-            header h1 {{
-                font-size: 1.65rem;
-            }}
-            header p {{
-                font-size: 0.88rem;
-                margin-bottom: 1rem;
+                padding: 0.65rem 0.85rem 0.5rem;
             }}
             .controls-container {{
                 flex-direction: column;
                 align-items: stretch;
-                gap: 0.75rem;
+                gap: 0.5rem;
             }}
-            .action-tools {{
+            .brand-block {{
                 display: flex;
-                flex-wrap: wrap;
+                flex-direction: column;
+                gap: 0.15rem;
+            }}
+            .brand-title-row {{
+                display: flex;
                 align-items: center;
-                gap: 0.6rem;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }}
+            header h1.brand-title {{
+                font-size: 1.25rem;
+            }}
+            .brand-sub {{
+                font-size: 0.76rem;
+            }}
+            .header-sub-en {{
+                display: none;
+            }}
+            .nav-tools-group {{
                 width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 0.45rem;
             }}
             .tabs {{
-                width: 100%;
+                flex: 1;
+                width: auto;
                 display: flex;
                 overflow-x: auto;
                 white-space: nowrap;
-                justify-content: space-between;
                 -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }}
+            .tabs::-webkit-scrollbar {{
+                display: none;
             }}
             .tab-btn {{
-                padding: 0.5rem 0.85rem;
-                font-size: 0.85rem;
-                flex: 1;
-                text-align: center;
-                white-space: nowrap;
+                padding: 0.38rem 0.75rem;
+                font-size: 0.8rem;
+                flex-shrink: 0;
             }}
-            .search-bar {{
-                flex: 1;
-                min-width: 180px;
+            .sub-controls-bar {{
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+                margin-top: 0.45rem;
+                padding-top: 0.45rem;
+            }}
+            .sub-controls-bar .search-bar {{
+                width: 100%;
+                max-width: 100%;
+                min-width: unset;
             }}
             .filter-tags {{
                 overflow-x: auto;
@@ -2310,8 +2362,8 @@ def main():
             .display-toggles-bar {{
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 0.65rem;
-                padding-top: 0.75rem;
+                gap: 0.45rem;
+                width: 100%;
             }}
             .toggle-group-left {{
                 width: 100%;
@@ -2399,58 +2451,63 @@ def main():
 <body>
 
     <header>
+        <!-- Tier 1: Brand (Left) + Primary Navigation & Theme (Right) -->
         <div class="controls-container">
-            <div>
-                <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.25rem;">
-                    <h1>工作的管見 <span class="en-title">My Two Cents</span></h1>
-                    <span class="update-badge" title="最後建置與更新時間">🕒 最後更新：{build_timestamp}</span>
+            <div class="brand-block">
+                <div class="brand-title-row">
+                    <h1 class="brand-title">工作的管見 <span class="en-title">My Two Cents</span></h1>
+                    <span class="update-badge" title="最後更新：{build_timestamp}">🕒 {build_timestamp}</span>
                 </div>
-                <p>職場生存與成長的避坑指南 (中・英・台三語對照卡牌)<span class="header-sub-en">From the Floor: My Two Cents on Practical Work Principles</span></p>
+                <p class="brand-sub">
+                    <span>職場生存與成長的避坑指南 (三語對照)</span>
+                    <span class="header-sub-en">· From the Floor: My Two Cents on Practical Work Principles</span>
+                </p>
             </div>
             
-            <div class="action-tools">
-                <div class="tabs">
+            <div class="nav-tools-group">
+                <nav class="tabs">
                     <button class="tab-btn active" onclick="switchView('principles')">核心原則 (20)</button>
                     <button class="tab-btn" onclick="switchView('slides')">簡報卡牌 ({len(final_items)})</button>
                     <button class="tab-btn" onclick="switchView('random')">隨機抽卡</button>
                     <button class="tab-btn" onclick="switchView('graph')">關係圖譜 🕸️</button>
-                </div>
-                
-                <div class="search-bar" id="searchBarContainer">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" class="search-input" id="searchInput" placeholder="搜尋原則、中文、英文或台語..." oninput="handleSearch()">
-                </div>
-                
+                </nav>
                 <button class="icon-btn" onclick="toggleDarkMode()" title="切換深淺色模式">🌓</button>
             </div>
         </div>
         
-        <div class="display-toggles-bar">
-            <div class="toggle-group-left">
-                <span class="toggle-group-label">👁️ 顯示切換：</span>
-                <div class="toggle-chips">
-                    <button class="toggle-chip active" id="toggle-original" onclick="toggleField('original')" title="顯示/關閉投影片原文（目前書寫的原則）">
-                        <span class="chip-dot"></span> 簡報原文
-                    </button>
-                    <button class="toggle-chip active" id="toggle-mandarin" onclick="toggleField('mandarin')" title="顯示/關閉優化中文（國語）">
-                        <span class="chip-dot"></span> 優化中文
-                    </button>
-                    <button class="toggle-chip active" id="toggle-english" onclick="toggleField('english')" title="顯示/關閉優化英文">
-                        <span class="chip-dot"></span> 優化英文
-                    </button>
-                    <button class="toggle-chip active" id="toggle-taiwanese" onclick="toggleField('taiwanese')" title="顯示/關閉優化台文">
-                        <span class="chip-dot"></span> 優化台文
-                    </button>
-                    <button class="toggle-chip active" id="toggle-principles" onclick="toggleField('principles')" title="顯示/關閉核心原則標籤與對照連結">
-                        <span class="chip-dot"></span> 對照原則
-                    </button>
+        <!-- Tier 2: Display Filters (Left) + Search Bar (Right) -->
+        <div class="sub-controls-bar">
+            <div class="display-toggles-bar">
+                <div class="toggle-group-left">
+                    <span class="toggle-group-label">👁️ 顯示：</span>
+                    <div class="toggle-chips">
+                        <button class="toggle-chip active" id="toggle-original" onclick="toggleField('original')" title="顯示/關閉投影片原文（目前書寫的原則）">
+                            <span class="chip-dot"></span> 簡報原文
+                        </button>
+                        <button class="toggle-chip active" id="toggle-mandarin" onclick="toggleField('mandarin')" title="顯示/關閉優化中文（國語）">
+                            <span class="chip-dot"></span> 優化中文
+                        </button>
+                        <button class="toggle-chip active" id="toggle-english" onclick="toggleField('english')" title="顯示/關閉優化英文">
+                            <span class="chip-dot"></span> 優化英文
+                        </button>
+                        <button class="toggle-chip active" id="toggle-taiwanese" onclick="toggleField('taiwanese')" title="顯示/關閉優化台文">
+                            <span class="chip-dot"></span> 優化台文
+                        </button>
+                        <button class="toggle-chip active" id="toggle-principles" onclick="toggleField('principles')" title="顯示/關閉核心原則標籤與對照連結">
+                            <span class="chip-dot"></span> 對照原則
+                        </button>
+                    </div>
+                </div>
+                <div class="preset-links">
+                    <button class="preset-btn" onclick="applyPreset('all')" title="顯示全部內容">全部</button>
+                    <button class="preset-btn" onclick="applyPreset('trilingual')" title="只看三語翻譯，隱藏簡報原文">純三語</button>
+                    <button class="preset-btn" onclick="applyPreset('original_only')" title="只看簡報原文，隱藏三語翻譯">純原文</button>
                 </div>
             </div>
-            <div class="preset-links">
-                <span>快速模式：</span>
-                <button class="preset-btn" onclick="applyPreset('all')" title="顯示全部內容">全部顯示</button>
-                <button class="preset-btn" onclick="applyPreset('trilingual')" title="只看三語翻譯，隱藏簡報原文">純三語</button>
-                <button class="preset-btn" onclick="applyPreset('original_only')" title="只看簡報原文，隱藏三語翻譯">純原文</button>
+            
+            <div class="search-bar" id="searchBarContainer">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="searchInput" placeholder="搜尋原則、中文、英文或台語..." oninput="handleSearch()">
             </div>
         </div>
     </header>
