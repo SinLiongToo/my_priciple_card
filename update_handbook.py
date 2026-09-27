@@ -2524,6 +2524,38 @@ def main():
                 <button class="filter-tag" onclick="filterPrinciples('5')">第五篇：職涯與個人成長</button>
                 <button class="filter-tag" onclick="filterPrinciples('6')">第六篇：能量、韌性與生活平衡</button>
             </div>
+
+            <!-- Principles Autoplay Player Bar -->
+            <div class="slides-player-bar principles-player-bar" id="principlesPlayerBar">
+                <div class="player-bar-left">
+                    <button class="player-btn-main" id="principlesPlayerBtnPlay" onclick="toggleAutoplay('principles')" title="依序自動連續朗讀當前核心原則之優化英文">
+                        <span>▶️</span> 自動連續播放
+                    </button>
+                    <button class="player-btn-secondary" id="principlesPlayerBtnStop" onclick="stopAllAudio()" title="停止語音朗讀">
+                        ⏹️ 停止
+                    </button>
+                    <button class="player-btn-secondary" id="principlesPlayerBtnPrev" onclick="prevAudioItem()" title="上一原則" disabled>
+                        ⏮️
+                    </button>
+                    <button class="player-btn-secondary" id="principlesPlayerBtnNext" onclick="nextAudioItem()" title="下一原則" disabled>
+                        ⏭️
+                    </button>
+                    <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted); margin-left: 0.25rem;">
+                        <span>語速：</span>
+                        <select class="player-rate-select" id="principlesPlayerRateSelect" onchange="changePlaybackRate(this.value)" title="調整語音朗讀速度">
+                            <option value="0.85">0.85x 慢速</option>
+                            <option value="1.0" selected>1.0x 標準</option>
+                            <option value="1.15">1.15x 快速</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="player-bar-status">
+                    <span class="player-status-badge" id="principlesPlayerStatusText">準備就緒</span>
+                    <div class="player-progress-track" title="朗讀進度">
+                        <div class="player-progress-bar" id="principlesPlayerProgressBar"></div>
+                    </div>
+                </div>
+            </div>
             <div class="card-grid" id="principlesGrid"></div>
         </section>
 
@@ -2536,16 +2568,16 @@ def main():
             <!-- Slides Autoplay Player Bar -->
             <div class="slides-player-bar" id="slidesPlayerBar">
                 <div class="player-bar-left">
-                    <button class="player-btn-main" id="playerBtnPlay" onclick="toggleSlidesAutoplay()" title="依序自動連續朗讀當前卡牌之優化英文">
+                    <button class="player-btn-main" id="playerBtnPlay" onclick="toggleAutoplay('slides')" title="依序自動連續朗讀當前卡牌之優化英文">
                         <span>▶️</span> 自動連續播放
                     </button>
-                    <button class="player-btn-secondary" id="playerBtnStop" onclick="stopSlidesAutoplay()" title="停止語音朗讀">
+                    <button class="player-btn-secondary" id="playerBtnStop" onclick="stopAllAudio()" title="停止語音朗讀">
                         ⏹️ 停止
                     </button>
-                    <button class="player-btn-secondary" id="playerBtnPrev" onclick="prevSlideCardAudio()" title="上一張卡牌" disabled>
+                    <button class="player-btn-secondary" id="playerBtnPrev" onclick="prevAudioItem()" title="上一張卡牌" disabled>
                         ⏮️
                     </button>
-                    <button class="player-btn-secondary" id="playerBtnNext" onclick="nextSlideCardAudio()" title="下一張卡牌" disabled>
+                    <button class="player-btn-secondary" id="playerBtnNext" onclick="nextAudioItem()" title="下一張卡牌" disabled>
                         ⏭️
                     </button>
                     <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted); margin-left: 0.25rem;">
@@ -2797,9 +2829,10 @@ def main():
 
         function switchView(viewName) {{
             currentActiveView = viewName;
-            if (viewName !== 'slides') {{
+            if (isAutoplaying && autoplayMode !== viewName) {{
                 stopAllAudio();
             }}
+            updatePlayerBarUI();
             
             // Toggle active tabs
             const tabButtons = document.querySelectorAll('.tab-btn');
@@ -2875,19 +2908,11 @@ def main():
             const grid = document.getElementById('principlesGrid');
             grid.innerHTML = '';
             
-            const filtered = PRINCIPLES.filter(p => {{
-                const chapterId = getChapterId(p.num);
-                const matchesChapter = (principlesFilter === 'all' || principlesFilter === chapterId);
-                const matchesSearch = !searchQuery || 
-                    p.title.toLowerCase().includes(searchQuery) ||
-                    p.mandarin.toLowerCase().includes(searchQuery) ||
-                    p.english.toLowerCase().includes(searchQuery) ||
-                    p.taiwanese.toLowerCase().includes(searchQuery);
-                return matchesChapter && matchesSearch;
-            }});
+            const filtered = getCurrentlyFilteredPrinciples();
 
             if (filtered.length === 0) {{
                 grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem;">無符合搜尋條件的原則</div>`;
+                updatePlayerBarUI();
                 return;
             }}
 
@@ -2968,6 +2993,8 @@ def main():
                     grid.appendChild(card);
                 }});
             }});
+
+            updatePlayerBarUI();
         }}
 
         function renderSlides() {{
@@ -3098,6 +3125,7 @@ def main():
             document.querySelectorAll('#principlesFilters .filter-tag').forEach(tag => tag.classList.remove('active'));
             event.target.classList.add('active');
             renderPrinciples();
+            if (isAutoplaying) stopAllAudio();
         }}
 
         function filterSlides(slide) {{
@@ -3114,8 +3142,8 @@ def main():
                 renderPrinciples();
             }} else if (currentActiveView === 'slides') {{
                 renderSlides();
-                if (isAutoplaying) stopAllAudio();
             }}
+            if (isAutoplaying) stopAllAudio();
         }}
 
         // ==========================================
@@ -3126,6 +3154,7 @@ def main():
         let playbackRate = 1.0;
         let isAutoplaying = false;
         let isPaused = false;
+        let autoplayMode = 'principles'; // 'principles' or 'slides'
         let autoplayQueue = [];
         let currentQueueIndex = -1;
         let currentlyPlayingCardId = null;
@@ -3202,7 +3231,8 @@ def main():
             }}
 
             // Highlight card in slides or principles view
-            let cardEl = document.getElementById(`card-slide-${{cardId}}`) || document.getElementById(`card-principle-${{cardId}}`);
+            const cardNum = String(cardId).replace(/^p/, '');
+            let cardEl = document.getElementById(`card-slide-${{cardId}}`) || document.getElementById(`card-principle-${{cardNum}}`);
             if (cardEl) cardEl.classList.add('now-playing');
 
             const utterance = new SpeechSynthesisUtterance(text);
@@ -3260,154 +3290,17 @@ def main():
             }}
         }}
 
-        // Slides Autoplay Controller
-        function toggleSlidesAutoplay() {{
-            if (isAutoplaying) {{
-                if (isPaused) {{
-                    resumeSlidesAutoplay();
-                }} else {{
-                    pauseSlidesAutoplay();
-                }}
-            }} else {{
-                startSlidesAutoplay();
-            }}
-        }}
-
-        function startSlidesAutoplay() {{
-            if (!speechSynth) {{
-                alert('您的瀏覽器不支援 Web Speech API 語音發音功能。');
-                return;
-            }}
-
-            const cards = getCurrentlyFilteredSlides();
-            if (cards.length === 0) {{
-                alert('當前無符合條件的卡牌可供播放。');
-                return;
-            }}
-
-            stopAllAudio();
-
-            autoplayQueue = cards;
-            currentQueueIndex = 0;
-            isAutoplaying = true;
-            isPaused = false;
-
-            updatePlayerBarUI();
-            playCurrentQueueItem();
-        }}
-
-        function playCurrentQueueItem() {{
-            if (!isAutoplaying || currentQueueIndex < 0 || currentQueueIndex >= autoplayQueue.length) {{
-                stopAllAudio();
-                return;
-            }}
-
-            const item = autoplayQueue[currentQueueIndex];
-            currentlyPlayingCardId = item.key;
-            updatePlayerBarUI();
-
-            // Clear previous highlights
-            document.querySelectorAll('.principle-card.now-playing').forEach(c => c.classList.remove('now-playing'));
-            document.querySelectorAll('.audio-play-btn.speaking').forEach(b => {{
-                b.classList.remove('speaking');
-                b.innerHTML = '🔊';
+        function getCurrentlyFilteredPrinciples() {{
+            return PRINCIPLES.filter(p => {{
+                const chapterId = getChapterId(p.num);
+                const matchesChapter = (principlesFilter === 'all' || principlesFilter === chapterId);
+                const matchesSearch = !searchQuery || 
+                    p.title.toLowerCase().includes(searchQuery) ||
+                    p.mandarin.toLowerCase().includes(searchQuery) ||
+                    p.english.toLowerCase().includes(searchQuery) ||
+                    p.taiwanese.toLowerCase().includes(searchQuery);
+                return matchesChapter && matchesSearch;
             }});
-
-            // Smooth scroll & highlight card
-            const cardEl = document.getElementById(`card-slide-${{item.key}}`);
-            if (cardEl) {{
-                cardEl.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
-                cardEl.classList.add('now-playing');
-                const btn = cardEl.querySelector('.audio-play-btn');
-                if (btn) {{
-                    btn.classList.add('speaking');
-                    btn.innerHTML = '⏹️';
-                }}
-            }}
-
-            const utterance = new SpeechSynthesisUtterance(item.english || item.original || '');
-            if (speechVoice) utterance.voice = speechVoice;
-            utterance.lang = 'en-US';
-            utterance.rate = playbackRate;
-
-            utterance.onend = () => {{
-                if (!isAutoplaying || isPaused) return;
-                // Natural pause 1.0s between cards
-                setTimeout(() => {{
-                    if (!isAutoplaying || isPaused) return;
-                    currentQueueIndex++;
-                    if (currentQueueIndex < autoplayQueue.length) {{
-                        playCurrentQueueItem();
-                    }} else {{
-                        stopAllAudio();
-                    }}
-                }}, 1000);
-            }};
-
-            utterance.onerror = () => {{
-                if (!isAutoplaying || isPaused) return;
-                currentQueueIndex++;
-                if (currentQueueIndex < autoplayQueue.length) {{
-                    playCurrentQueueItem();
-                }} else {{
-                    stopAllAudio();
-                }}
-            }};
-
-            speechSynth.speak(utterance);
-        }}
-
-        function pauseSlidesAutoplay() {{
-            if (!isAutoplaying || isPaused) return;
-            if (speechSynth) speechSynth.pause();
-            isPaused = true;
-            updatePlayerBarUI();
-        }}
-
-        function resumeSlidesAutoplay() {{
-            if (!isAutoplaying || !isPaused) return;
-            if (speechSynth) speechSynth.resume();
-            isPaused = false;
-            updatePlayerBarUI();
-        }}
-
-        function stopSlidesAutoplay() {{
-            stopAllAudio();
-        }}
-
-        function nextSlideCardAudio() {{
-            if (!isAutoplaying) {{
-                startSlidesAutoplay();
-                return;
-            }}
-            if (speechSynth) speechSynth.cancel();
-            if (currentQueueIndex < autoplayQueue.length - 1) {{
-                currentQueueIndex++;
-                isPaused = false;
-                playCurrentQueueItem();
-            }} else {{
-                stopAllAudio();
-            }}
-        }}
-
-        function prevSlideCardAudio() {{
-            if (!isAutoplaying) return;
-            if (speechSynth) speechSynth.cancel();
-            if (currentQueueIndex > 0) {{
-                currentQueueIndex--;
-                isPaused = false;
-                playCurrentQueueItem();
-            }} else {{
-                playCurrentQueueItem();
-            }}
-        }}
-
-        function changePlaybackRate(rate) {{
-            playbackRate = parseFloat(rate) || 1.0;
-            if (speechSynth && speechSynth.speaking && isAutoplaying) {{
-                speechSynth.cancel();
-                playCurrentQueueItem();
-            }}
         }}
 
         function getCurrentlyFilteredSlides() {{
@@ -3434,38 +3327,263 @@ def main():
             }});
         }}
 
-        function updatePlayerBarUI() {{
-            const playBtn = document.getElementById('playerBtnPlay');
-            const statusTxt = document.getElementById('playerStatusText');
-            const progress = document.getElementById('playerProgressBar');
-            const prevBtn = document.getElementById('playerBtnPrev');
-            const nextBtn = document.getElementById('playerBtnNext');
+        // ==========================================
+        // Unified Autoplay Controller (Principles & Slides)
+        // ==========================================
+        function toggleAutoplay(mode) {{
+            mode = mode || (currentActiveView === 'principles' ? 'principles' : 'slides');
+            if (isAutoplaying && autoplayMode === mode) {{
+                if (isPaused) {{
+                    resumeAutoplay();
+                }} else {{
+                    pauseAutoplay();
+                }}
+            }} else {{
+                startAutoplay(mode);
+            }}
+        }}
 
-            if (!playBtn) return;
+        function startAutoplay(mode) {{
+            if (!speechSynth) {{
+                alert('您的瀏覽器不支援 Web Speech API 語音發音功能。');
+                return;
+            }}
+
+            mode = mode || (currentActiveView === 'principles' ? 'principles' : 'slides');
+            let queue = [];
+            if (mode === 'principles') {{
+                const principles = getCurrentlyFilteredPrinciples();
+                if (principles.length === 0) {{
+                    alert('當前無符合條件的核心原則可供播放。');
+                    return;
+                }}
+                queue = principles.map(p => ({{
+                    mode: 'principles',
+                    key: 'p' + p.num,
+                    label: `原則 ${{p.num}}`,
+                    text: p.english,
+                    cardId: `card-principle-${{p.num}}`
+                }}));
+            }} else {{
+                const slides = getCurrentlyFilteredSlides();
+                if (slides.length === 0) {{
+                    alert('當前無符合條件的卡牌可供播放。');
+                    return;
+                }}
+                queue = slides.map(s => ({{
+                    mode: 'slides',
+                    key: s.key,
+                    label: `No. ${{s.key}}`,
+                    text: s.english || s.original || '',
+                    cardId: `card-slide-${{s.key}}`
+                }}));
+            }}
+
+            stopAllAudio();
+
+            autoplayMode = mode;
+            autoplayQueue = queue;
+            currentQueueIndex = 0;
+            isAutoplaying = true;
+            isPaused = false;
+
+            updatePlayerBarUI();
+            playCurrentQueueItem();
+        }}
+
+        function playCurrentQueueItem() {{
+            if (!isAutoplaying || currentQueueIndex < 0 || currentQueueIndex >= autoplayQueue.length) {{
+                stopAllAudio();
+                return;
+            }}
+
+            const item = autoplayQueue[currentQueueIndex];
+            currentlyPlayingCardId = item.key;
+            updatePlayerBarUI();
+
+            // Clear previous highlights
+            document.querySelectorAll('.principle-card.now-playing').forEach(c => c.classList.remove('now-playing'));
+            document.querySelectorAll('.audio-play-btn.speaking').forEach(b => {{
+                b.classList.remove('speaking');
+                b.innerHTML = '🔊';
+            }});
+
+            // Smooth scroll & highlight card
+            const cardEl = document.getElementById(item.cardId);
+            if (cardEl) {{
+                cardEl.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
+                cardEl.classList.add('now-playing');
+                const btn = cardEl.querySelector('.audio-play-btn');
+                if (btn) {{
+                    btn.classList.add('speaking');
+                    btn.innerHTML = '⏹️';
+                }}
+            }}
+
+            const utterance = new SpeechSynthesisUtterance(item.text);
+            if (speechVoice) utterance.voice = speechVoice;
+            utterance.lang = 'en-US';
+            utterance.rate = playbackRate;
+
+            utterance.onend = () => {{
+                if (!isAutoplaying || isPaused) return;
+                // Natural pause 1.0s between items
+                setTimeout(() => {{
+                    if (!isAutoplaying || isPaused) return;
+                    currentQueueIndex++;
+                    if (currentQueueIndex < autoplayQueue.length) {{
+                        playCurrentQueueItem();
+                    }} else {{
+                        stopAllAudio();
+                    }}
+                }}, 1000);
+            }};
+
+            utterance.onerror = () => {{
+                if (!isAutoplaying || isPaused) return;
+                currentQueueIndex++;
+                if (currentQueueIndex < autoplayQueue.length) {{
+                    playCurrentQueueItem();
+                }} else {{
+                    stopAllAudio();
+                }}
+            }};
+
+            speechSynth.speak(utterance);
+        }}
+
+        function pauseAutoplay() {{
+            if (!isAutoplaying || isPaused) return;
+            if (speechSynth) speechSynth.pause();
+            isPaused = true;
+            updatePlayerBarUI();
+        }}
+
+        function resumeAutoplay() {{
+            if (!isAutoplaying || !isPaused) return;
+            if (speechSynth) speechSynth.resume();
+            isPaused = false;
+            updatePlayerBarUI();
+        }}
+
+        function nextAudioItem() {{
+            if (!isAutoplaying) {{
+                startAutoplay(currentActiveView === 'principles' ? 'principles' : 'slides');
+                return;
+            }}
+            if (speechSynth) speechSynth.cancel();
+            if (currentQueueIndex < autoplayQueue.length - 1) {{
+                currentQueueIndex++;
+                isPaused = false;
+                playCurrentQueueItem();
+            }} else {{
+                stopAllAudio();
+            }}
+        }}
+
+        function prevAudioItem() {{
+            if (!isAutoplaying) return;
+            if (speechSynth) speechSynth.cancel();
+            if (currentQueueIndex > 0) {{
+                currentQueueIndex--;
+                isPaused = false;
+                playCurrentQueueItem();
+            }} else {{
+                playCurrentQueueItem();
+            }}
+        }}
+
+        // Backward compatibility aliases
+        function toggleSlidesAutoplay() {{ toggleAutoplay('slides'); }}
+        function startSlidesAutoplay() {{ startAutoplay('slides'); }}
+        function pauseSlidesAutoplay() {{ pauseAutoplay(); }}
+        function resumeSlidesAutoplay() {{ resumeAutoplay(); }}
+        function stopSlidesAutoplay() {{ stopAllAudio(); }}
+        function nextSlideCardAudio() {{ nextAudioItem(); }}
+        function prevSlideCardAudio() {{ prevAudioItem(); }}
+
+        function changePlaybackRate(rate) {{
+            playbackRate = parseFloat(rate) || 1.0;
+            const pSel = document.getElementById('principlesPlayerRateSelect');
+            const sSel = document.getElementById('playerRateSelect');
+            if (pSel) pSel.value = String(playbackRate);
+            if (sSel) sSel.value = String(playbackRate);
+            if (speechSynth && speechSynth.speaking && isAutoplaying) {{
+                speechSynth.cancel();
+                playCurrentQueueItem();
+            }}
+        }}
+
+        function updatePlayerBarUI() {{
+            // Principles controls
+            const pPlayBtn = document.getElementById('principlesPlayerBtnPlay');
+            const pStatusTxt = document.getElementById('principlesPlayerStatusText');
+            const pProgress = document.getElementById('principlesPlayerProgressBar');
+            const pPrevBtn = document.getElementById('principlesPlayerBtnPrev');
+            const pNextBtn = document.getElementById('principlesPlayerBtnNext');
+
+            // Slides controls
+            const sPlayBtn = document.getElementById('playerBtnPlay');
+            const sStatusTxt = document.getElementById('playerStatusText');
+            const sProgress = document.getElementById('playerProgressBar');
+            const sPrevBtn = document.getElementById('playerBtnPrev');
+            const sNextBtn = document.getElementById('playerBtnNext');
+
+            const totalPrinciples = getCurrentlyFilteredPrinciples().length;
+            const totalSlides = getCurrentlyFilteredSlides().length;
 
             if (isAutoplaying) {{
-                if (isPaused) {{
-                    playBtn.innerHTML = '<span>▶️</span> 繼續播放';
-                    playBtn.title = '繼續播放';
-                }} else {{
-                    playBtn.innerHTML = '<span>⏸️</span> 暫停播放';
-                    playBtn.title = '暫停播放';
-                }}
                 const total = autoplayQueue.length;
                 const curr = currentQueueIndex + 1;
                 const pct = total > 0 ? (curr / total) * 100 : 0;
-                if (statusTxt) statusTxt.innerText = `🎧 朗讀中 No. ${{currentlyPlayingCardId || ''}} (${{curr}} / ${{total}})`;
-                if (progress) progress.style.width = `${{pct}}%`;
-                if (prevBtn) prevBtn.disabled = currentQueueIndex <= 0;
-                if (nextBtn) nextBtn.disabled = currentQueueIndex >= total - 1;
+                const currentItem = autoplayQueue[currentQueueIndex];
+                const label = currentItem ? currentItem.label : '';
+
+                if (autoplayMode === 'principles') {{
+                    if (pPlayBtn) {{
+                        pPlayBtn.innerHTML = isPaused ? '<span>▶️</span> 繼續播放' : '<span>⏸️</span> 暫停播放';
+                        pPlayBtn.title = isPaused ? '繼續播放' : '暫停播放';
+                    }}
+                    if (pStatusTxt) pStatusTxt.innerText = `🎧 朗讀中 ${{label}} (${{curr}} / ${{total}})`;
+                    if (pProgress) pProgress.style.width = `${{pct}}%`;
+                    if (pPrevBtn) pPrevBtn.disabled = currentQueueIndex <= 0;
+                    if (pNextBtn) pNextBtn.disabled = currentQueueIndex >= total - 1;
+
+                    // Idle slides player
+                    if (sPlayBtn) sPlayBtn.innerHTML = '<span>▶️</span> 自動連續播放';
+                    if (sStatusTxt) sStatusTxt.innerText = `準備就緒 (共 ${{totalSlides}} 張卡牌)`;
+                    if (sProgress) sProgress.style.width = '0%';
+                    if (sPrevBtn) sPrevBtn.disabled = true;
+                    if (sNextBtn) sNextBtn.disabled = true;
+                }} else {{
+                    if (sPlayBtn) {{
+                        sPlayBtn.innerHTML = isPaused ? '<span>▶️</span> 繼續播放' : '<span>⏸️</span> 暫停播放';
+                        sPlayBtn.title = isPaused ? '繼續播放' : '暫停播放';
+                    }}
+                    if (sStatusTxt) sStatusTxt.innerText = `🎧 朗讀中 ${{label}} (${{curr}} / ${{total}})`;
+                    if (sProgress) sProgress.style.width = `${{pct}}%`;
+                    if (sPrevBtn) sPrevBtn.disabled = currentQueueIndex <= 0;
+                    if (sNextBtn) sNextBtn.disabled = currentQueueIndex >= total - 1;
+
+                    // Idle principles player
+                    if (pPlayBtn) pPlayBtn.innerHTML = '<span>▶️</span> 自動連續播放';
+                    if (pStatusTxt) pStatusTxt.innerText = `準備就緒 (共 ${{totalPrinciples}} 條原則)`;
+                    if (pProgress) pProgress.style.width = '0%';
+                    if (pPrevBtn) pPrevBtn.disabled = true;
+                    if (pNextBtn) pNextBtn.disabled = true;
+                }}
             }} else {{
-                playBtn.innerHTML = '<span>▶️</span> 自動連續播放';
-                playBtn.title = '依序自動連續朗讀當前篩選的所有卡牌';
-                const total = getCurrentlyFilteredSlides().length;
-                if (statusTxt) statusTxt.innerText = `準備就緒 (共 ${{total}} 張卡牌)`;
-                if (progress) progress.style.width = '0%';
-                if (prevBtn) prevBtn.disabled = true;
-                if (nextBtn) nextBtn.disabled = true;
+                if (pPlayBtn) pPlayBtn.innerHTML = '<span>▶️</span> 自動連續播放';
+                if (pStatusTxt) pStatusTxt.innerText = `準備就緒 (共 ${{totalPrinciples}} 條原則)`;
+                if (pProgress) pProgress.style.width = '0%';
+                if (pPrevBtn) pPrevBtn.disabled = true;
+                if (pNextBtn) pNextBtn.disabled = true;
+
+                if (sPlayBtn) sPlayBtn.innerHTML = '<span>▶️</span> 自動連續播放';
+                if (sStatusTxt) sStatusTxt.innerText = `準備就緒 (共 ${{totalSlides}} 張卡牌)`;
+                if (sProgress) sProgress.style.width = '0%';
+                if (sPrevBtn) sPrevBtn.disabled = true;
+                if (sNextBtn) sNextBtn.disabled = true;
             }}
         }}
 
