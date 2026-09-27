@@ -1,7 +1,7 @@
 ---
 name: workplace-principles-workflow
 description: >-
-  Automates the full lifecycle of the workplace principles handbook and card system: parsing PowerPoint slides (.pptx), caching trilingual translations (Mandarin, English, Taiwanese Hokkien), regenerating the Markdown handbook, ODT publication book, and RWD interactive card deck web application (index.html), and deploying updates to GitHub Pages. Use when the user asks to update slides, add or modify workplace principles, customize the card web app, or deploy changes.
+  Automates the full lifecycle of the workplace principles handbook and card system: parsing PowerPoint slides (.pptx), caching trilingual translations (Mandarin, English, Taiwanese Hokkien), regenerating the Markdown handbook, ODT publication book, and RWD interactive card deck web application (index.html) with Web Speech API audio pronunciation, dual-view continuous autoplay player bars, compact 2-tier responsive header, and relationship connection graph, then deploying updates to GitHub Pages. Use when the user asks to update slides, add or modify workplace principles, customize the card web app, or deploy changes.
 ---
 
 # Workplace Principles Handbook & Card Deck Workflow
@@ -103,12 +103,32 @@ git push origin main
 
 ---
 
-## 四、網頁四大檢視視角與關係圖譜架構
+## 四、網頁四大檢視視角、語音播放與關係圖譜架構
 
-網頁應用程式 (`index.html`) 提供四種不同的瀏覽與檢索視角：
-1. **核心原則 (20)**：系統化 20 大原則卡片，包含所屬章節標籤、三語文本與關聯對照卡牌按鈕。
+網頁應用程式 (`index.html`) 具備以下核心互動功能與模組：
+
+### 1. 緊湊型雙層導航結構 (Compact 2-Tier Header)
+- **結構對稱與空間最佳化**：
+  - **第 1 層 (品牌與視角導航)**：左側為精簡品牌標題、副標題與更新時間徽章；右側為「核心原則 (20)」、「簡報卡牌 (458)」、「隨機抽卡」、「關係圖譜 🕸️」四大導航分頁與 `🌓` 深淺色模式切換，徹底消除右上角空白死區。
+  - **第 2 層 (欄位開關與即時搜尋)**：左側為「簡報原文 / 優化中文 / 優化英文 / 優化台文 / 對照原則」獨立顯示膠囊與快速模式（全部/純三語/純原文）；右側為即時搜尋輸入框，左右平衡對稱。
+  - **垂直高度縮減 60%**：整體導航列高度由 ~240px 大幅降至 ~98px，顯著釋放閱覽視野。
+
+### 2. 優化英文語音朗讀 (Web Speech API)
+- 每張簡報卡牌、核心原則卡片、隨機抽卡背面及圖譜詳細資訊抽屜中的「優化英文」旁皆配有專屬發音按鈕（`🔊`）。
+- 採用瀏覽器原生 `window.speechSynthesis`，零依賴、純離線、美式標準發音，發音時按鈕切換為 `⏹️` 並伴隨卡片邊框脈衝高亮光暈。
+
+### 3. 雙視角連續自動播放器 (Dual Autoplay Player Bars)
+- **原則與卡牌全面支援**：「核心原則 (20)」與「簡報卡牌 (458)」視角頂部均配有專屬的連續自動播放控制器。
+- **功能特點**：
+  - **一鍵循序朗讀**：一鍵依序朗讀符合條件的原則或卡牌優化英文，項目之間自然停頓 1.0 秒。
+  - **視覺平滑置中**：朗讀時自動平滑滾動（Smooth Scroll）將卡片置中，並呈現呼吸發光高亮外框。
+  - **智慧篩選聯動**：完全尊重篇章章節、投影片批次與即時搜尋關鍵字，只播放符合篩選的清單。
+  - **進度與速率控制**：即時彩條進度百分比與總數比（如 `🎧 朗讀中 原則 1 (1 / 20)`），支援 `0.85x` / `1.0x` / `1.15x` 語速切換，以及上一張、下一張、暫停與停止控制。
+
+### 4. 四種檢視視角
+1. **核心原則 (20)**：系統化 20 大原則卡片，包含所屬章節標籤、篇章核心指引金句橫幅、三語文本與關聯對照卡牌跳轉按鈕。
 2. **簡報卡牌 (458)**：逐條查閱投影片所有卡牌，支援按投影片批次過濾與即時搜尋。
-3. **隨機抽卡**：模擬實體卡牌抽取與 3D 翻牌動畫，適合每日職場啟發或自我抽測。
+3. **隨機抽卡**：模擬實體卡牌抽取與 3D 翻牌動畫，背面支援三語對照與個別發音，適合每日職場啟發或自我抽測。
 4. **關係圖譜 🕸️ (Connection Graph)**：
    - **零依賴物理引擎**：基於原生 HTML5 Canvas，運用庫倫斥力（推開防重疊）、虎克彈簧力（拉近關聯）、向心重力（防止飄散）與速度阻尼（收斂平衡）進行力導向物理模擬（Force-Directed Simulation）。
    - **拓撲結構 (三層全景架構)**：
@@ -120,7 +140,7 @@ git push origin main
      - **模式切換**：「🌐 原則骨幹 (20)」與「✨ 全景星系 (458卡牌)」一鍵切換。
      - **衛星展開**：雙擊原則節點或於抽屜點擊「🪐 展開/收合卡牌」，以該原則為中心展開衛星卡牌群。
      - **畫布導航**：支援平移、平滑縮放（0.35x~2.8x）、節點任意拖曳重組、懸停浮動 Tooltip 預覽、懸停高亮路徑、篇章篩選、視角重置與暫停/繼續模擬。
-   - **滑出式詳細抽屜 (Sliding Drawer)**：點擊任一原則或卡牌節點即滑出右側抽屜，呈現三語文本、關聯原則跳轉膠囊與直達卡牌檢視連結。
+   - **滑出式詳細抽屜 (Sliding Drawer)**：點擊任一原則或卡牌節點即滑出右側抽屜，呈現三語文本、優化英文發音、關聯原則跳轉膠囊與直達卡牌檢視連結。
 
 ---
 
