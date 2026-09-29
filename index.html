@@ -780,34 +780,101 @@
             font-size: 0.82rem;
             color: var(--text-muted);
             flex: 1;
-            min-width: 220px;
+            min-width: 250px;
             justify-content: flex-end;
+            flex-wrap: wrap;
         }
 
         .player-status-badge {
             font-weight: 600;
             color: var(--text-main);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            white-space: nowrap;
         }
 
-        .player-progress-track {
-            width: 130px;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 99px;
-            overflow: hidden;
+        .player-jump-input {
+            width: 48px;
+            padding: 2px 4px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            outline: none;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .player-jump-input:focus {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.15);
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
+        }
+
+        .light-mode .player-jump-input {
+            color: var(--primary);
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+
+        .player-progress-container {
+            display: inline-flex;
+            align-items: center;
+            width: 140px;
             position: relative;
         }
 
-        .light-mode .player-progress-track {
-            background: rgba(0, 0, 0, 0.1);
+        .player-progress-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.12);
+            outline: none;
+            cursor: pointer;
+            transition: background 0.15s ease;
         }
 
-        .player-progress-bar {
-            height: 100%;
-            width: 0%;
+        .light-mode .player-progress-slider {
+            background: rgba(0, 0, 0, 0.12);
+        }
+
+        .player-progress-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
             background: var(--primary);
-            border-radius: 99px;
-            transition: width 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 0 6px rgba(99, 102, 241, 0.5);
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .player-progress-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.25);
+            background: #818cf8;
+        }
+
+        .player-progress-slider::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 6px rgba(99, 102, 241, 0.5);
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .player-progress-slider::-moz-range-thumb:hover {
+            transform: scale(1.25);
+            background: #818cf8;
         }
 
         /* Now playing card halo */
@@ -1818,7 +1885,7 @@
             <div class="brand-block">
                 <div class="brand-title-row">
                     <h1 class="brand-title">工作的管見 <span class="en-title">My Two Cents</span></h1>
-                    <span class="update-badge" title="最後更新：2026-09-27 18:33">🕒 2026-09-27 18:33</span>
+                    <span class="update-badge" title="最後更新：2026-09-29 08:13">🕒 2026-09-29 08:13</span>
                 </div>
                 <p class="brand-sub">
                     <span>職場生存與成長的避坑指南 (三語對照)</span>
@@ -1910,11 +1977,23 @@
                             <option value="1.15">1.15x 快速</option>
                         </select>
                     </div>
+                    <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted);">
+                        <span>停頓：</span>
+                        <select class="player-rate-select" id="principlesPauseSelect" onchange="changePauseDuration(this.value)" title="調整朗讀間隔時間">
+                            <option value="500">0.5s</option>
+                            <option value="1000" selected>1.0s</option>
+                            <option value="1500">1.5s</option>
+                            <option value="2000">2.0s</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="player-bar-status">
-                    <span class="player-status-badge" id="principlesPlayerStatusText">準備就緒</span>
-                    <div class="player-progress-track" title="朗讀進度">
-                        <div class="player-progress-bar" id="principlesPlayerProgressBar"></div>
+                    <div class="player-status-badge" id="principlesPlayerStatusContainer">
+                        <span id="principlesPlayerStatusLabel">準備就緒</span>
+                        <span id="principlesPlayerStatusIndexWrap">(<input type="number" id="principlesPlayerJumpInput" class="player-jump-input" min="1" max="20" value="1" onchange="onPlayerJumpInputChange(this.value, 'principles')" onkeydown="if(event.key==='Enter')onPlayerJumpInputChange(this.value, 'principles')" title="輸入編號跳轉"> / <span id="principlesPlayerTotalCount">20</span>)</span>
+                    </div>
+                    <div class="player-progress-container" title="拖動或點擊跳轉進度">
+                        <input type="range" class="player-progress-slider" id="principlesPlayerSlider" min="1" max="20" value="1" oninput="onProgressSliderInput(this.value, 'principles')" onchange="onProgressSliderChange(this.value, 'principles')">
                     </div>
                 </div>
             </div>
@@ -1959,11 +2038,23 @@
                             <option value="1.15">1.15x 快速</option>
                         </select>
                     </div>
+                    <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted);">
+                        <span>停頓：</span>
+                        <select class="player-rate-select" id="slidesPauseSelect" onchange="changePauseDuration(this.value)" title="調整朗讀間隔時間">
+                            <option value="500">0.5s</option>
+                            <option value="1000" selected>1.0s</option>
+                            <option value="1500">1.5s</option>
+                            <option value="2000">2.0s</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="player-bar-status">
-                    <span class="player-status-badge" id="playerStatusText">準備就緒</span>
-                    <div class="player-progress-track" title="朗讀進度">
-                        <div class="player-progress-bar" id="playerProgressBar"></div>
+                    <div class="player-status-badge" id="slidesPlayerStatusContainer">
+                        <span id="playerStatusText">準備就緒</span>
+                        <span id="slidesPlayerStatusIndexWrap">(<input type="number" id="playerJumpInput" class="player-jump-input" min="1" max="458" value="1" onchange="onPlayerJumpInputChange(this.value, 'slides')" onkeydown="if(event.key==='Enter')onPlayerJumpInputChange(this.value, 'slides')" title="輸入編號跳轉"> / <span id="playerTotalCount">458</span>)</span>
+                    </div>
+                    <div class="player-progress-container" title="拖動或點擊跳轉進度">
+                        <input type="range" class="player-progress-slider" id="playerSlider" min="1" max="458" value="1" oninput="onProgressSliderInput(this.value, 'slides')" onchange="onProgressSliderChange(this.value, 'slides')">
                     </div>
                 </div>
             </div>
@@ -2118,7 +2209,7 @@
     </main>
 
     <footer>
-        <p>© 2026 工作的管見 - 避坑指南與商務工作原則整理與潤稿系統 · 最後更新：2026-09-27 18:33</p>
+        <p>© 2026 工作的管見 - 避坑指南與商務工作原則整理與潤稿系統 · 最後更新：2026-09-29 08:13</p>
     </footer>
 
     <script>
@@ -2523,6 +2614,7 @@
         const speechSynth = window.speechSynthesis;
         let speechVoice = null;
         let playbackRate = 1.0;
+        let autoplayPauseDuration = 1000;
         let isAutoplaying = false;
         let isPaused = false;
         let autoplayMode = 'principles'; // 'principles' or 'slides'
@@ -2714,7 +2806,7 @@
             }
         }
 
-        function startAutoplay(mode) {
+        function startAutoplay(mode, startIndex = 0) {
             if (!speechSynth) {
                 alert('您的瀏覽器不支援 Web Speech API 語音發音功能。');
                 return;
@@ -2754,7 +2846,7 @@
 
             autoplayMode = mode;
             autoplayQueue = queue;
-            currentQueueIndex = 0;
+            currentQueueIndex = Math.max(0, Math.min(startIndex || 0, queue.length - 1));
             isAutoplaying = true;
             isPaused = false;
 
@@ -2798,7 +2890,6 @@
 
             utterance.onend = () => {
                 if (!isAutoplaying || isPaused) return;
-                // Natural pause 1.0s between items
                 setTimeout(() => {
                     if (!isAutoplaying || isPaused) return;
                     currentQueueIndex++;
@@ -2807,17 +2898,20 @@
                     } else {
                         stopAllAudio();
                     }
-                }, 1000);
+                }, autoplayPauseDuration);
             };
 
             utterance.onerror = () => {
                 if (!isAutoplaying || isPaused) return;
-                currentQueueIndex++;
-                if (currentQueueIndex < autoplayQueue.length) {
-                    playCurrentQueueItem();
-                } else {
-                    stopAllAudio();
-                }
+                setTimeout(() => {
+                    if (!isAutoplaying || isPaused) return;
+                    currentQueueIndex++;
+                    if (currentQueueIndex < autoplayQueue.length) {
+                        playCurrentQueueItem();
+                    } else {
+                        stopAllAudio();
+                    }
+                }, 500);
             };
 
             speechSynth.speak(utterance);
@@ -2885,18 +2979,123 @@
             }
         }
 
+        function changePauseDuration(val) {
+            autoplayPauseDuration = parseInt(val) || 1000;
+            const pPause = document.getElementById('principlesPauseSelect');
+            const sPause = document.getElementById('slidesPauseSelect');
+            if (pPause) pPause.value = String(autoplayPauseDuration);
+            if (sPause) sPause.value = String(autoplayPauseDuration);
+        }
+
+        function updateSliderTrackStyle(slider, val, max) {
+            if (!slider) return;
+            const min = parseFloat(slider.min) || 1;
+            const maxVal = parseFloat(max || slider.max) || 100;
+            const current = parseFloat(val !== undefined ? val : slider.value) || min;
+            const pct = maxVal > min ? ((current - min) / (maxVal - min)) * 100 : 0;
+            const clampedPct = Math.max(0, Math.min(100, pct));
+            slider.style.background = `linear-gradient(to right, var(--primary) 0%, var(--primary) ${clampedPct}%, rgba(120, 120, 120, 0.25) ${clampedPct}%, rgba(120, 120, 120, 0.25) 100%)`;
+        }
+
+        function onProgressSliderInput(val, mode) {
+            const num = parseInt(val) || 1;
+            if (mode === 'principles') {
+                const input = document.getElementById('principlesPlayerJumpInput');
+                const slider = document.getElementById('principlesPlayerSlider');
+                if (input) input.value = num;
+                if (slider) updateSliderTrackStyle(slider, num, slider.max);
+            } else {
+                const input = document.getElementById('playerJumpInput');
+                const slider = document.getElementById('playerSlider');
+                if (input) input.value = num;
+                if (slider) updateSliderTrackStyle(slider, num, slider.max);
+            }
+        }
+
+        function onProgressSliderChange(val, mode) {
+            jumpToQueueNumber(val, mode);
+        }
+
+        function onPlayerJumpInputChange(val, mode) {
+            jumpToQueueNumber(val, mode);
+        }
+
+        function jumpToQueueNumber(val, mode) {
+            mode = mode || (currentActiveView === 'principles' ? 'principles' : 'slides');
+
+            let queue = (isAutoplaying && autoplayMode === mode && autoplayQueue && autoplayQueue.length > 0) ? autoplayQueue : null;
+            if (!queue) {
+                if (mode === 'principles') {
+                    const principles = getCurrentlyFilteredPrinciples();
+                    if (principles.length === 0) return;
+                    queue = principles.map(p => ({
+                        mode: 'principles',
+                        key: 'p' + p.num,
+                        label: `原則 ${p.num}`,
+                        text: p.english,
+                        cardId: `card-principle-${p.num}`
+                    }));
+                } else {
+                    const slides = getCurrentlyFilteredSlides();
+                    if (slides.length === 0) return;
+                    queue = slides.map(s => ({
+                        mode: 'slides',
+                        key: s.key,
+                        label: `No. ${s.key}`,
+                        text: s.english || s.original || '',
+                        cardId: `card-slide-${s.key}`
+                    }));
+                }
+            }
+
+            if (!queue || queue.length === 0) return;
+
+            const valStr = String(val).trim();
+            let targetIdx = -1;
+
+            // 1. Try exact key match (e.g. '17-1', '10', 'p5')
+            const keyMatchIdx = queue.findIndex(item => item.key === valStr || item.key === 'p' + valStr || item.key.replace(/^p/, '') === valStr);
+            if (keyMatchIdx !== -1) {
+                targetIdx = keyMatchIdx;
+            } else {
+                // 2. Parse sequential number 1..N
+                const num = parseInt(valStr);
+                if (!isNaN(num)) {
+                    targetIdx = Math.max(0, Math.min(num - 1, queue.length - 1));
+                }
+            }
+
+            if (targetIdx === -1) {
+                updatePlayerBarUI();
+                return;
+            }
+
+            if (isAutoplaying && autoplayMode === mode) {
+                if (speechSynth) speechSynth.cancel();
+                currentQueueIndex = targetIdx;
+                isPaused = false;
+                playCurrentQueueItem();
+            } else {
+                startAutoplay(mode, targetIdx);
+            }
+        }
+
         function updatePlayerBarUI() {
             // Principles controls
             const pPlayBtn = document.getElementById('principlesPlayerBtnPlay');
-            const pStatusTxt = document.getElementById('principlesPlayerStatusText');
-            const pProgress = document.getElementById('principlesPlayerProgressBar');
+            const pStatusLabel = document.getElementById('principlesPlayerStatusLabel');
+            const pJumpInput = document.getElementById('principlesPlayerJumpInput');
+            const pTotalCount = document.getElementById('principlesPlayerTotalCount');
+            const pSlider = document.getElementById('principlesPlayerSlider');
             const pPrevBtn = document.getElementById('principlesPlayerBtnPrev');
             const pNextBtn = document.getElementById('principlesPlayerBtnNext');
 
             // Slides controls
             const sPlayBtn = document.getElementById('playerBtnPlay');
-            const sStatusTxt = document.getElementById('playerStatusText');
-            const sProgress = document.getElementById('playerProgressBar');
+            const sStatusLabel = document.getElementById('playerStatusText');
+            const sJumpInput = document.getElementById('playerJumpInput');
+            const sTotalCount = document.getElementById('playerTotalCount');
+            const sSlider = document.getElementById('playerSlider');
             const sPrevBtn = document.getElementById('playerBtnPrev');
             const sNextBtn = document.getElementById('playerBtnNext');
 
@@ -2906,7 +3105,6 @@
             if (isAutoplaying) {
                 const total = autoplayQueue.length;
                 const curr = currentQueueIndex + 1;
-                const pct = total > 0 ? (curr / total) * 100 : 0;
                 const currentItem = autoplayQueue[currentQueueIndex];
                 const label = currentItem ? currentItem.label : '';
 
@@ -2915,15 +3113,36 @@
                         pPlayBtn.innerHTML = isPaused ? '<span>▶️</span> 繼續播放' : '<span>⏸️</span> 暫停播放';
                         pPlayBtn.title = isPaused ? '繼續播放' : '暫停播放';
                     }
-                    if (pStatusTxt) pStatusTxt.innerText = `🎧 朗讀中 ${label} (${curr} / ${total})`;
-                    if (pProgress) pProgress.style.width = `${pct}%`;
+                    if (pStatusLabel) pStatusLabel.innerText = `🎧 朗讀中 ${label}`;
+                    if (pJumpInput) {
+                        pJumpInput.min = 1;
+                        pJumpInput.max = total;
+                        pJumpInput.value = curr;
+                    }
+                    if (pTotalCount) pTotalCount.innerText = total;
+                    if (pSlider) {
+                        pSlider.min = 1;
+                        pSlider.max = total;
+                        pSlider.value = curr;
+                        updateSliderTrackStyle(pSlider, curr, total);
+                    }
                     if (pPrevBtn) pPrevBtn.disabled = currentQueueIndex <= 0;
                     if (pNextBtn) pNextBtn.disabled = currentQueueIndex >= total - 1;
 
                     // Idle slides player
                     if (sPlayBtn) sPlayBtn.innerHTML = '<span>▶️</span> 自動連續播放';
-                    if (sStatusTxt) sStatusTxt.innerText = `準備就緒 (共 ${totalSlides} 張卡牌)`;
-                    if (sProgress) sProgress.style.width = '0%';
+                    if (sStatusLabel) sStatusLabel.innerText = `準備就緒`;
+                    if (sJumpInput) {
+                        sJumpInput.min = 1;
+                        sJumpInput.max = Math.max(1, totalSlides);
+                        if (!sJumpInput.value || sJumpInput.value > totalSlides) sJumpInput.value = 1;
+                    }
+                    if (sTotalCount) sTotalCount.innerText = totalSlides;
+                    if (sSlider) {
+                        sSlider.min = 1;
+                        sSlider.max = Math.max(1, totalSlides);
+                        updateSliderTrackStyle(sSlider, sSlider.value || 1, Math.max(1, totalSlides));
+                    }
                     if (sPrevBtn) sPrevBtn.disabled = true;
                     if (sNextBtn) sNextBtn.disabled = true;
                 } else {
@@ -2931,28 +3150,69 @@
                         sPlayBtn.innerHTML = isPaused ? '<span>▶️</span> 繼續播放' : '<span>⏸️</span> 暫停播放';
                         sPlayBtn.title = isPaused ? '繼續播放' : '暫停播放';
                     }
-                    if (sStatusTxt) sStatusTxt.innerText = `🎧 朗讀中 ${label} (${curr} / ${total})`;
-                    if (sProgress) sProgress.style.width = `${pct}%`;
+                    if (sStatusLabel) sStatusLabel.innerText = `🎧 朗讀中 ${label}`;
+                    if (sJumpInput) {
+                        sJumpInput.min = 1;
+                        sJumpInput.max = total;
+                        sJumpInput.value = curr;
+                    }
+                    if (sTotalCount) sTotalCount.innerText = total;
+                    if (sSlider) {
+                        sSlider.min = 1;
+                        sSlider.max = total;
+                        sSlider.value = curr;
+                        updateSliderTrackStyle(sSlider, curr, total);
+                    }
                     if (sPrevBtn) sPrevBtn.disabled = currentQueueIndex <= 0;
                     if (sNextBtn) sNextBtn.disabled = currentQueueIndex >= total - 1;
 
                     // Idle principles player
                     if (pPlayBtn) pPlayBtn.innerHTML = '<span>▶️</span> 自動連續播放';
-                    if (pStatusTxt) pStatusTxt.innerText = `準備就緒 (共 ${totalPrinciples} 條原則)`;
-                    if (pProgress) pProgress.style.width = '0%';
+                    if (pStatusLabel) pStatusLabel.innerText = `準備就緒`;
+                    if (pJumpInput) {
+                        pJumpInput.min = 1;
+                        pJumpInput.max = Math.max(1, totalPrinciples);
+                        if (!pJumpInput.value || pJumpInput.value > totalPrinciples) pJumpInput.value = 1;
+                    }
+                    if (pTotalCount) pTotalCount.innerText = totalPrinciples;
+                    if (pSlider) {
+                        pSlider.min = 1;
+                        pSlider.max = Math.max(1, totalPrinciples);
+                        updateSliderTrackStyle(pSlider, pSlider.value || 1, Math.max(1, totalPrinciples));
+                    }
                     if (pPrevBtn) pPrevBtn.disabled = true;
                     if (pNextBtn) pNextBtn.disabled = true;
                 }
             } else {
                 if (pPlayBtn) pPlayBtn.innerHTML = '<span>▶️</span> 自動連續播放';
-                if (pStatusTxt) pStatusTxt.innerText = `準備就緒 (共 ${totalPrinciples} 條原則)`;
-                if (pProgress) pProgress.style.width = '0%';
+                if (pStatusLabel) pStatusLabel.innerText = `準備就緒`;
+                if (pJumpInput) {
+                    pJumpInput.min = 1;
+                    pJumpInput.max = Math.max(1, totalPrinciples);
+                    if (!pJumpInput.value || pJumpInput.value > totalPrinciples) pJumpInput.value = 1;
+                }
+                if (pTotalCount) pTotalCount.innerText = totalPrinciples;
+                if (pSlider) {
+                    pSlider.min = 1;
+                    pSlider.max = Math.max(1, totalPrinciples);
+                    updateSliderTrackStyle(pSlider, pSlider.value || 1, Math.max(1, totalPrinciples));
+                }
                 if (pPrevBtn) pPrevBtn.disabled = true;
                 if (pNextBtn) pNextBtn.disabled = true;
 
                 if (sPlayBtn) sPlayBtn.innerHTML = '<span>▶️</span> 自動連續播放';
-                if (sStatusTxt) sStatusTxt.innerText = `準備就緒 (共 ${totalSlides} 張卡牌)`;
-                if (sProgress) sProgress.style.width = '0%';
+                if (sStatusLabel) sStatusLabel.innerText = `準備就緒`;
+                if (sJumpInput) {
+                    sJumpInput.min = 1;
+                    sJumpInput.max = Math.max(1, totalSlides);
+                    if (!sJumpInput.value || sJumpInput.value > totalSlides) sJumpInput.value = 1;
+                }
+                if (sTotalCount) sTotalCount.innerText = totalSlides;
+                if (sSlider) {
+                    sSlider.min = 1;
+                    sSlider.max = Math.max(1, totalSlides);
+                    updateSliderTrackStyle(sSlider, sSlider.value || 1, Math.max(1, totalSlides));
+                }
                 if (sPrevBtn) sPrevBtn.disabled = true;
                 if (sNextBtn) sNextBtn.disabled = true;
             }
