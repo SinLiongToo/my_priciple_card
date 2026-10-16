@@ -143,9 +143,9 @@ def parse_existing_md(md_path):
         taiwanese = ""
         ref = ""
         
-        m_match = re.search(r"\*\s+\*\*國語 \(Mandarin\)\*\*：(.*?)(?=\n\*|\n\[對照|\Z)", body)
+        m_match = re.search(r"\*\s+\*\*國語[\(（]Mandarin[\)）]\*\*：(.*?)(?=\n\*|\n\[對照|\Z)", body)
         e_match = re.search(r"\*\s+\*\*English\*\*：(.*?)(?=\n\*|\n\[對照|\Z)", body)
-        t_match = re.search(r"\*\s+\*\*台語 \(Taiwanese\)\*\*：(.*?)(?=\n\*|\n\[對照|\Z)", body)
+        t_match = re.search(r"\*\s+\*\*台語[\(（]Taiwanese[\)）]\*\*：(.*?)(?=\n\*|\n\[對照|\Z)", body)
         ref_match = re.search(r"`\[對照原項目：(.*?)\]`", body)
         
         if m_match:
@@ -583,8 +583,8 @@ def main():
     print("\nStep 5: Regenerating Markdown handbook...")
     # Write Part 1 and regenerated Part 2
     with open(md_path, "w", encoding="utf-8") as f:
-        f.write(part1_content.strip() + "\n\n---\n\n## 第二部分：簡報對照與逐條潤稿 (簡報版)\n\n")
-        f.write(f"> [!NOTE]\n> 本部分為逐頁對照簡報 (PPTX) 的 {len(final_items)} 條原始筆記進行優化與翻譯的內容，方便您在更新投影片時直接複製貼上使用。\n\n")
+        f.write(part1_content.strip() + "\n\n---\n\n## 第二部分：簡報對照與逐條潤稿（簡報版）\n\n")
+        f.write(f"> [!NOTE]\n> 本部分為逐頁對照簡報（PPTX）的 {len(final_items)} 條原始筆記進行優化與翻譯的內容，方便您在更新投影片時直接複製貼上使用。\n\n")
         
         current_slide = 0
         for item in final_items:
@@ -595,7 +595,7 @@ def main():
                 slide_items = [x for x in final_items if x['slide'] == slide]
                 min_key = slide_items[0]['key']
                 max_key = slide_items[-1]['key']
-                f.write(f"### Slide {slide} (原則 {min_key} - {max_key})\n\n")
+                f.write(f"### Slide {slide}（原則 {min_key}～{max_key}）\n\n")
                 
             # Find matched principles
             matched_principles = []
@@ -607,8 +607,8 @@ def main():
                     matched_principles.append(p['num'])
             
             if matched_principles:
-                principles_str = ", ".join(f"原則 {num}" for num in matched_principles)
-                f.write(f"#### **No. {item['key']}** ({principles_str})\n")
+                principles_str = "、".join(f"原則 {num}" for num in matched_principles)
+                f.write(f"#### **No. {item['key']}**（{principles_str}）\n")
             else:
                 f.write(f"#### **No. {item['key']}**\n")
             f.write(f"*   **原文**：`{item['original']}`\n")

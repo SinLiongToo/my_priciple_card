@@ -2,14 +2,14 @@
 """
 generate_proofreading_doc.py
 ========================================================================================
-工作的管見 (My Two Cents) — 職場生存與成長的避坑指南
+工作的管見（My Two Cents） — 職場生存與成長的避坑指南
 三語對照校稿列印手冊生成器 (Word .docx + PDF)
 
 特色：
 1. A4 橫向 (Landscape) 表格對照排版，專為紙本列印與筆墨校對設計。
 2. 六欄完整對照：編號/原則關聯、投影片原文、優化英文、優化中文、優化台文、校對勾選與批註欄。
 3. 表格標題列跨頁自動重複 (tblHeader)，每列內容不跨頁截斷 (cantSplit)。
-4. 完整收錄：篇章核心引導金句 (53 則)、20 大核心原則、458 條實務原則卡牌。
+4. 完整收錄：篇章核心引導金句（53 則）、20 大核心原則、458 條實務原則卡牌。
 5. 同步產出 DOCX 與 PDF 雙格式。
 ========================================================================================
 """
@@ -105,7 +105,7 @@ def add_page_number_to_section(section):
     header = section.header
     hp = header.paragraphs[0]
     hp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    hrun1 = hp.add_run("工作的管見 (My Two Cents) — 職場生存與成長的避坑指南【三語對照校稿手冊】")
+    hrun1 = hp.add_run("工作的管見（My Two Cents） — 職場生存與成長的避坑指南【三語對照校稿手冊】")
     hrun1.font.name = "Microsoft JhengHei"
     hrun1.font.size = Pt(8.5)
     hrun1.font.color.rgb = RGBColor(100, 116, 139)
@@ -179,7 +179,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
     title_p = doc.add_paragraph()
     title_p.paragraph_format.space_before = Pt(4)
     title_p.paragraph_format.space_after = Pt(2)
-    title_run = title_p.add_run("工作的管見 (My Two Cents) — 職場生存與成長的避坑指南")
+    title_run = title_p.add_run("工作的管見（My Two Cents） — 職場生存與成長的避坑指南")
     title_run.font.name = "Microsoft JhengHei"
     title_run.font.size = Pt(18)
     title_run.font.bold = True
@@ -188,7 +188,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
     sub_p = doc.add_paragraph()
     sub_p.paragraph_format.space_before = Pt(0)
     sub_p.paragraph_format.space_after = Pt(6)
-    sub_run = sub_p.add_run("From the Floor: Practical Work Principles — 英文・中文・台文 三語對照校稿列印手冊 (A4 橫向表格版)")
+    sub_run = sub_p.add_run("From the Floor: Practical Work Principles — 英文・中文・台文 三語對照校稿列印手冊（A4 橫向表格版）")
     sub_run.font.name = "Microsoft JhengHei"
     sub_run.font.size = Pt(11)
     sub_run.font.bold = True
@@ -212,7 +212,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
     g_title.font.color.rgb = RGBColor(15, 23, 42)
 
     g_body = gp.add_run(
-        "1. 收錄範圍：完整收錄六大篇章核心金句 (53 則)、20 大核心原則，以及 458 張實務原則卡牌 (Slide 1～Slide 9 全集)。\n"
+        "1. 收錄範圍：完整收錄六大篇章核心金句（53 則）、20 大核心原則，以及 458 張實務原則卡牌（Slide 1～Slide 9 全集）。\n"
         "2. 三語核對重點：\n"
         "   • 優化英文 (Polished English)：商務語境自然道地，文法與用語專業簡潔，修飾口語與語病。\n"
         "   • 優化中文 (Polished Mandarin)：繁體中文流暢嚴謹，符合職場實務溝通脈絡，文雅精準。\n"
@@ -659,7 +659,7 @@ def build_proofreading_xlsx(principles, final_items, chapters, xlsx_path):
     # Title Banner
     ws_dash.merge_cells("B2:I2")
     cell_b2 = ws_dash["B2"]
-    cell_b2.value = "工作的管見 (My Two Cents) — 職場生存與成長的避坑指南"
+    cell_b2.value = "工作的管見（My Two Cents） — 職場生存與成長的避坑指南"
     cell_b2.font = Font(name=font_family, size=15, bold=True, color="FFFFFF")
     cell_b2.fill = PatternFill(start_color="1E293B", end_color="1E293B", fill_type="solid")
     cell_b2.alignment = Alignment(horizontal='center', vertical='center')
@@ -667,7 +667,7 @@ def build_proofreading_xlsx(principles, final_items, chapters, xlsx_path):
 
     ws_dash.merge_cells("B3:I3")
     cell_b3 = ws_dash["B3"]
-    cell_b3.value = f"英文・中文・台文 三語對照校稿手冊 (Excel 試算校對版) | 產出時間：{datetime.now().strftime('%Y-%m-%d %H:%M')}"
+    cell_b3.value = f"英文・中文・台文 三語對照校稿手冊（Excel 試算校對版） | 產出時間：{datetime.now().strftime('%Y-%m-%d %H:%M')}"
     cell_b3.font = Font(name=font_family, size=10, color="CBD5E1")
     cell_b3.fill = PatternFill(start_color="334155", end_color="334155", fill_type="solid")
     cell_b3.alignment = Alignment(horizontal='center', vertical='center')
@@ -738,7 +738,7 @@ def build_proofreading_xlsx(principles, final_items, chapters, xlsx_path):
 
     # Rows in Dashboard Table
     dash_rows = [
-        (14, "實務原則卡牌 (458 條)",
+        (14, "實務原則卡牌（458 條）",
          "=COUNTA('實務原則卡牌校對 (458條)'!B2:B459)",
          '=COUNTIF(\'實務原則卡牌校對 (458條)\'!H2:H459, "通過")',
          '=COUNTIF(\'實務原則卡牌校對 (458條)\'!H2:H459, "待修")',
@@ -754,7 +754,7 @@ def build_proofreading_xlsx(principles, final_items, chapters, xlsx_path):
          '=COUNTIF(\'20大核心原則校對\'!I2:I21, "有疑問")',
          '=C15-D15-E15-F15-G15',
          '=(D15+F15)/C15'),
-        (16, "篇章核心指引金句 (53 則)",
+        (16, "篇章核心指引金句（53 則）",
          "=COUNTA('篇章核心指引金句 (53則)'!C2:C54)",
          '=COUNTIF(\'篇章核心指引金句 (53則)\'!E2:E54, "通過")',
          '=COUNTIF(\'篇章核心指引金句 (53則)\'!E2:E54, "待修")',
