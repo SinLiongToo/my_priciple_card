@@ -62,7 +62,7 @@
   "Check your spelling before sending the email. Using Google translate or Grammarly or using mandarin directly for urgent cases to avoid confusion and misunderstanding. There is a website to check grammar.": {
     "english": "Check your spelling and grammar (using tools like Google Translate or Grammarly) before sending emails. For urgent cases, writing in Mandarin directly is better than sending confusing English emails.",
     "mandarin": "發信前務必檢查拼字與文法（可善用 Grammarly 等工具）。若是十萬火急的情況，直接寫中文也比發一封文法混亂、容易引起誤會的英文信來得妥當。",
-    "taiwanese": "寄信進前先檢查字甘有寫對、話甘有講順（會使借工具來幫忙）。若遇著十萬火急的局，直接寫中文，嘛贏過寄一封漏氣閣令人誤會的英文信。",
+    "taiwanese": "寄信進前先檢查字敢有寫著、話敢有講順（會使藉工具來鬥相共）。若遇著十萬火急的局，直接寫中文，嘛贏過寄一封漏氣閣令人誤會的英文信。",
     "key": "11"
   },
   "Make sure you learn something during the project and document it. These skills/things will boost you or feedback or whatever adds value from long-term view.": {
@@ -194,7 +194,7 @@
   "Schedule your resources / energy (Gantt chart). Don't put a lot of things in one timeslot, including your leave and balance them. Energy of mind is  limited. Find a balance point between family and work ( it may be a bullshit). What is key skill / competency to learn for future, actions to take. ( any risk?) Thinking in bet.": {
     "english": "Manage your resources and energy systematically (like a Gantt chart). Avoid double-booking tasks and balance work with leaves. Mental energy is finite. Work-life balance is a dynamic trade-off; identify future key skills, take action, manage risks, and think probabilistically (\"thinking in bets\").",
     "mandarin": "像甘特圖一樣規劃你的時間與能量。不要把多項行程塞在同一個時段，合理調配休假與工作。心智能力是有限的。工作與生活的平衡是動態調配的過程；思考未來需要學習的核心技能，擬定行動並控制風險，保持「以小博大、合理下注」的思維。",
-    "taiwanese": "像甘特圖一樣規劃你的時間佮能量。不要把多個行程擠在同一个時段，合理調配休假。心智能力是有限的。工作與生活是動態平衡；思考未來需要學習的核心技能，擬定行動並控制風險，保持理性下注思維（Thinking in bets）。",
+    "taiwanese": "照甘特圖來排好你的時間佮氣力。莫共濟濟行程擠佇仝一時段，休假調配好。心智氣力有限。工課佮生活是動態平衡；思考未來愛學啥物核心功夫，擬好步驟並顧好風險，保持理性下注思維（Thinking in bets）。",
     "key": "31"
   },
   "Use a timer to measure the time you spend on each task. Estimate the effort.": {
@@ -494,7 +494,7 @@
   "try to commit to your mistake and say sorry and even if you think you already finished all the things and sometimes you skip or neglect or overlook by accident. therefore, you need some peer review or feedback or a good checklist to make sure you didn't miss anything. that's why we need to have review ourselfs regularly because you are not perfect, and everything may change during the time. Therefore, you may renew the checklist. Iteration. Task-oriented, retrospective. Continuously improvement and gradually better.": {
     "english": "Acknowledge your mistakes and apologize when necessary. Even when you think a task is complete, minor oversights can happen. Utilize peer reviews, feedback, and checklists to ensure quality. Establish regular self-reflections, keep updating your checklists, and focus on continuous iterative improvement (kaizen).",
     "mandarin": "勇於承認錯誤並適時道歉。即使自認完工，偶爾也可能發生疏忽。藉助同儕審查（Peer review）、他人反饋與檢查清單來查漏補缺。定期自我審視，更新檢查表，以任務為導向、持續反思優化（Kaizen），追求漸進式的成長。",
-    "taiwanese": "勇於承認錯誤並適時道歉。即使自認完工，偶爾也可能發生疏忽。藉助同儕審查（Peer review）、他人反饋與檢查清單來查漏補缺。定期自我審視，更新檢查表，以任務為導向、持續反思優化（Kaizen），追求漸進式的成長。",
+    "taiwanese": "敢做敢當，做毋著愛甘願認閣會曉會失禮。就算掠準做好了，三不五時嘛可能落勾。借同仁互相審查（Peer review）、別人意見佮檢查清單來掠漏補縫。定定自省兼翻新檢查表，以工課為重、持續反思改善（改善精神 Kaizen），步步踏實來求進步。",
     "key": "81"
   },
   "Do not input many information in one time, especially bad news. You also need good news to your boss.  To set “ delayed delivery” for sending email when you already finished and don’t want to send right away.": {
@@ -518,7 +518,7 @@
   "Do not make low tech mistake. Item 50. Which may not be recovered.預先驗屍。不去做會如何，心理難過後悔會受實質處罰": {
     "english": "Avoid low-tech, careless mistakes that may be irreversible. Perform pre-mortem analysis: ask what the consequences are if we fail, and evaluate the real-world impact to prevent regret. (Related to Item 50)",
     "mandarin": "嚴防那些無法挽回的低級技術性錯誤。開展預前驗屍（Pre-mortem）：思考如果這件事搞砸了會怎樣？不去做會帶來什麼實質處罰或後悔？提前築好防線。",
-    "taiwanese": "嚴防那些無法挽回的低級技術性錯誤。開展預前驗屍（Pre-mortem）：思考如果這件事搞砸了會按怎？不去做會帶來什麼實質處罰或後悔？提前築好防線。",
+    "taiwanese": "嚴防遐的無法度挽回的粗心大意錯誤。做預前驗屍（Pre-mortem）：想看覓若是這項代誌用摵去會按怎？若無做會帶來啥物實質處罰抑是後悔？提前共防線築好。",
     "key": "85"
   },
   "Your report is your product / brand. ( check your logic, rephrase, number, paragraph order, plot, spelling, and plot is blur or not? Hyperlink was lost? Watch out what you write and say either in public or public.": {
@@ -542,7 +542,7 @@
   "Try to set up firewall to protect yourself just in case your colleague  make a mistake and put you on the danger. Documentation it. EX, CCB, mail collection, meeting minutes.": {
     "english": "Build defensive \"firewalls\" to protect yourself from others' mistakes. Document everything carefully (e.g., archiving emails, saving meeting minutes, and obtaining CCB approvals).",
     "mandarin": "建立防衛性「防火牆」，避免同事犯錯時波及到你。落實工作留痕與文件化（例如：保存郵件備份、詳細的會議記錄、CCB 變更審查審核記錄）。",
-    "taiwanese": "建立防衛性「防火牆」，避免同事犯錯時波及到你。落實工作留痕與文件化（例如：保存郵件備份、詳細的會議記錄、CCB 變更審查審核記錄）。",
+    "taiwanese": "起一座防衛性的「防火牆」，避免邊仔人做毋著連累著家己。落實做代誌留底稿佮留紀錄（像保存郵件備份、詳細會議紀錄、CCB 變更審查審核記錄），留步顧後壁。",
     "key": "89"
   },
   "Make yourself irreplaceable. Build up a strong skill, experience and document it like resume / Linkedin. Make sure those skills are welcomed with time. If that is the case, learn by yourself. To be aligned with latest industrial status. ITEM129.": {
@@ -560,7 +560,7 @@
   "Focus and Don't get  distracted on non-priorities. Ask yourself Why do you do that? Item 14.": {
     "english": "Maintain focus and avoid getting distracted by low-priority tasks. Constantly ask yourself: \"Why am I doing this?\" (Related to Item 14)",
     "mandarin": "保持專注，不被非核心的雜務分心。時常拷問自己：「我做這件事的目的是什麼？它能帶來核心價值嗎？」",
-    "taiwanese": "保持專注，不被非核心的雜務分心。時常拷問家己：「我做這件事的目的是什麼？它能帶來核心價值嗎？」",
+    "taiwanese": "保持專注，莫予非核心的雜務抐去。時常自問：「我做這項代誌的目的到底是為著啥物？敢會帶來核心價值？」",
     "key": "92"
   },
   "Explain your data by a physical eye. And use scientific thinking. Item 40.": {
@@ -626,7 +626,7 @@
   "What boost you to finish this? And why? ( fame / achievement /life pressure / economic /  passion / survival / reality. Item 46. Or block you? Motivation?": {
     "english": "Analyze what motivates or blocks you in finishing a task (e.g., recognition, achievement, pressure, financial reward, passion, survival, or simple reality). Understanding your underlying motivation is key. (Related to Item 46)",
     "mandarin": "分析推動你完成任務或阻礙你前行的動力是什麼？（是成就感、生存壓力、經濟因素、熱情還是現實的職責？）。看清核心動機，有助於調整自身能量與狀態。",
-    "taiwanese": "分析推動你完成任務抑是阻擋你前進的動力是什麼？（是成就感、生存壓力、經濟因素、熱情抑是現實的責任？）。看清楚核心動機，有助於調整家己的能量佮狀態。",
+    "taiwanese": "分析推動你完成工課抑是阻擋你向前行的動力到底是啥物？（是成就感、生存壓力、經濟因素、熱情抑是現實的責任？）。看清楚心底核心動機，按呢才調得順家己的氣力佮狀態。",
     "key": "103"
   },
   "Don't say anything above your level/position. Talk decently in public, also dress. You need to practice then are not afraid of embarrassment in public.": {
@@ -740,7 +740,7 @@
   "Put your ass heavy, you don’t need to reply everyone’s email / message rapidly, even they came to your desk. (How to say NO in 10 ways) Item 21. Try to leave a time slot ( safety of margin) and see if the situation were changed or not. What’s  impact if you do nothing.": {
     "english": "Practice \"sitting tight\" (putting your ass heavy); you do not need to reply to every email or message instantly, even if people walk up to your desk. Give yourself a buffer (margin of safety) to see if the situation resolves itself. Ask yourself: \"What will happen if I do nothing?\" (Related to Item 21)",
     "mandarin": "沉得住氣（放重底），你不需要秒回每封郵件或訊息，即使對方直接走到你桌前也一樣。留出觀察緩衝期（安全邊際），看看事情是否會隨時間產生變化。問自己：「如果我什麼都不做，會有什麼實質影響？」",
-    "taiwanese": "沉住氣（放重底），你毋免秒回每封郵件或訊息，即使對方直接行到你桌前嘛平。留出緩衝期（安全邊際），看看代誌敢會隨時間變更。問家己：「如果我什麼代誌攏無做，會有什麼實質影響？」",
+    "taiwanese": "沉牢氣（放重底），你毋免秒回每封郵件抑訊息，就算對方直接行到你桌仔前嘛仝款。留出緩衝期（安全邊際），看覓代誌敢會隨時間起變化。問家己：「若準我啥物代誌攏無做，敢會有啥物實質影響？」",
     "key": "122"
   },
   "Ask for promotion with solid achievement. Speak loudly. Work out loud. Collect some evidence as record. Good documentation and feedback from colleagues.": {
@@ -770,7 +770,7 @@
   "Difficulties will pass away ,  just be patient and wait. We need some time and get some results which will help us to make the decision for next step . You cannot jump from A to C directly. Item 46,84, 75, 131.": {
     "english": "Setbacks will eventually pass; practice patience and wait. Sometimes, we need time to allow results to unfold before making the next decision. Remember, you cannot jump from step A to C without going through B. (Related to Items 46, 75, 84, and 131)",
     "mandarin": "難關終究會過去，保持耐心。很多時候我們需要時間讓結果明朗，才能做出下一步的明智決策。你無法不經歷 B，就直接從 A 跳到 C。",
-    "taiwanese": "難關總會過去，保持耐心。真多時陣我們需要時間讓結果明朗，才可以做下一步的決定。你無法不經歷 B，就直接從 A 跳到 C。",
+    "taiwanese": "難關總是會過去，吞忍耐心等待。真濟時陣咱著需要時間等局勢明朗，按呢才做得出下一步的明智決定。你無法度無經過 B，就直接對 A 跳到 C。",
     "key": "127"
   },
   "Before starting meeting, ask people how are you, how about holiday….Good icebreaking will help communication. Prepare some global news for instance.  EX: how is your family , kids, house, weather?": {
@@ -824,7 +824,7 @@
   "What’s the worse situation / scenario / bottom line? Give you a stress test. It is temporary or permanent.  Item 50. Item 125. If fails, what is the loss and impact?": {
     "english": "Define the absolute worst-case scenario and your bottom line. Conduct a mental stress test: Is the negative impact temporary or permanent? If failure occurs, what is the actual financial or career loss? (Related to Items 50 and 125)",
     "mandarin": "定義最壞的狀況與你的底線。給自己做一場心智壓力測試：這個衝擊是暫時的還是永久的？如果真的搞砸了，實質的損失與影響是什麼？",
-    "taiwanese": "定義最壞的狀況佮你的底線。做壓力測試：這个衝擊是暫時的抑是永久的？如果真的搞砸了，實質的損失佮影響是什麼？",
+    "taiwanese": "先掠最䆀的局面佮你的底線。共家己做壓力測試：這个衝擊是暫時抑是永久的？若準真正用摵去，實質的損失佮影響到底是啥物？",
     "key": "136"
   },
   "Imagine what is the future skill / knowledge (hard/soft), be patient. Market trend.": {
@@ -848,7 +848,7 @@
   "Leader statement: ( for meeting) I repeat what we agreed upon during the meeting I repeat what you said, make sure my understanding is correct. Allow me confirm. I got a lot of help from the team. Thank for all your dedicated hard work. When will be the next discussion and what is agenda. What is the goal that should be achieved in the end? Can you make it on time or before that day ( time)? Ask why should we do this? PAR, purpose, action, Result. ORID. My skillset is not enough for this discussion or assignment. It is not my position to discuss that. Challenge what you haven’t done in the past. One marathon, one new speech, one new book. Longer trail, different path. Broaden your view.": {
     "english": "Use structured \"Leader Statements\" during meetings: \"Let me repeat what we agreed upon,\" \"Allow me to confirm my understanding of your points,\" and \"I appreciate the team's dedication and support.\" Clearly define next steps: \"When is the next discussion, and what is the agenda?\" \"What is our ultimate goal, and can we meet the deadline?\" \"Why are we doing this?\" Use frameworks like PAR (Purpose, Action, Result) and ORID. Know your limits: \"My current skillset or role is not suited for this specific discussion.\" Challenge yourself: run a marathon, deliver a new speech, or write a book. Broaden your horizons.",
     "mandarin": "開會時善用「領導者聲明」：例如「我重新確認一下會議達成的共識」、「請容我確認一下我對您發言的理解是否正確」、以及「非常感謝團隊的協助與付出」。明確下一步行動：「下次討論是什麼時候？議程為何？」、「我們的終極目標是什麼？能否如期完成？」、「我們做這件事的目的是什麼？」。採用 PAR（目的-行動-結果）與 ORID 架構。合理示弱：「我目前的技能組合或崗位職責不適合主導此項討論。」自我挑戰：挑戰一場馬拉松、一場新演講或寫一本新書，拓寬你的視野。",
-    "taiwanese": "開會的時陣善用「主管聲明」：親像「我重新確認一下會議達成的共識」、「請容我確認一下我對您發言的理解敢有對」、以及「真多謝團隊的幫忙佮付出」。明確下一步行動：「下次討論是什麼時陣？議程是啥？」、「我們的終極目標是什麼？敢能準時完成？」、「我們做這件事的目的是什麼？」。採用 PAR 與 ORID 架構。合理示弱：「我目前的技能組合或職責不適合主導此項討論。」自我挑戰：挑戰一場馬拉松、一場新演講或寫一本新書，開闊你的視野。",
+    "taiwanese": "開會時陣善用「主管發言」：親像「我重新確定一下會中逐家的共識」、「容我確認一下我聽到的意思敢有著」、閣有「真多謝團隊逐家的鬥相共佮付出」。落實下一步行動：「後回開會是啥物時陣？題目是啥？」、「咱的終極目標到底是啥物？敢有法度照起工準時完成？」、「咱做這項代誌到底為著啥物？」。善用 PAR 佮 ORID 架構。適當講明家己的限制：「我目前的功夫抑職責無合適主導這个討論。」挑戰以前無做過的事：走一場馬拉松、辦一場新演講抑寫一本新書，開闊你的視野。",
     "key": "301"
   },
   "watch out economic environment and industrial trend. your salary is the top priority for your retire plan. Good to ask promotion if you did a great job and boss recognize you. if not, you may consider not to do. Good to track yearly salary increment is more than market inflation (3%) so Purchasing power parity won't be degraded. in the end, do rebalance on your asset allocation and keep going without worrying market too much.": {
@@ -860,7 +860,7 @@
   "Understand welfare policy, any compensation, food allowance, leave ( depends on rank, 14-22 days), baby / children,..LTIP.AIP, RSU, ESPP, health check, scholarship..., how to apply and earn.  business traveler, training...you also need this when you apply next job or before leaving current position. It is part of financial management. Flexibility WFH. (max. day per year?20days)": {
     "english": "Fully understand company benefits and welfare policies: food allowances, leave allowances (14–22 days depending on rank), childcare benefits, LTIP, AIP bonuses, RSU vesting, ESPP, health screenings, and business travel policies. Know how to apply and qualify for these. This knowledge is key for financial management and serves as a benchmark when evaluating new job offers.",
     "mandarin": "徹底搞懂公司的各項福利與補償政策：伙食津貼、年假（依職級約 14-22 天）、育兒津貼、長期激勵計畫（LTIP）、年度激勵金（AIP）、RSU 股票、ESPP 員工認股、健檢與差旅補助等。掌握申請管道與資格，這不僅是財務管理的一環，也是日後跳槽或離職談判的重要基準。了解在家工作（WFH）的彈性額度（如每年最多20天）。",
-    "taiwanese": "徹底搞懂公司的各項福利與補償政策：伙食津貼、年假（依職級約 14-22 天）、育兒津貼、長期激勵計畫（LTIP）、年度激勵金（AIP）、RSU 股票、ESPP 員工認股、健檢與差旅補助等。掌握申請管道與資格，這不僅是財務管理的一環，也是日後跳槽或離職談判的重要基準。了解在家工作（WFH）的彈性額度（如每年最多20天）。",
+    "taiwanese": "規氣將公司的各項福利佮補償規定摸透透：飯包津貼、年假（照職級約 14-22 天）、育兒補助、長期激勵（LTIP）、年度獎金（AIP）、RSU 股票、員工買股票（ESPP）、健檢佮出差貼補。摸清申請門路佮資格，這毋但顧荷包，嘛是以後跳槽抑離職講條件的重要本錢。知曉佇厝做工課（WFH）的彈性額度（親像每年最多 20 天）。",
     "key": "303"
   },
   "Try to train yourself to look into someone's eyes. Or certain point on their face.": {
@@ -872,7 +872,7 @@
   "when you feel frustrated and disappointed, be patient, take a deep breath, you did a good job and don't burn out yourself, control what you can control and let the things what you cannot control go. life is not fair, that is true, but still, you need to move on and grow up for yourself, not for your company or your colleagues. Indeed, life is struggling, and you need earn moneys for kids and families, also for your ideal. You have no time to think better and find a better way to survey. You know what? no one knows how until the time is arrived. as a result, think positive, I knew it is hard, but you need to try. Live a better  version of you and you will thank yourself after many years later.": {
     "english": "When frustrated or disappointed, be patient and take a deep breath. Remind yourself that you did a good job; avoid burnout. Focus strictly on what you can control and let the rest go. Life is not fair, but you must keep moving forward and growing—for yourself, not for the company or colleagues. Life is a struggle to support family and pursue ideals, but stay positive and take it one day at a time. The future you will thank you for trying.",
     "mandarin": "感到沮喪和失望時，保持耐心，深呼吸。告訴自己你已經做得很好了，別讓自己燃燒殆盡。專注於你能控制的事，放手那些你無法控制的事。生活確實不公平，但你仍須前行，為了自己（而非公司或同事）持續成長。生活固然辛苦，需要養家糊口並兼顧理想，但請保持積極心態。很多事情在時機成熟前是沒有答案的；努力活出更好的自己，多年後你會深深感謝現在的自己。",
-    "taiwanese": "感到沮喪和失望時，保持耐心，深呼吸。告訴家己你已經做得很好了，別讓家己燃燒殆盡。專注於你能控制的事，放手那些你無法控制的事。生活確實不公平，但你仍須前行，為了家己（而非公司或同事）持續成長。生活固然辛苦，需要養家糊口並兼顧理想，但請保持積極心態。很多事情在時機成熟前是沒有答案的；努力活出更好的家己，多年後你會深深感謝現在的家己。",
+    "taiwanese": "心情若失志落魄的時陣，吞忍一口氣，大大吐出來。共家己講你已經做甲足好矣，莫予家己燒甲虛累累。專心顧好你管得到的代誌，放手遐的你管袂到的代誌。世間本成就無公平，但你猶著向前行，為著家己（毋是為公司抑同事）精進成長。日子固然辛酸，討賺養家顧囡仔閣愛顧理想，毋過心態愛正向。真濟代誌在時機成熟進前是無答案的；拼出一个閣較讚的家己，濟年後你會真感謝這馬的家己。",
     "key": "305"
   },
   "What do you want to achieve?": {
@@ -890,7 +890,7 @@
   "What are you doing right now? is it aligned with the goal you want to achieve?  Daily questions.": {
     "english": "Ask yourself daily: \"What am I doing right now, and is it aligned with my long-term goals?\"",
     "mandarin": "每天自我詰問：「我現在正在做的事，是否與我想要達成的終極目標一致？」",
-    "taiwanese": "每天自我詰問：「我現在正在做的事，是否與我想要達成的終極目標一致？」",
+    "taiwanese": "逐工反省問家己：「我這馬當咧做的代誌，敢有佮我上想欲達成的終極目標行佇仝一條路頂？」",
     "key": "308"
   },
   "“I’m glad you brought it up. Is there anything to be covered? “": {
@@ -944,7 +944,7 @@
   "Quick learn / collect the latest information which may need in the future market.  ( the methodology of taking \"electrical\" note)": {
     "english": "Develop a method for quick learning and capturing industry trends using structured digital note-taking.",
     "mandarin": "建立一套利用數位筆記快速學習與收集未來市場最新資訊的工作方法。",
-    "taiwanese": "建立一套利用數位筆記快速學習與收集未來市場最新資訊的工作方法。",
+    "taiwanese": "建立一套用數位筆記隨手速學、收集未來市場最新情報的手路。",
     "key": "317"
   },
   "How does you contribute for this project? To show your value in a quantization way .": {
@@ -992,7 +992,7 @@
   "Check when big boss visit your department and prepare question list. ( or potential document for review)": {
     "english": "Track when senior executives visit your department. Prepare a thoughtful question list or have review-ready documents on hand.",
     "mandarin": "掌握高階主管巡視部門的時程。提前準備好提問清單，或備妥隨時可供審閱的亮點成果報告。",
-    "taiwanese": "掌握高階主管巡視部門的時程。提前準備好提問清單，或備妥隨時可供審閱的亮點成果報告。",
+    "taiwanese": "摸清大頭主管巡視部門的走馬時程。提早款好欲請教的問題清單，抑是備好隨時會使予人過目展現成果的報告。",
     "key": "325-1"
   },
   "Leverage The outcomes from others and share to different team members or department or stakeholders.": {
@@ -1004,7 +1004,7 @@
   "Set a deadline or expected time  to check result. Evaluate the effort and value. Using a google calendar.": {
     "english": "Set clear deadlines and follow-up checkpoints for task outcomes. Evaluate the required effort versus the value generated, and track milestones on your calendar.",
     "mandarin": "為每項任務設定明確的截止日期與結果檢視時點。評估投入的精力與產出價值是否合乎比例，並在行事曆上做記錄。",
-    "taiwanese": "為每項任務設定明確的截止日期與結果檢視時點。評估投入的精力與產出價值是否合乎比例，並在行事曆上做記錄。",
+    "taiwanese": "每項工課攏愛訂出清清楚楚的截止期限佮驗收時限。算看覓開落去的氣力佮收成的價值敢有合算，並佇行事曆頂面記好勢。",
     "key": "322-2"
   },
   "Does your boss really need your personal opinion or expertise? Is this project need it or need team decision or based on facts and scientific / statistical data. Or only judge by manager’s feeling.": {
@@ -1058,7 +1058,7 @@
   "Don’t’ give up to find a better solution for some tasks. It could be a long journey. For some items, it may be good enough for now.": {
     "english": "Do not give up on finding optimized solutions for critical tasks, even if it is a long journey. However, recognize when a solution is \"good enough for now\" to avoid over-engineering.",
     "mandarin": "對於關鍵任務，不要放棄尋找更佳解，這可能是一場持久戰。但對於次要任務，要懂得適可而止、接受「目前夠用就好」，避免過度設計。",
-    "taiwanese": "當頭關鍵的工課，莫放棄揣出閣較讚的解法，雖然路頭遙遠猶著堅持；毋過對待次要的瑣事，著愛知足收手、識得「這馬堪用就好」，毋免刁鑽過頭。",
+    "taiwanese": "當頭關鍵的工課，莫放棄揣出閣較讚的解法，哪怕路途遙遠猶著堅持；毋過對待次要的瑣碎雜事，著愛知足收手、識得「這馬堪用就好」，毋免刁鑽鑽過頭。",
     "key": "331"
   },
   "Let your colleagues and boss do their jobs. Don’t cross the line. Speak their language / terms.": {
@@ -1070,7 +1070,7 @@
   "You cannot say no for tasks related to business level.": {
     "english": "Recognize that you cannot easily reject tasks that are critical to business-level priorities or corporate strategy.",
     "mandarin": "認清現實：對於與公司業務層面、核心戰略直接相關的任務，你沒有說「不」的權力。",
-    "taiwanese": "認清現實：對於與公司業務層面、核心戰略直接相關的任務，你沒有說「不」的權力。",
+    "taiwanese": "看清現實：碰著牽連公司業務核心、公司大方向的重大代誌，你無說「袂使」的權利，只有承擔頂起去。",
     "key": "333"
   },
   "No pursuit fairness in the office.": {
@@ -1088,7 +1088,7 @@
   "Evaluate the value  of your tasks. In short term or long term view. Try to gain value or experience from what you did.": {
     "english": "Regularly evaluate the value of your tasks from both short-term and long-term perspectives. Aim to extract transferable experience from everything you do.",
     "mandarin": "從短期與長期的雙重維度評估你手頭任務的價值。致力於從做過的每件事中吸取能帶得走的實戰經驗。",
-    "taiwanese": "從短期與長期的雙重維度評估你手頭任務的價值。致力於從做過的每件事中吸取能帶得走的實戰經驗。",
+    "taiwanese": "從眼前佮長遠的雙重角度來秤看手頭工課的份量。認真對做過的逐項代誌汲取經驗，練出誰嘛提袂走的真本事。",
     "key": "336"
   },
   "People attend to think in a negative way or overthink.": {
@@ -1130,7 +1130,7 @@
   "Reserved your time for exercise, family, learning. Let things with less important go ( the less the better).  OKR. Sacred time": {
     "english": "Reserve non-negotiable blocks of \"sacred time\" on your calendar for exercise, family, and learning. Let low-priority tasks go; less is often better.",
     "mandarin": "在行事曆上為運動、家人與自學預留不可妥協的「神聖時間」。果斷捨棄次要雜務，越簡單越有力。",
-    "taiwanese": "在行事曆上為運動、家人與自學預留不可妥協的「神聖時間」。果斷捨棄次要雜務，越簡單越有力。",
+    "taiwanese": "佇行事曆頂面為著運動、照顧厝裡佮自學進修，留出無妥協的「神聖時間」。無要緊的雜務愛敢放手，愈單純愈有氣力。",
     "key": "343"
   },
   "You won’t work in this company till retire. You need to have some backup plan. What is future roadmap for your product and career? Item 328": {
@@ -1154,7 +1154,7 @@
   "Always to challenge yourself for being best. Improve a little everyday.": {
     "english": "Always challenge yourself to pursue excellence. Strive to improve just a little bit every single day.",
     "mandarin": "永遠抱持挑戰自我、追求卓越的心態。不求一日千里，但求每天都有微小的進步。",
-    "taiwanese": "永遠抱持挑戰自我、追求卓越的心態。不求一日千里，但求每天都有微小的進步。",
+    "taiwanese": "隨時抱著自我挑戰、求好心切的心情。毋免一日千里，但求逐工攏有一屑仔微小的進步。",
     "key": "347"
   },
   "What’s takeaways for this meeting / discussion?": {
@@ -1190,7 +1190,7 @@
   "CAGR, EBIT, understand financial terms.  ITEM 62.": {
     "english": "Familiarize yourself with core business and financial terms, such as CAGR (Compound Annual Growth Rate) and EBIT (Earnings Before Interest and Taxes). (Related to Item 62)",
     "mandarin": "熟悉核心商業與財務術語，如 CAGR（複合年均增長率）、EBIT（息稅前利潤）等，這有助於你理解高層的財務視角。",
-    "taiwanese": "熟悉核心商業與財務術語，如 CAGR（複合年均增長率）、EBIT（息稅前利潤）等，這有助於你理解高層的財務視角。",
+    "taiwanese": "熟悉核心商業佮算帳術語（親像 CAGR、EBIT），這會鬥相共你了解高層主管的算盤佮財務眼光。",
     "key": "355"
   },
   "Don’t be perfect, don’t need to finish thing in one time, the difference between good and good for you. Be patient, step by step.": {
@@ -1202,7 +1202,7 @@
   "Care about your instinct, what does it feel and want to tell you?  ( however, scientific  data talk more)": {
     "english": "Listen to your gut instinct and what it is trying to tell you. However, always prioritize objective, scientific data to guide your final decisions.",
     "mandarin": "重視你的直覺，傾聽它想傳遞給你的警訊。然而，最終決策仍應以客觀、科學的數據為依歸。",
-    "taiwanese": "重視你的直覺，傾聽它想傳遞給你的警訊。然而，最終決策仍應以客觀、科學的數據為依歸。",
+    "taiwanese": "照重你的第六感，聽伊欲提醒你的警報。毋過最後拍算決定，猶是愛以客觀、科學的數字根據為準。",
     "key": "357"
   },
   "Go  around when tired in front of laptop, find someone you feel he/she is stressful and encourage him/her.": {
@@ -1220,13 +1220,13 @@
   "Make a good report template for regular meeting and certain topic. ( EX: 8D, one page…, yield)": {
     "english": "Develop high-quality report templates for regular reviews and specific issues (e.g., 8D reports, one-page summaries, and yield tracking).",
     "mandarin": "為例行性會議或特定主題開發高質量的報告範本（例如：8D 報告、一頁紙總結、良率追蹤表）。",
-    "taiwanese": "為例行性會議或特定主題開發高質量的報告範本（例如：8D 報告、一頁紙總結、良率追蹤表）。",
+    "taiwanese": "為平常開會抑專案題目，開發出高水準的報告範本（例如：8D 報告、一張紙重點、良率追蹤表）。",
     "key": "360"
   },
   "You don't need to comment for everything. Keep silence. Separate fields between work and life. it is not easy.  No reply is a reply.": {
     "english": "You do not need to comment on every issue. Keep your silence when appropriate. Maintain boundaries between work and life, even though it is difficult. Remember: no reply is also a reply.",
     "mandarin": "你不需要對每件事都發表意見。學會保持沉默。儘管不易，仍要努力畫分工作與生活的邊界。記住：不回覆本身也是一種回覆。",
-    "taiwanese": "你不需要對每件事都發表意見。學會保持沉默。儘管不易，仍要努力畫分工作與生活的邊界。記住：不回覆本身也是一種回覆。",
+    "taiwanese": "你毋免逐項代誌攏揷喙發表意見。學會得恬恬。就算無簡單，猶是愛盡力畫分工課佮生活的界線。記牢：無回覆本身就是一種回覆。",
     "key": "361"
   },
   "Focus on 3 key tasks per day. Don’t exceed 3 items ( major).": {
@@ -1244,13 +1244,13 @@
   "Do high value-added work. Separate high/low value job, but don’t forget basic knowledge.": {
     "english": "Focus your energy on high-value-added work. Categorize tasks into high-value versus low-value, but never neglect the foundational knowledge that supports them.",
     "mandarin": "專注做高附加價值的工作。學會辨識高低價值任務的區別，但切勿輕視並忘卻支撐這些任務的底層基礎知識。",
-    "taiwanese": "專注做高附加價值的工作。學會辨識高低價值任務的區別，但切勿輕視並忘卻支撐這些任務的底層基礎知識。",
+    "taiwanese": "專心做價值懸的工課。學會得分清好空佮雜碎事的差別，毋過千萬莫看輕亦莫袂記扶持這寡工課的底層根基功夫。",
     "key": "364"
   },
   "Taking statistics, it may cheat by percentage, absolute number, and base number, unit fallacy.": {
     "english": "When analyzing statistics, be alert to manipulation through percentages, absolute versus relative numbers, varying baselines, and unit fallacies.",
     "mandarin": "檢視統計數據時，保持警惕：數據常透過百分比、絕對值與相對值的操弄、基準點的變更，以及單位謬誤來誤導人。",
-    "taiwanese": "檢視統計數據時，保持警惕：數據常透過百分比、絕對值與相對值的操弄、基準點的變更，以及單位謬誤來誤導人。",
+    "taiwanese": "審核統計數字時陣，眼睛愛擘予金：數字定定會用百分比、絕對值佮相對值偷換觀念、換起頭基準、抑是借單位糊弄人。",
     "key": "365"
   },
   "Improve yourself while you are waiting for things ( environment) to improve. But not squeeze too much": {
@@ -1292,19 +1292,19 @@
   "A simple talks may ease some tension situation. Like talking weathers, sports.": {
     "english": "Engaging in casual small talk (e.g., discussing the weather or sports) can effectively diffuse tense situations and build rapport.",
     "mandarin": "在氣氛緊張時，聊聊日常話題（如天氣或運動）能有效緩解緊繃氣氛、拉近人際距離。",
-    "taiwanese": "在氣氛緊張時，聊聊日常話題（如天氣或運動）能有效緩解緊繃氣氛、拉近人際距離。",
+    "taiwanese": "佇氣氛硬梆梆的時陣，開喙講講日常閒話（像天公氣色抑運動球賽），上會解圍鬆筋、拉近逐家的距離。",
     "key": "372"
   },
   "Make fun for your job. Find new things. To grow your mind.": {
     "english": "Find ways to bring fun and curiosity into your work. Discovering new learning points keeps your mind active and growing.",
     "mandarin": "設法在日常工作中尋找樂趣與好奇心。主動學習新知識，以此刺激心智成長。",
-    "taiwanese": "設法在日常工作中尋找樂趣與好奇心。主動學習新知識，以此刺激心智成長。",
+    "taiwanese": "想辦法佇平時的工課中揣趣味佮好玄的心情。主動學新知，按呢大腦才袂生菇，心智持續成長。",
     "key": "373"
   },
   "Set a one-minute goal. ( MVP)": {
     "english": "Set one-minute micro-goals (similar to MVP thinking) to build momentum and overcome procrastination.",
     "mandarin": "設定「一分鐘微目標」（MVP 最小可行思維），降低起動阻力以克制拖延。",
-    "taiwanese": "設定「一分鐘微目標」（MVP 最小可行思維），降低起動阻力以克制拖延。",
+    "taiwanese": "設「一分鐘微目標」（MVP 最小可行起頭），降低落手門檻來治好拖延的病根。",
     "key": "374"
   },
   "Spend time on your goal and spend more time on execution.": {
@@ -1316,13 +1316,13 @@
   "Stop telling people more than they need to know.": {
     "english": "Avoid over-sharing. Stop volunteering information beyond what stakeholders need to know.",
     "mandarin": "適度留白。不要主動向旁人透露超出他們需要知道的過多資訊。",
-    "taiwanese": "適度留白。不要主動向旁人透露超出他們需要知道的過多資訊。",
+    "taiwanese": "喙角愛有度，適度留白。莫主動共邊仔人講甲過頭冗雜，別人毋免知影的秘密佮細節，恬恬就好。",
     "key": "376"
   },
   "=> don't reply email after 3:00 PM if it is not necessary. spend time on real output, learn new things, documentation...etc. habit, positive words,=> just fine....just good.": {
     "english": "Avoid replying to non-urgent emails late in the afternoon (e.g., after 3:00 PM). Instead, reserve that time for deep focus, producing tangible outputs, documenting work, or learning. Adopt positive language like \"It's fine\" or \"Looking good.\"",
     "mandarin": "下午 3:00 後如無迫切必要，避免回信。將這段時間留給深度產出、整理文檔或自學新事物。保持正向口吻，多說「這沒問題」、「一切順利」。",
-    "taiwanese": "下午 3:00 後如無迫切必要，避免回信。將這段時間留給深度產出、整理文檔或自學新事物。保持正向口吻，多說「這沒問題」、「一切順利」。",
+    "taiwanese": "下晝三點過後若無火燒菇，盡量莫閣回批。將這段時間留予深度產出、整頓檔案抑進修新功夫。講話維持正向口氣，濟講「這無問題」、「攏真順利」。",
     "key": "377"
   },
   "I am driving this activity with low priority in my daily to do list. Hope to get is done by end of September. Could you please let me know more background of your question, any need to change my to do list priority. Way to request.": {
@@ -1346,13 +1346,13 @@
   "Learn read financial report from top managers and annual report for considering job security, what is the KPI for coming year. How to judge operation working fine or not. To see if your product is survived in the market?  What is product life?": {
     "english": "Learn to read corporate financial reports and annual earnings summaries. This helps you assess job security, understand upcoming corporate KPIs, evaluate company performance, and judge whether your products have a sustainable market life cycle.",
     "mandarin": "學習閱讀高階主管的財務報告與公司的年度財務報表。這能幫助你評估工作保障度、理解明年的 KPI 目標、判斷公司的經營狀況，並審視你負責的產品在市場中的生命週期。",
-    "taiwanese": "學習閱讀高階主管的財務報告與公司的年度財務報表。這能幫助你評估工作保障度、理解明年的 KPI 目標、判斷公司的經營狀況，並審視你負責的產品在市場中的生命週期。",
+    "taiwanese": "學看大老闆的財務報告佮公司的年度算帳報表。這會鬥相共你推測頭路敢穩當、知曉明年的 KPI 目標、看清公司的經營好䆀，並且盤查你顧的產品佇市場上的壽命。",
     "key": "382"
   },
   "Don’t hesitate to use new tool or afraid of. Like Chatgpt, 電子筆記。And think where to find it next time quickly.": {
     "english": "Do not hesitate to adopt new tools (such as ChatGPT, Obsidian, or other digital note-taking apps). Establish a systematic way to retrieve information quickly when needed.",
     "mandarin": "勇於嘗試並使用新工具（如 ChatGPT、數位筆記）。同時，要建立清晰的資訊檢索邏輯，確保下次需要時能快速找到。",
-    "taiwanese": "勇於嘗試並使用新工具（如 ChatGPT、數位筆記）。同時，要建立清晰的資訊檢索邏輯，確保下次需要時能快速找到。",
+    "taiwanese": "大膽試用新工具（像 ChatGPT、數位筆記）。仝時愛起好清楚的找揣邏輯，保證後回要用的時陣會當隨揣著。",
     "key": "383"
   },
   "don’t ask if you may know possible feedback or answers.": {
@@ -1442,7 +1442,7 @@
   "do not talk about negative things to your colleague, speak some positive things and they will look up on you, envy you even jealous you but it's all good however, if you're talking about negative things they will look down on you and think you're not good enough.  there is a perform,  you need to play for survival.": {
     "english": "Avoid sharing negative thoughts with colleagues. Focus on positive milestones; this encourages respect and establishes your authority. Complaining or sharing vulnerabilities in the office can cause others to perceive you as weak. Understand that workplace survival requires strategic self-presentation.",
     "mandarin": "避免在同事面前流露消極想法。多談論正面、有建設性的事，這能建立你的專業自信並贏得尊重。相反地，頻繁抱怨只會讓旁人質疑你的能力。認清現實：職場是一場表演，為了生存，你必須展現專業與實力。",
-    "taiwanese": "避免在同事面前流露消極想法。多談論正面、有建設性的事，這能建立你的專業自信並贏得尊重。相反地，頻繁抱怨只會讓旁人質疑你的能力。認清現實：職場是一場表演，為了生存，你必須展現專業與實力。",
+    "taiwanese": "莫佇同事面前顯出洩氣話。濟講正面、有建設性的代誌，按呢會起造你的專業自信兼受人敬重。若愛怨東怨西，只會予人質疑你的本事。看清現實：職場本成是一場戲齣，為著顧飯碗，你著愛展現出專業佮實力。",
     "key": "407"
   },
   "Do right thing? What is right? Who to judge? And you have power to do right thing?": {
@@ -1460,7 +1460,7 @@
   "Try to adaptive the thing you cannot change and run away. Choose battle.": {
     "english": "Adapt to the constraints you cannot alter, or choose to walk away. Be highly selective and choose your battles. (Related to Item 141)",
     "mandarin": "對於無法改變的既定環境，學會適應它，或者果斷抽身離場。選擇正確的戰場。",
-    "taiwanese": "對於無法改變的既定環境，學會適應它，或者果斷抽身離場。選擇正確的戰場。",
+    "taiwanese": "碰著無塊好改的大環境，學會得適應順應，無就煞煞抽身離場。揀對戰場才去拚。",
     "key": "410"
   },
   "any accumulate knowledge or credit or experience on current project or position.": {
@@ -1490,7 +1490,7 @@
   "a template for meeting minutes, agenda. PAR problem action result.": {
     "english": "Create a standardized template for meeting agendas and minutes, utilizing the PAR (Problem, Action, Result) or PAR (Purpose, Action, Result) structured format.",
     "mandarin": "設計標準的會議議程與記錄範本，導入 PAR（問題-行動-結果 或 目的-行動-結果）的結構化格式。",
-    "taiwanese": "設計標準的會議議程與記錄範本，導入 PAR（問題-行動-結果 或 目的-行動-結果）的結構化格式。",
+    "taiwanese": "打造規矩的會議議程佮紀錄範本，導入 PAR（問題-行動-結果 抑 目的-行動-結果）的骨架格式。",
     "key": "415"
   },
   "Check if you are the DRI for the question or task when receiving email. if not, you don't need to reply.  Bravely to cancel unnecessary meeting. With reason.": {
@@ -1508,7 +1508,7 @@
   "Do we have a agreement on this?": {
     "english": "Confirm alignment at the end of key discussions: \"Do we have an agreement on this next step?\"",
     "mandarin": "在討論結束時，與團隊再次確認：「關於這個下一步，我們達成共識了嗎？」",
-    "taiwanese": "在討論結束時，與團隊再次確認：「關於這个下一步，我們達成共識了嗎？」",
+    "taiwanese": "會議收尾時陣，佮團隊眾人確認好勢：「針對這个下一步，咱逐家敢有一致的共識？」",
     "key": "418"
   },
   "No reply is a reply": {
@@ -1532,7 +1532,7 @@
   "Be aware of the holiday of foreign colleagues. Say thank you for greeting.": {
     "english": "Be aware of the national holidays of your foreign colleagues. Remember to express gratitude when they send holiday greetings.",
     "mandarin": "留意跨國外籍同事所在國家的國定假日。當他們發來節日祝賀時，務必禮貌回謝。",
-    "taiwanese": "留意跨國外籍同事所在國家的國定假日。當他們發來節日祝賀時，務必禮貌回謝。",
+    "taiwanese": "心內愛知影外國同事當地的放假日。若是人有心送來過節祝賀，著愛照禮數共人講多謝。",
     "key": "422"
   },
   "What is the way to say no ？ and what is the situation that you can defense your statement and how ？": {
@@ -1544,7 +1544,7 @@
   "choose your battle": {
     "english": "Choose your battles wisely; do not waste energy on low-value conflicts. (Related to Item 410)",
     "mandarin": "選擇對你真正重要的戰場，不要把寶貴精力浪費在低價值的衝突上。",
-    "taiwanese": "選擇對你真正重要的戰場，不要把寶貴精力浪費在低價值的衝突上。",
+    "taiwanese": "揀對家己真正重要的主戰場才去拚，莫共寶貴的氣力開佇無要緊的冤家衝突頂高。",
     "key": "424"
   },
   "Practice and improve your skill set every chance you get.": {
@@ -1556,19 +1556,19 @@
   "Try to learn new things but not for everything. stay focus . Every year, do a special thing which you never done.": {
     "english": "Be open to learning new things, but stay focused on your core domain. Challenge yourself to do one unique, milestone activity every year that you have never done before.",
     "mandarin": "保持學習新事物的心態，但必須專注於你的核心能力圈。自我要求每年去挑戰一件從未做過的特殊大事，打破常規。",
-    "taiwanese": "保持學習新事物的心態，但必須專注於你的核心能力圈。自我要求每年去挑戰一件從未做過的特殊大事，打破常規。",
+    "taiwanese": "保持學新代誌的心胸，毋過愛鎖定佇家己的核心本事圈。自我要求每年去衝一件未曾做過的特殊大事，跳出舊模仔。",
     "key": "426"
   },
   "Non player characteristic /分人 / save your energy": {
     "english": "Adopt a \"Non-Player Character\" (NPC) mindset when dealing with workplace drama (detachment) to save your energy.",
     "mandarin": "冷眼旁觀職場紛擾，開啟「非玩家角色（NPC / 分人）」心態，以保存自身精神能量。",
-    "taiwanese": "冷眼旁觀職場紛擾，開啟「非玩家角色（NPC / 分人）」心態，以保存自身精神能量。",
+    "taiwanese": "冷眼看職場紛紛擾擾，啟動「非玩家角色（NPC / 分人）」心態，留好精神氣力顧家己。",
     "key": "427"
   },
   "No more email reply during weekend. Close email alert": {
     "english": "Stop replying to emails during weekends. Turn off email notifications on your phone.",
     "mandarin": "週末不再回覆任何工作郵件。關閉手機上的郵件即時警報通知。",
-    "taiwanese": "週末不再回覆任何工作郵件。關閉手機上的郵件即時警報通知。",
+    "taiwanese": "禮拜六日絕不再回任何工課批信。共手機頂頭的郵件通知鈴聲通通關掉。",
     "key": "428"
   },
   "You don't need to take everything on your shoulder.": {
@@ -1580,49 +1580,49 @@
   "GET BACK UP! It's time to take control of your life! / buy your time back. (mind simulation / Scenario Simulation) If then policy change / earthque / typhonn / war / electricity shut down / economic crisis / virus attach… If received a emotional email, If someone said negative things If stock goes down, If schedule delayed If get sicked, If you feel unhappy, ( why?  go run ) If you feel frustrated/stressed, If people don’t get your point If people get angry with you": {
     "english": "GET BACK UP! Take control of your life and buy your time back. Use \"If-Then\" scenario planning to prepare for crises (e.g., earthquakes, policy changes, economic shifts). Establish clear contingency rules: If you receive an emotional email, delay your reply. If someone criticizes you, put your ego aside. If schedule is delayed, focus on solutions. If stressed or unhappy, go for a run. If people don't get your point, rephrase using simple words.",
     "mandarin": "站起來！重新掌控你的人生，買回你的時間。運用「如果…就…（If-Then）」進行情境模擬，防範各類危機（如政策突變、地震、颱風、停電、經濟危機）。為日常狀況設定自動應對程序：若收到情緒化郵件，就延遲發信；若遭遇惡意批評，就放下自尊不予理會；若專案延遲，就聚焦解決方案；若感到鬱悶，就去跑步；若他人聽不懂你的話，就改用最簡單的話語解釋。",
-    "taiwanese": "站起來！重新掌控你的人生，買回你的時間。運用「如果…就…（If-Then）」進行情境模擬，防範各類危機（如政策突變、地震、颱風、停電、經濟危機）。為日常狀況設定自動應對程序：若收到情緒化郵件，就延遲發信；若遭遇惡意批評，就放下自尊不予理會；若專案延遲，就聚焦解決方案；若感到鬱悶，就去跑步；若他人聽不懂你的話，就改用最簡單的話語解釋。",
+    "taiwanese": "爬起來！共家己的人生主導權提倒轉來，買回寶貴的時間。用「若是按呢…著按怎…（If-Then）」來演練心智模擬，防範逐款危機（像政策變卦、地動、風颱、停電、景氣崩盤）。為平時狀況設好自動應對步驟：收到情緒化信件，著延後回覆；受人惡意抹黑，著莫理面子無免插伊；專案若延誤，著專注揣解法；心內若欻鬱，著去跑步流汗；別人若聽無，著換上淺白的話講予伊明。",
     "key": "430"
   },
   "Play with fun,": {
     "english": "Approach your work and hobbies with a playful, fun-loving spirit.",
     "mandarin": "保持玩心，在工作與生活中尋找樂趣。",
-    "taiwanese": "保持玩心，在工作與生活中尋找樂趣。",
+    "taiwanese": "抱著緣投趣味佮歡喜的心來看待挑戰；代誌就算無簡單，猶是值得盡心來試看覓。",
     "key": "431"
   },
   "Invest your interest no matter spending money or time. Try to make it as part of profession.": {
     "english": "Invest time and money in your hobbies and interests. Strive to build them to a professional level of competence.",
     "mandarin": "大膽投資你的個人興趣（不論是投入時間還是金錢）。努力將其鑽研到具備某種專業水準。",
-    "taiwanese": "大膽投資你的個人興趣（不論是投入時間還是金錢）。努力將其鑽研到具備某種專業水準。",
+    "taiwanese": "大膽投資家己的趣味嗜好（不管開時間抑是開銀兩）。煞猛共伊鑽研到有一套專門的水準。",
     "key": "432"
   },
   "Spend time to be alone, scared time for working time or in private time. To do what you want to do. Or had time to develop other skill": {
     "english": "Dedicate time to be alone. Reserve sacred, uninterrupted slots during both work and private hours to focus on what you want or to develop secondary skills.",
     "mandarin": "留出獨處的時間。無論在工作還是私人生活中，都要確保有不受干擾的「神聖時間」去做你想做的事，或發展第二專長。",
-    "taiwanese": "留出獨處的時間。無論在工作還是私人生活中，都要確保有不受干擾的「神聖時間」去做你想做的事，或發展第二專長。",
+    "taiwanese": "留出孤單一人的時段。無論工課抑是私底下，攏愛確保有一段無人抐擾的「神聖時間」，去做你愛做的事，抑是練就第二專長。",
     "key": "433"
   },
   "What if you got fired, how soon you can find another job? Or store your achievement with you? Do you have margin or error? How long can you survive, any resource?": {
     "english": "Ask yourself: \"If I were laid off today, how quickly could I secure another job?\" Ensure your achievements are documented and portable. Do you have a safety margin? How long can your assets support you, and what resources can you tap into?",
     "mandarin": "危機自問：「如果今天被開除，我能多快找到下份工作？」確保你累積的成就都已妥善留底存檔。你的生活安全邊際夠嗎？手頭的資產能讓你撐多久？你有哪些人脈與資源可以調用？",
-    "taiwanese": "危機自問：「如果今天被開除，我能多快找到下份工作？」確保你累積的成就都已妥善留底存檔。你的生活安全邊際夠嗎？手頭的資產能讓你撐多久？你有哪些人脈與資源可以調用？",
+    "taiwanese": "居安思危問家己：「若是今仔日予人開除，我敢有法度隨揣著下份工課？」平常時著愛共戰績成就留底備份。你的生活安全邊際敢有夠？手頭的本錢敢有法度予你頂得過？你閣有啥物人脈佮資源會使調動？",
     "key": "434"
   },
   "Spend time on other field / your favorite and release your stress. ( SPIRE) , try to get some  solid result.": {
     "english": "Dedicate time to fields outside of work and hobbies to relieve stress (using the SPIRE wellness framework), and strive to achieve solid, measurable results.",
     "mandarin": "將時間投在工作以外的興趣領域以排解壓力（參考 SPIRE 身心靈平衡指標），並努力取得具體、有成就感的結果。",
-    "taiwanese": "將時間投在工作以外的興趣領域以排解壓力（參考 SPIRE 身心靈平衡指標），並努力取得具體、有成就感的結果。",
+    "taiwanese": "將時間投資佇工課以外的嗜好天地來消解壓力（參考 SPIRE 身心靈平衡指標），兼煞猛拼出具體、有歡喜成就感的成績。",
     "key": "435"
   },
   "Increase the mobility. Use cellphone to get whatever information you need. Use tools in the cloud.": {
     "english": "Increase your work mobility. Master cloud tools and mobile access to retrieve key information instantly from anywhere.",
     "mandarin": "提升行動力。善用雲端工具與行動裝置，確保在任何地方都能迅速獲取所需資訊。",
-    "taiwanese": "提升行動力。善用雲端工具與行動裝置，確保在任何地方都能迅速獲取所需資訊。",
+    "taiwanese": "提高腳手行動力。善用雲端工具佮手機仔，確保無論佇佗位攏會當隨調出需要用的資料。",
     "key": "436"
   },
   "Don’t tell your boss whom you don’t like because they will feel.": {
     "english": "Never tell your manager about colleagues you dislike; managers will intuitively sense the negativity, which reflects poorly on you.",
     "mandarin": "絕對不要向主管透露你討厭哪些同事，因為主管會敏銳察覺到你的負面情緒，這反而會損害你的職業素養。",
-    "taiwanese": "絕對不要向主管透露你討厭哪些同事，因為主管會敏銳察覺到你的負面情緒，這反而會損害你的職業素養。",
+    "taiwanese": "千千萬萬莫共主管講你討厭佗一个同事，因為主管心神真利，一定會感覺著你的怨氣，這反轉傷著家己的職場格調。",
     "key": "437"
   },
   "You can speak frankly, in only your position’s view.": {
@@ -1640,7 +1640,7 @@
   "Learn the way manager talks": {
     "english": "Observe and emulate the communication style, tone, and strategic phrasing used by experienced managers.",
     "mandarin": "仔細觀察並學習資深主管與高階經理人的言談方式、語氣與高階溝通話術。",
-    "taiwanese": "仔細觀察並學習資深主管與高階經理人的言談方式、語氣與高階溝通話術。",
+    "taiwanese": "頂真看覓兼學習資深大主管的講話氣度、聲調口氣佮高段的溝通手路。",
     "key": "440"
   },
   "How many leaves and floating leaves / yearly plan": {
@@ -1652,13 +1652,13 @@
   "Find your battle": {
     "english": "Identify where your true passions and competitive advantages lie; choose your battles carefully. (Related to Item 424)",
     "mandarin": "尋找真正屬於你的戰場，在具備優勢的地方聚焦突破。",
-    "taiwanese": "尋找真正屬於你的戰場，在具備優勢的地方聚焦突破。",
+    "taiwanese": "揣出真正屬於你的主戰場，佇家己上內行、占贏面的所在集中氣力拚突破。",
     "key": "443"
   },
   "Try to forget the work stuff after leaving office is hot it's hard but please try.": {
     "english": "Make a conscious effort to forget about work once you leave the office. It is challenging, but critical for mental recovery.",
     "mandarin": "踏出辦公室後，努力強迫自己忘掉工作瑣事。這很難，但對大腦的修復至關重要。",
-    "taiwanese": "行出辦公室的大門，著愛下決心共工課雜碎的代誌放予清氣。這項功夫雖然䆀練，但對大腦的修補調養有夠要緊。",
+    "taiwanese": "踏出辦公室的大門，著愛下決心共工課雜碎的代誌放予清氣。這項功夫就算無簡單練，毋過對大腦的修補調養有夠要緊。",
     "key": "444"
   },
   "Spend more energy in time important things is that working except": {
@@ -1670,7 +1670,7 @@
   "Take one week off after Luⁿar new year .adjust children schedule. ( April, September)": {
     "english": "Plan leaves strategically, such as taking a week off after Lunar New Year or aligning leaves with your children's school schedule transitions in April and September.",
     "mandarin": "策略性安排長假，例如在農曆新年後安排一週休假，或配合子女在四月、九月的學期開學行程進行請假。",
-    "taiwanese": "策略性安排長假，例如在農曆新年後安排一週休假，或配合子女在四月、九月的學期開學行程進行請假。",
+    "taiwanese": "盤算好來排長假，親像過年後排假一禮拜陪伴囡仔調整作息，抑配合四月、九月開學時程來排休。",
     "key": "446"
   },
   "Don't even believe your colleague and any promise from your managers": {
@@ -1682,7 +1682,7 @@
   "Try to move electrical notes obsidian in the office， into obsidian cloud sync.": {
     "english": "Migrate your digital notes (e.g., Obsidian office notes) into a secure, synced cloud database to ensure instant accessibility.",
     "mandarin": "將辦公室使用的 Obsidian 數位筆記同步到安全的雲端庫中，以便隨時檢索與跨端同步。",
-    "taiwanese": "將辦公室使用的 Obsidian 數位筆記同步到安全的雲端庫中，以便隨時檢索與跨端同步。",
+    "taiwanese": "共辦公室寫的 Obsidian 電子筆記同步到安全穩當的雲端庫，按呢無論何時何地攏會當調閱互通。",
     "key": "448"
   },
   "Plot template, table template, automation.": {
@@ -1700,13 +1700,13 @@
   "Check if there is a existing tool to fix the current question you encountered.": {
     "english": "Before starting a task or solving a problem, check if a tool or script already exists to do it. Avoid reinventing the wheel.",
     "mandarin": "遇到問題前，先檢查市面上或公司內部是否已有現成工具、腳本可以解決。避免重覆造輪子。",
-    "taiwanese": "遇到問題前，先檢查市面上或公司內部是否已有現成工具、腳本可以解決。避免重覆造輪子。",
+    "taiwanese": "遇到代誌進前，先巡看市面上抑公司內底敢有現成的工具、指令碼會使排解。莫閣重磨石磨仔造輪仔，省氣力。",
     "key": "451"
   },
   "What is the skill to be needed?": {
     "english": "Identify what skills will be required to develop or support the next generation of products.",
     "mandarin": "思考為了迎接下一代產品與技術變革，自己需要提前儲備什麼技能？",
-    "taiwanese": "思考為了迎接下一代產品與技術變革，家己需要提前儲備什麼技能？",
+    "taiwanese": "眼睛放遠思考：為著迎接後一代的新產品佮技術變化，家己到底需要提前款好啥物功夫？",
     "key": "453"
   },
   "BUILD UP CREDIT and relationship": {
@@ -1718,13 +1718,13 @@
   "Don’t sent the results out before releasing": {
     "english": "Never distribute raw data or preliminary results to wider stakeholders before they are officially reviewed and released.",
     "mandarin": "在數據未經最終確認與正式審批發佈前，絕不私自發送給外部或跨團隊利害關係人。",
-    "taiwanese": "在數據未經最終確認與正式審批發佈前，絕不私自發送給外部或跨團隊利害關係人。",
+    "taiwanese": "數字資料在猶未正式複驗、審批核准發布進前，萬萬袂使私自偷送予外口抑是別組人馬。",
     "key": "455"
   },
   "Skip the work/email what suddenly throw to you. Do your job first.": {
     "english": "Avoid getting distracted by sudden, non-urgent tasks or emails thrown at you. Prioritize and complete your planned work first.",
     "mandarin": "對於突然砸過來、非緊急的突發工作或信件，先予以擱置。專心先完成你既定的核心任務。",
-    "taiwanese": "對於突然砸過來、非緊急的突發工作或信件，先予以擱置。專心先完成你既定的核心任務。",
+    "taiwanese": "面對突然掞過來、無要無緊的插隊工課抑批信，先共擲一邊。專心先做好家己排好的核心代誌。",
     "key": "456"
   },
   "Don’t stop your colleague learning by themselves, try not to help too much.": {
@@ -1790,7 +1790,7 @@
   "Can you / how can you restart when fail? How long can you survive, ex, had been fired or lost in the mountain. Find another job in a different area? What new hard or soft skill do you need to learn for future?": {
     "english": "Evaluate if and how you can restart after a failure. Know your survival margin (e.g., if you got fired or lost in the mountains). Could you find a job in a completely different domain? Identify what new hard or soft skills you need to acquire.",
     "mandarin": "思考當失敗發生時，你能否以及如何重頭開始？評估你的生存極限（例如：被解雇或在深山迷路時能支撐多久）。你能到不同領域找到新工作嗎？你需要為未來學習哪些新的硬技能與軟實力？",
-    "taiwanese": "想看覓如果失敗，你要按怎重新開頭？評估你的生存極限（比方講被裁員抑是山中迷路）。你敢有法度去無仝的領域揣工作？你需要為未來學習什麼新的軟硬實力？",
+    "taiwanese": "想看覓若是跋倒失敗，你敢有法度重頭閣起？評估你的生存極限（比方講予人裁員抑是在深山迷路）。你敢有法度跨到無仝領域揣工課？你閣需要為未來學啥物新的軟硬實力？",
     "key": "149"
   },
   "Make sure your energy is full? Sleep enough, over 6 hours at least, eat nutritious, build your mind stronger enough. At least, take a nap after lunch. it is important to commit and aware that you are tired. Eat nutritious food.": {
@@ -2288,7 +2288,7 @@
   "Not correct. =>we have different way of working. ( rephrase) Although there are many conflicts in reality…, I have different opinions.": {
     "english": "Avoid saying 'That's not correct.' Rephrase to: 'We have different ways of working.' Soften statements like: 'Although there are conflicts in reality, I hold a different perspective.'",
     "mandarin": "避免直接否定他人說「這不對」。改用客氣的措辭：「我們的工作方法有些不同。」或「雖然現實中存在分歧，但我有不同的看法。」",
-    "taiwanese": "莫硬梆梆直插人講「這毋著」。換較婉轉的辭令：「咱做代誌的手路有淡薄無仝款。」抑是「雖然現實中有無仝所在，毋過我另有一點睇法。」",
+    "taiwanese": "莫硬梆梆直插人講「這毋著」。換較婉曲好聽的話：「咱做代誌的手路有淡薄仔無仝。」抑是「即使現實中有無仝所在，毋過我另有一點仔睇法。」",
     "key": "233"
   },
   "Don’t try to correct others’ WoW or attitude. If they don’t ask / request. Item 236": {
@@ -2582,7 +2582,7 @@
   "Raise your hand and call for help if this is not in your control.": {
     "english": "Raise your hand and proactively call for help if a situation goes beyond your control.",
     "mandarin": "一旦事情發展超出你的控制範圍，立即舉手尋求協助與外部資源支持。",
-    "taiwanese": "一旦代誌發展超出你的控制範圍，著隨時舉手討求幫忙同資源相挺。",
+    "taiwanese": "一旦代誌發展超過你管得到的範疇，著愛隨時夯手討鬥相共，借外部資源來相挺。",
     "key": "284"
   },
   "Dare to reject the requests which are not reasonable. Be careful with office politics. State R/R clearly.": {
@@ -2672,7 +2672,7 @@
   "Your position or skillset is not in that level and not fit this task? If not, good to keep silence. How to grow? Make it as an project.": {
     "english": "If your current rank or skillset is not yet at the level required for a task, it is wise to keep silent. Reframe the challenge and treat your personal growth as a project.",
     "mandarin": "如果發現自己的職級或技能組合尚不足以應對當前任務，保持沉默是明智的選擇。思考如何自我提升：將你的能力升級視為一個專案來管理。",
-    "taiwanese": "如果發現家己的職級或技能還無夠處理目前的任務，恬恬是明智的選擇。思考按怎提升能力：共自我升級當作專案來執行。",
+    "taiwanese": "若是發覺家己的職級抑功夫猶未夠處理這馬的任務，恬恬看是上巧的選擇。想看覓按怎充實能力：共家己的升級當做專案來好好規劃執行。",
     "key": "299"
   },
   "Fallacy: confirmation bias, survivor bias, Negativity bias, short term mindset. Tunnel vision. M̄-thang tàng lâng ê KPI.": {
@@ -2726,7 +2726,7 @@
   "Schedule your resources / energy (Gantt chart). Don't put a lot of things in one timeslot, including your leave and balance them. Energy of mind is limited. Find a balance point between family and work ( it may be a bullshit). What is key skill / competency to learn for future, actions to take. ( any risk?) Thinking in bet.": {
     "english": "Manage your resources and energy systematically (like a Gantt chart). Avoid double-booking tasks and balance work with leaves. Mental energy is finite. Work-life balance is a dynamic trade-off; identify future key skills, take action, manage risks, and think probabilistically (\"thinking in bets\").",
     "mandarin": "像甘特圖一樣規劃你的時間與能量。不要把多項行程塞在同一個時段，合理調配休假與工作。心智能力是有限的。工作與生活的平衡是動態調配的過程；思考未來需要學習的核心技能，擬定行動並控制風險，保持「以小博大、合理下注」的思維。",
-    "taiwanese": "照排程算盤時間佮力氣。一个時段莫塞滿滿，休假佮工課調配好。心神有限，學關鍵真工夫，做好風控，看準才下注。",
+    "taiwanese": "照甘特圖來排好你的時間佮氣力。莫共濟濟行程擠佇仝一時段，休假調配好。心智氣力有限。工課佮生活是動態平衡；思考未來愛學啥物核心功夫，擬好步驟並顧好風險，保持理性下注思維（Thinking in bets）。",
     "key": "31"
   },
   "Always have a good relationship with your assistants, bosses and colleagues no matter foreign or native or other departments. ( supply chain, WPE, MPE, assembly- PA/CS, process Eng, quality and reliability…etc.) soft tone.": {
@@ -2774,25 +2774,25 @@
   "Do not make low tech mistake. Item 50. Which may not be recovered.預先驗屍。不去做會如何，心理難過,,後悔,會受實質處罰": {
     "english": "Avoid low-tech, careless mistakes that may be irreversible. Perform pre-mortem analysis: ask what the consequences are if we fail, and evaluate the real-world impact to prevent regret. (Related to Item 50)",
     "mandarin": "嚴防那些無法挽回的低級技術性錯誤。開展預前驗屍（Pre-mortem）：思考如果這件事搞砸了會怎樣？不去做會帶來什麼實質處罰或後悔？提前築好防線。",
-    "taiwanese": "千萬莫犯粗心大意、救袂轉來的粗淺錯誤。代誌先做「預前驗屍」：想講若是搞砸會按怎？無去做敢會有實質處罰抑是後悔？防線提早築予勇。（參照第 50 項）",
+    "taiwanese": "嚴防遐的無法度挽回的粗心大意錯誤。做預前驗屍（Pre-mortem）：想看覓若是這項代誌用摵去會按怎？若無做會帶來啥物實質處罰抑是後悔？提前共防線築好。",
     "key": "85"
   },
   "Try to set up firewall to protect yourself just in case your colleague make a mistake and put you on the danger. Documentation it. EX, CCB, mail collection, meeting minutes.": {
     "english": "Build defensive \"firewalls\" to protect yourself from others' mistakes. Document everything carefully (e.g., archiving emails, saving meeting minutes, and obtaining CCB approvals).",
     "mandarin": "建立防衛性「防火牆」，避免同事犯錯時波及到你。落實工作留痕與文件化（例如：保存郵件備份、詳細的會議記錄、CCB 變更審查審核記錄）。",
-    "taiwanese": "做代誌愛起防火牆，防範別人做不對連累著家己。逐項留底做紀錄（親像留電郵備份、寫齊會議紀錄、經 CCB 審查簽核），有憑有據才有保單。",
+    "taiwanese": "起一座防衛性的「防火牆」，避免邊仔人做毋著連累著家己。落實做代誌留底稿佮留紀錄（像保存郵件備份、詳細會議紀錄、CCB 變更審查審核記錄），留步顧後壁。",
     "key": "89"
   },
   "Focus and Don't get distracted on non-priorities. Ask yourself Why do you do that? Item 14.": {
     "english": "Maintain focus and avoid getting distracted by low-priority tasks. Constantly ask yourself: \"Why am I doing this?\" (Related to Item 14)",
     "mandarin": "保持專注，不被非核心的雜務分心。時常拷問自己：「我做這件事的目的是什麼？它能帶來核心價值嗎？」",
-    "taiwanese": "專注本業，莫予無要緊的雜務拆分散心。定定問家己：「我做這項代誌是為著啥物？敢有核心價值？」（參照第 14 項）",
+    "taiwanese": "保持專注，莫予非核心的雜務抐去。時常自問：「我做這項代誌的目的到底是為著啥物？敢會帶來核心價值？」",
     "key": "92"
   },
   "What boost you to finish this? And why? ( fame / achievement /life pressure / economic / passion / survival / reality. Item 46. Or block you? Motivation?": {
     "english": "Analyze what motivates or blocks you in finishing a task (e.g., recognition, achievement, pressure, financial reward, passion, survival, or simple reality). Understanding your underlying motivation is key. (Related to Item 46)",
     "mandarin": "分析推動你完成任務或阻礙你前行的動力是什麼？（是成就感、生存壓力、經濟因素、熱情還是現實的職責？）。看清核心動機，有助於調整自身能量與狀態。",
-    "taiwanese": "想看覓到底啥物是共你推向前衝、抑是共你閘牢的動力？（是愛名聲、成就感、生活壓力、錢項、熱情、生存抑是現實飯碗？）。看清骨底的核心動機，才知影按怎調整家己的氣力佮心境。（參照第 46 項）",
+    "taiwanese": "分析推動你完成工課抑是阻擋你向前行的動力到底是啥物？（是成就感、生存壓力、經濟因素、熱情抑是現實的責任？）。看清楚心底核心動機，按呢才調得順家己的氣力佮狀態。",
     "key": "103"
   },
   "Remember to protect yourself ( interest) and keep your mouth shut. Not being some’s teacher without being asked. Item 88.": {
@@ -2804,7 +2804,7 @@
   "Difficulties will pass away , just be patient and wait. We need some time and get some results which will help us to make the decision for next step . You cannot jump from A to C directly. Item 46,84, 75, 131.": {
     "english": "Setbacks will eventually pass; practice patience and wait. Sometimes, we need time to allow results to unfold before making the next decision. Remember, you cannot jump from step A to C without going through B. (Related to Items 46, 75, 84, and 131)",
     "mandarin": "難關終究會過去，保持耐心。很多時候我們需要時間讓結果明朗，才能做出下一步的明智決策。你無法不經歷 B，就直接從 A 跳到 C。",
-    "taiwanese": "風波坎坷終究會消退，心胸定著冗冗等。真濟時陣得愛留時間予局勢明朗，才好決斷下一跤棋。未經過程 B，是無法度直接對 A 跳到 C 的。（參照第 46、75、84、131 項）",
+    "taiwanese": "難關總是會過去，吞忍耐心等待。真濟時陣咱著需要時間等局勢明朗，按呢才做得出下一步的明智決定。你無法度無經過 B，就直接對 A 跳到 C。",
     "key": "127"
   },
   "Before starting meeting, ask people how are you, how about holiday….Good icebreaking will help communication. Prepare some global news for instance. EX: how is your family , kids, house, weather?": {
@@ -2822,31 +2822,31 @@
   "Understand welfare policy, any compensation, food allowance, leave ( depends on rank, 14-22 days), baby / children,..LTIP.AIP, RSU, ESPP, health check, scholarship..., how to apply and earn. business traveler, training...you also need this when you apply next job or before leaving current position. It is part of financial management. Flexibility WFH. (max. day per year?20days)": {
     "english": "Fully understand company benefits and welfare policies: food allowances, leave allowances (14–22 days depending on rank), childcare benefits, LTIP, AIP bonuses, RSU vesting, ESPP, health screenings, and business travel policies. Know how to apply and qualify for these. This knowledge is key for financial management and serves as a benchmark when evaluating new job offers.",
     "mandarin": "徹底搞懂公司的各項福利與補償政策：伙食津貼、年假（依職級約 14-22 天）、育兒津貼、長期激勵計畫（LTIP）、年度激勵金（AIP）、RSU 股票、ESPP 員工認股、健檢與差旅補助等。掌握申請管道與資格，這不僅是財務管理的一環，也是日後跳槽或離職談判的重要基準。了解在家工作（WFH）的彈性額度（如每年最多20天）。",
-    "taiwanese": "會社的各項福利佮津貼規矩愛摸甲透澈：伙食補貼、特別休假（照職級差不多14到22工）、育兒津貼、LTIP 長期獎勵、AIP 年度分紅、RSU 股份、ESPP 員工認股、健檢佮出差補助等等。愛通曉申請路關佮資格，這毋毋過理財的一環，更是將來跳槽抑是辭職盤撨身價的憑據。嘛愛摸熟佇厝辦公（WFH）的額度（親像逐年上濟20工）。",
+    "taiwanese": "規氣將公司的各項福利佮補償規定摸透透：飯包津貼、年假（照職級約 14-22 天）、育兒補助、長期激勵（LTIP）、年度獎金（AIP）、RSU 股票、員工買股票（ESPP）、健檢佮出差貼補。摸清申請門路佮資格，這毋但顧荷包，嘛是以後跳槽抑離職講條件的重要本錢。知曉佇厝做工課（WFH）的彈性額度（親像每年最多 20 天）。",
     "key": "303"
   },
   "when you feel frustrated and disappointed, be patient, take a deep breath, you did a good job and don't burn out yourself, control what you can control and let the things what you cannot control go. life is not fair, that is true, but still, you need to move on and grow up for yourself, not for your company or your colleagues. Indeed, life is struggling, and you need earn moneys for kids and families, also for your ideal. You have no time to think better and find a better way to survey. You know what? no one knows how until the time is arrived. as a result, think positive, I knew it is hard, but you need to try. Live a better version of you and you will thank yourself after many years later.": {
     "english": "When frustrated or disappointed, be patient and take a deep breath. Remind yourself that you did a good job; avoid burnout. Focus strictly on what you can control and let the rest go. Life is not fair, but you must keep moving forward and growing—for yourself, not for the company or colleagues. Life is a struggle to support family and pursue ideals, but stay positive and take it one day at a time. The future you will thank you for trying.",
     "mandarin": "感到沮喪和失望時，保持耐心，深呼吸。告訴自己你已經做得很好了，別讓自己燃燒殆盡。專注於你能控制的事，放手那些你無法控制的事。生活確實不公平，但你仍須前行，為了自己（而非公司或同事）持續成長。生活固然辛苦，需要養家糊口並兼顧理想，但請保持積極心態。很多事情在時機成熟前是沒有答案的；努力活出更好的自己，多年後你會深深感謝現在的自己。",
-    "taiwanese": "心情失落、嚥氣的時陣，著愛耐恬性、深吐大氣。同情家己講你已經盡心矣，莫共身軀催甲燃消去。顧好家己管得著的代誌，管袂著的著放予去。世事無平正是實在，毋過你猶原愛繼續行，是為著家己（毋是為著會社抑是同事）來大漢。過日子本成就艱苦，愛賺錢養家顧囝兒，嘛想欲圓夢。好多代誌時到時擔、時機未到是無答案的。心轉向正向，這步真忝無毋著，毋過愛拼看覓；好好活出閣較成樣的家己，幾落年後你會萬分感謝這馬的家己。",
+    "taiwanese": "心情若失志落魄的時陣，吞忍一口氣，大大吐出來。共家己講你已經做甲足好矣，莫予家己燒甲虛累累。專心顧好你管得到的代誌，放手遐的你管袂到的代誌。世間本成就無公平，但你猶著向前行，為著家己（毋是為公司抑同事）精進成長。日子固然辛酸，討賺養家顧囡仔閣愛顧理想，毋過心態愛正向。真濟代誌在時機成熟進前是無答案的；拼出一个閣較讚的家己，濟年後你會真感謝這馬的家己。",
     "key": "305"
   },
   "What are you doing right now? is it aligned with the goal you want to achieve? Daily questions.": {
     "english": "Ask yourself daily: \"What am I doing right now, and is it aligned with my long-term goals?\"",
     "mandarin": "每天自我詰問：「我現在正在做的事，是否與我想要達成的終極目標一致？」",
-    "taiwanese": "逐日自問自省：「我這馬手頭咧創的工課，敢有合著我心目中的大目標？」",
+    "taiwanese": "逐工反省問家己：「我這馬當咧做的代誌，敢有佮我上想欲達成的終極目標行佇仝一條路頂？」",
     "key": "308"
   },
   "Quick learn / collect the latest information which may need in the future market. ( the methodology of taking \"electrical\" note)": {
     "english": "Develop a method for quick learning and capturing industry trends using structured digital note-taking.",
     "mandarin": "建立一套利用數位筆記快速學習與收集未來市場最新資訊的工作方法。",
-    "taiwanese": "起一套利用電子筆記手冊的手路，緊緊學習佮聚集未來市場最新風聲，隨時替家己換腦袋。",
+    "taiwanese": "建立一套用數位筆記隨手速學、收集未來市場最新情報的手路。",
     "key": "317"
   },
   "Evaluate the value of your tasks. In short term or long term view. Try to gain value or experience from what you did.": {
     "english": "Regularly evaluate the value of your tasks from both short-term and long-term perspectives. Aim to extract transferable experience from everything you do.",
     "mandarin": "從短期與長期的雙重維度評估你手頭任務的價值。致力於從做過的每件事中吸取能帶得走的實戰經驗。",
-    "taiwanese": "對目前佮長遠的眼光，秤出你手頭每項工課的輕重。定著愛對每件經手過的代誌，提煉出別人偷袂走的實戰功夫。",
+    "taiwanese": "從眼前佮長遠的雙重角度來秤看手頭工課的份量。認真對做過的逐項代誌汲取經驗，練出誰嘛提袂走的真本事。",
     "key": "336"
   },
   "Secure your field ( territory) first and protect your passion. Energy.": {
@@ -2858,7 +2858,7 @@
   "Reserved your time for exercise, family, learning. Let things with less important go ( the less the better). OKR. Sacred time": {
     "english": "Reserve non-negotiable blocks of \"sacred time\" on your calendar for exercise, family, and learning. Let low-priority tasks go; less is often better.",
     "mandarin": "在行事曆上為運動、家人與自學預留不可妥協的「神聖時間」。果斷捨棄次要雜務，越簡單越有力。",
-    "taiwanese": "佇行事曆上定著要留「神聖時間」予運動、厝內人佮讀冊進修，這毋通讓步。放捨四散雜工，越乾淨越有氣力。",
+    "taiwanese": "佇行事曆頂面為著運動、照顧厝裡佮自學進修，留出無妥協的「神聖時間」。無要緊的雜務愛敢放手，愈單純愈有氣力。",
     "key": "343"
   },
   "Antifragile, prepare resign letter and update your resume (adding the latest keywords so people hunter can find you.). Understand your power of circle. Call / connect head hunter to see if any opportunities.": {
@@ -2870,7 +2870,7 @@
   "Care about your instinct, what does it feel and want to tell you? ( however, scientific data talk more)": {
     "english": "Listen to your gut instinct and what it is trying to tell you. However, always prioritize objective, scientific data to guide your final decisions.",
     "mandarin": "重視你的直覺，傾聽它想傳遞給你的警訊。然而，最終決策仍應以客觀、科學的數據為依歸。",
-    "taiwanese": "愛尊重家己的直覺，斟酌聽伊想欲共你提醒的警訊。毋過，落尾要做決斷的時陣，猶原愛看客觀、有科學的數據來做憑準。",
+    "taiwanese": "照重你的第六感，聽伊欲提醒你的警報。毋過最後拍算決定，猶是愛以客觀、科學的數字根據為準。",
     "key": "357"
   },
   "Go around when tired in front of laptop, find someone you feel he/she is stressful and encourage him/her.": {
@@ -2888,7 +2888,7 @@
   "do not talk about negative things to your colleague, speak some positive things and they will look up on you, envy you even jealous you but it's all good however, if you're talking about negative things they will look down on you and think you're not good enough. there is a perform, you need to play for survival.": {
     "english": "Avoid sharing negative thoughts with colleagues. Focus on positive milestones; this encourages respect and establishes your authority. Complaining or sharing vulnerabilities in the office can cause others to perceive you as weak. Understand that workplace survival requires strategic self-presentation.",
     "mandarin": "避免在同事面前流露消極想法。多談論正面、有建設性的事，這能建立你的專業自信並贏得尊重。相反地，頻繁抱怨只會讓旁人質疑你的能力。認清現實：職場是一場表演，為了生存，你必須展現專業與實力。",
-    "taiwanese": "莫佇同仁面前碎碎唸哀怨倒垃圾。多講光明正面、有建設性的代誌，別人才會共你看重；定定怨嘆抱怨只會予人看輕。認清現實：職場親像搬戲，為了站起，愛將專業氣勢演出來。",
+    "taiwanese": "莫佇同事面前顯出洩氣話。濟講正面、有建設性的代誌，按呢會起造你的專業自信兼受人敬重。若愛怨東怨西，只會予人質疑你的本事。看清現實：職場本成是一場戲齣，為著顧飯碗，你著愛展現出專業佮實力。",
     "key": "407"
   },
   "Check if you are the DRI for the question or task when receiving email. if not, you don't need to reply. Bravely to cancel unnecessary meeting. With reason.": {
@@ -2900,7 +2900,7 @@
   "Spend time on other field / your favorite and release your stress. ( SPIRE) , try to get some solid result.": {
     "english": "Dedicate time to fields outside of work and hobbies to relieve stress (using the SPIRE wellness framework), and strive to achieve solid, measurable results.",
     "mandarin": "將時間投在工作以外的興趣領域以排解壓力（參考 SPIRE 身心靈平衡指標），並努力取得具體、有成就感的結果。",
-    "taiwanese": "將時間撥予頭路以外的興趣領域來解鬱消氣（參考 SPIRE 身心靈平衡指標），閣愛煞氣拚出看有影、摸會著的扎實成果。",
+    "taiwanese": "將時間投資佇工課以外的嗜好天地來消解壓力（參考 SPIRE 身心靈平衡指標），兼煞猛拼出具體、有歡喜成就感的成績。",
     "key": "435"
   },
   "Add your leave and personal work time, even business trip and national holiday in the calendar. Automatic email replies. Request to resend the email. When you back to office, your colleagues can set delayed delivery for email sending on certain date. Item 82. Plan in the canlender.": {
@@ -2978,7 +2978,7 @@
   "try to commit to your mistake and say sorry and even if you think you already finished all the things and sometimes you skip or neglect or overlook by accident. therefore, you need some peer review or feedback or a good checklist to make sure you didn't miss anything. that's why we need to have review ourselfs regularly because you are not perfect, and everything may change during the time. Therefore, you may renew the checklist. Iteration. Task-oriented, retrospective. Continuously improvement and gradually better. Purposed-oriented.": {
     "english": "Own up to mistakes and apologize promptly when oversights occur. Rely on peer reviews, constructive feedback, and updated checklists to prevent missed details. Regularly conduct retrospectives to iterate, update checklists, and achieve continuous, purpose-driven improvement.",
     "mandarin": "勇於承認錯誤並及時致歉。意識到個人思慮難免有疏漏，應建立同行審查、同仁回饋與查核清單（Checklist）機制。透過定期覆盤與持續迭代，動態修訂檢核標準，實現以目標為導向的自我完善。",
-    "taiwanese": "做不對代誌愛敢承擔、失禮講出喙。人無十全十美，靠檢核清單（Checklist）佮同仁審查來防破綻。定定覆盤檢討、動態調整，做代誌才會愈做愈穩、愈來愈順手。",
+    "taiwanese": "敢做敢當，做毋著愛甘願認閣會曉會失禮。就算掠準做好了，三不五時嘛可能落勾。借同仁互相審查（Peer review）、別人意見佮檢查清單來掠漏補縫。定定自省兼翻新檢查表，以工課為重、持續反思改善（改善精神 Kaizen），步步踏實來求進步。",
     "key": "81"
   },
   "Do not input many information in one time, especially bad news. You also need good news to your boss. To set “ delayed delivery” for sending email when you already finished and don’t want to send right away. ( email, clean layout)": {
@@ -3032,7 +3032,7 @@
   "Put your ass heavy, you don’t need to reply everyone’s email / message rapidly, even they came to your desk. (How to say NO in 10 ways) Item 21. Try to leave a time slot ( safety of margin) and see if the situation were changed or not. What’s impact if you do nothing. Even delete first.": {
     "english": "Maintain composure and refrain from reacting instantly to every email, message, or drop-in request. Reserve a buffer time (\"safety margin\") to assess whether issues resolve themselves naturally, evaluating the true impact of inaction before committing your bandwidth (refer to Item 21).",
     "mandarin": "保持沉著冷靜（「屁股要沉」），不必對每封郵件或突然到訪的要求做出即時反應。為自己預留思考的安全邊界，先評估「暫不回應」的影響，觀察局勢發展再做處理（參見第 21 項）。",
-    "taiwanese": "底盤愛坐重（「尻川愛沉」），毋免人客一到桌邊抑是信件一來就驚惶隨應。留一截緩衝退路（安全邊際），看清楚局勢變化，算看覓「若放咧無治敢會按怎」，省氣力閣袂予人牽鼻走。（參照第 21 項）",
+    "taiwanese": "沉牢氣（放重底），你毋免秒回每封郵件抑訊息，就算對方直接行到你桌仔前嘛仝款。留出緩衝期（安全邊際），看覓代誌敢會隨時間起變化。問家己：「若準我啥物代誌攏無做，敢會有啥物實質影響？」",
     "key": "122"
   },
   "Image when project / life running is not smooth? Black swan. Outliers will be presented in one day. Enter sandbox mode \\ different mind mode to emulate. Stress test. How to react impolite speech? 情境思考。Mindset scenario": {
@@ -3050,7 +3050,7 @@
   "What’s the worse situation / scenario / bottom line? Give you a stress test. It is temporary or permanent. Item 50. Item 125. If fails, what is the loss and impact? What can we learn.": {
     "english": "Define the absolute worst-case scenario and bottom line through rigorous stress testing. Evaluate whether risks are temporary or permanent, calculate potential downside impact, and extract valuable lessons from potential failure (refer to Items 50 & 125).",
     "mandarin": "釐清最壞的打算與停損底線，進行極限壓力測試。評估衝擊屬於暫時性抑或永久性，量化失敗後的損失與影響，並從中汲取經驗與教訓（參見第 50 與 125 項）。",
-    "taiwanese": "做代誌先打量上壞的結局佮停損底線，替家己做耐壓測試。盤算這場衝擊是一時仔抑是一世人，假使真破局，損失有外深、影響有外闊，閣有啥物教訓好刻骨銘心。（參照第 50 與 125 項）",
+    "taiwanese": "先掠最䆀的局面佮你的底線。共家己做壓力測試：這个衝擊是暫時抑是永久的？若準真正用摵去，實質的損失佮影響到底是啥物？",
     "key": "136"
   },
   "Try to co-work with people who you don’t like. Talk to them with soft and steady tone. Put yourself in their shoes. Sharpen your skill of collaboration. Item2. Focus on process / WoW and result. empathy (同理心), compassion 和 sympathy (同情心) item153": {
@@ -3080,7 +3080,7 @@
   "Can you / how can you restart when fail? How long can you survive, ex, had been fired or lost in the mountain. Just a temporary. Find another job in a different area? What new hard or soft skill do you need to learn for future?": {
     "english": "How can you restart after a failure, and how long can you survive if you are laid off or stranded? Remember, setbacks are temporary. Can you transition into another domain? What new hard and soft skills must you acquire for the future?",
     "mandarin": "面對失敗時該如何重新出發？若遭解僱或陷入困境，你能撐多久？請記住這只是暫時的。你是否能跨領域尋找新機會？未來又需要學習哪些新的硬實力與軟實力？",
-    "taiwanese": "摔倒之時欲按怎重頭起跤？若不幸遇著逼退路抑是落入絕境，你敢有氣力撐偌久？請記持這只是暫時的過渡。敢有才調跳槽跨行？為著未來，你閣愛補啥物新的硬工夫佮軟實力？",
+    "taiwanese": "想看覓若是跋倒失敗，你敢有法度重頭閣起？評估你的生存極限（比方講予人裁員抑是在深山迷路）。你敢有法度跨到無仝領域揣工課？你閣需要為未來學啥物新的軟硬實力？",
     "key": "149"
   },
   "Done is better than perfect. For some, maybe not start is a better idea.": {
@@ -3218,7 +3218,7 @@
   "Raise your hand and call for help if this is not in your control. Role/ responsibility.": {
     "english": "Raise your hand and request support promptly when issues exceed your control or fall outside your designated role and responsibility.",
     "mandarin": "當問題超出個人掌控或權責範圍時，應及時舉手求助，釐清角色與責任。",
-    "taiwanese": "代誌若超出家己管會著的範疇抑是職責，著愛即時舉手借力、喝鬥相共，共分工界線劃清爽。",
+    "taiwanese": "一旦代誌發展超過你管得到的範疇，著愛隨時夯手討鬥相共，借外部資源來相挺。",
     "key": "284"
   },
   "You cannot do everything in one time. Set up a plan, breakdown the sub-tasks. Small win.": {
@@ -3242,13 +3242,13 @@
   "Your position or skillset is not in that level and not fit this task? If not, good to keep silence. How to grow? Make it as a project. Self –study.": {
     "english": "If your current position or skillset isn't at the required level for a task, it's best to keep silent. To grow, treat it as a personal project and pursue self-study.",
     "mandarin": "若自身的職位或專業能力尚未達到該任務的要求，保持沉默是明智的。若想突破成長，不妨將其視為一項個人專案，進行自主學習與鑽研。",
-    "taiwanese": "若自身的職位抑是本事猶未夠額、無合這項任務的門檻，上好先恬恬看、恬恬聽。按怎才會長進？共伊當作個人的修煉專案，下功夫自主自修。",
+    "taiwanese": "若是發覺家己的職級抑功夫猶未夠處理這馬的任務，恬恬看是上巧的選擇。想看覓按怎充實能力：共家己的升級當做專案來好好規劃執行。",
     "key": "299"
   },
   "Leader host statement: ( for meeting) I repeat what we agreed upon during the meeting I repeat what you said, make sure my understanding is correct. Allow me confirm. I got a lot of help from the team. Thank for all your dedicated hard work. When will be the next discussion and what is agenda. What is the goal that should be achieved in the end? Can you make it on time or before that day ( time)? Ask why should we do this? PAR, purpose, action, Result. ORID. My skillset is not enough for this discussion or assignment. It is not my position to discuss that. ( kind of saying no) Challenge what you haven’t done in the past. One marathon, one new speech, one new book. Longer trail, different path. Broaden your view.": {
     "english": "Meeting Leader Statements & Strategies: Reiterate key agreements and confirm understandings ('Let me confirm: I will repeat what you said to make sure I got it right'). Express gratitude to the team ('I received immense help from everyone; thank you for your dedicated hard work'). Clarify follow-ups ('When is our next discussion, and what is the agenda? What is the final goal? Can you complete it on or before the deadline?'). Probe intent using frameworks like PAR (Purpose, Action, Result) or ORID ('Why are we doing this?'). Know how to tactfully decline ('My current skillset isn't suited for this topic, nor is it within my role to address this'). Continually challenge yourself with unfamiliar experiences—such as running a marathon, giving a new presentation, or reading a new book—to broaden your horizon.",
     "mandarin": "會議主持人關鍵用語與心法：明確確認共識（「讓我複述您所說的，確認我的理解是否正確」）；誠摯感謝團隊（「感謝團隊的全力協助與辛苦付出」）；釐清後續作為與時程（「下次討論的時間、議程與最終目標為何？能否在期限前完成？」）；運用 PAR (目的/行動/結果) 或 ORID 思考架構詢問根本原因；學會委婉拒絕（「這非我專業範疇或職責所在」）；並持續挑戰未曾嘗試的新事（如馬拉松、新演講、新書讀後感），拓展自身視野。",
-    "taiwanese": "主持會議的鋩角佮心法：定著共識（「我共你講的閣講一擺，看敢有理解差誤」）；誠心多謝團隊（「真勞力逐家鬥相共佮辛苦付出」）；問清後步佮期程（「後回啥物時陣欲開會？議程佮上尾目標是啥物？敢有法度照期抑是提早做好？」）；用 PAR 抑是 ORID 骨架問出頭緒；遇著無合的工課愛會曉委婉推辭（「這毋是我的手路，亦毋是我的權責」）；平時愛敢挑戰無做過的代誌（親像走馬拉松、做新演講、看新書），展闊家己的眼界。",
+    "taiwanese": "開會時陣善用「主管發言」：親像「我重新確定一下會中逐家的共識」、「容我確認一下我聽到的意思敢有著」、閣有「真多謝團隊逐家的鬥相共佮付出」。落實下一步行動：「後回開會是啥物時陣？題目是啥？」、「咱的終極目標到底是啥物？敢有法度照起工準時完成？」、「咱做這項代誌到底為著啥物？」。善用 PAR 佮 ORID 架構。適當講明家己的限制：「我目前的功夫抑職責無合適主導這个討論。」挑戰以前無做過的事：走一場馬拉松、辦一場新演講抑寫一本新書，開闊你的視野。",
     "key": "301"
   },
   "watch out economic environment and industrial trend. your salary is the top priority for your retire plan. Good to ask promotion if you did a great job and boss recognize you. if not, you may consider not to do. Good to track yearly salary increment is more than market inflation (3%) so Purchasing power parity won't be degraded. in the end, do rebalance on your asset allocation and keep going without worrying market too much. Saving rate.": {
@@ -3260,31 +3260,31 @@
   "Check when big boss visit your department and prepare question list. ( or potential document for review), future view.": {
     "english": "Track the schedule of senior executives visiting your department, and prepare a curated list of strategic questions, review documents, and forward-looking insights in advance.",
     "mandarin": "密切留意大老闆前來部門視察的時程，預先準備好研討問題清單、審閱文件以及對未來業務發展的展望簡報。",
-    "taiwanese": "大頭家啥物時陣欲來部門巡察，時程愛摸透透；進前備好問答清單、審核冊頁佮未來的經營願景，隨時備好勢，一開喙就展出實力。",
+    "taiwanese": "摸清大頭主管巡視部門的走馬時程。提早款好欲請教的問題清單，抑是備好隨時會使予人過目展現成果的報告。",
     "key": "325-1"
   },
   "Set a deadline or expected time to check result. Evaluate the effort and value. Using a google calendar. Set small milestone": {
     "english": "Establish clear deadlines and milestone review checkpoints. Rigorously evaluate the effort required against the expected ROI, leverage digital tools like Google Calendar, and break major goals into manageable micro-milestones.",
     "mandarin": "設定明確的完成期限與階段性檢核點。審慎評估投入的資源與預估價值，善用 Google Calendar 等工具排定時程，將宏大目標拆解為可執行的微型里程碑。",
-    "taiwanese": "做代誌愛畫出期限佮查對的關卡。秤看覓投入的氣力佮收成的價值，善用行事曆排定步調，共大志向切做一步一步的小目標，按部就班自然省氣力。",
+    "taiwanese": "每項工課攏愛訂出清清楚楚的截止期限佮驗收時限。算看覓開落去的氣力佮收成的價值敢有合算，並佇行事曆頂面記好勢。",
     "key": "322-2"
   },
   "You cannot say no for tasks related to business level. Be silent.": {
     "english": "When assigned tasks linked directly to high-level strategic business objectives, outright refusal is not an option; practicing tactical silence and thoughtful alignment is preferred.",
     "mandarin": "面對攸關企業整體戰略層面的任務時，切忌直接拒絕；適度保持沉默並全盤理解背後意圖，才是成熟的處事態度。",
-    "taiwanese": "牽涉著公司經營大局的交代，千千萬萬毋通當面應講「莫」；嘴恬恬、氣沉牢，先摸清全盤底細再回身妥當應對。",
+    "taiwanese": "看清現實：碰著牽連公司業務核心、公司大方向的重大代誌，你無說「袂使」的權利，只有承擔頂起去。",
     "key": "333"
   },
   "Always to challenge yourself for being best. Improve a little everyday. Small win": {
     "english": "Strive continuously for excellence by pushing your boundaries. Aim for incremental daily improvements to build momentum through quick wins.",
     "mandarin": "持續追求卓越，自我挑戰。每天保持微小進步，累積小勝利以形成長期強大的正向循環。",
-    "taiwanese": "時時挑戰家己做到上好。逐日進步一屑仔就好，累積「細細贏」的甜頭，日積月累自自然然會出頭天。",
+    "taiwanese": "隨時抱著自我挑戰、求好心切的心情。毋免一日千里，但求逐工攏有一屑仔微小的進步。",
     "key": "347"
   },
   "CAGR, EBIT, understand financial terms. ITEM 62. YOY, QoQ": {
     "english": "Master core corporate financial metrics and jargon—such as CAGR (Compound Annual Growth Rate), EBIT (Earnings Before Interest and Taxes), YoY (Year-over-Year), and QoQ (Quarter-over-Quarter)—to thoroughly grasp business health.",
     "mandarin": "精通核心財務術語與指標（如 CAGR 複合年均成長率、EBIT 息稅前利潤、YoY 年增率、QoQ 季增率），方能精準洞察企業經營的全貌。",
-    "taiwanese": "定著愛摸熟財務專門術語（親像 CAGR 複合年增率、EBIT 息稅前利潤、YoY 年對年、QoQ 季對季），看會明財務報表，才有法度一眼看出公司經營的好歹全貌。",
+    "taiwanese": "熟悉核心商業佮算帳術語（親像 CAGR、EBIT），這會鬥相共你了解高層主管的算盤佮財務眼光。",
     "key": "355"
   },
   "Be proactive when no one realize what you did or any contribution, highlights them autonomously, they may value you again or learn from you, in the end you will earn respect. what did you accumulate?": {
@@ -3296,55 +3296,55 @@
   "Make a good report template for regular meeting and certain topic. ( EX: 8D, one page…, yield, tarshiro)": {
     "english": "Standardize and refine reporting templates for routine meetings and specialized analysis (e.g., 8D problem-solving reports, one-page summaries, yield analysis, Tashiro charts) to boost communication efficiency.",
     "mandarin": "建立並優化例行會議與特定主題的標準化報告範本（如 8D 異常改善報告、單頁摘要、良率分析報告等），以大幅提昇組織溝通效率。",
-    "taiwanese": "為例行會議佮專門主題建立好用的模組範本（親像 8D 改善報告、單頁摘要、良率分析等）。格式設好勢，做代誌省氣力，報告清楚閣專業。",
+    "taiwanese": "為平常開會抑專案題目，開發出高水準的報告範本（例如：8D 報告、一張紙重點、良率追蹤表）。",
     "key": "360"
   },
   "You don't need to comment for everything. Keep silence. Keep mouth shunt. Separate fields between work and life. it is not easy. No reply is a reply.": {
     "english": "Resist the urge to comment on every issue. Restraint and silence can be powerful. Maintain clear boundaries between your professional and personal life—though challenging, remember that 'no response is often a response in itself.'",
     "mandarin": "無需對所有事情發表意見，學會適時保持沉默。劃清工作與生活的界線雖非易事，但切記「不予回應本身就是一種明確的姿態」。",
-    "taiwanese": "代誌無需要項項出聲插嘴，適當時陣恬恬才是功夫。工作佮生活分予清清楚楚雖罔無簡單，毋過愛記持：「無應無答，往往就是一種尚堅定、清楚的表態。」",
+    "taiwanese": "你毋免逐項代誌攏揷喙發表意見。學會得恬恬。就算無簡單，猶是愛盡力畫分工課佮生活的界線。記牢：無回覆本身就是一種回覆。",
     "key": "361"
   },
   "Do high value-added work. Separate high/low value job, but don’t forget basic knowledge. Rep by rep.": {
     "english": "Focus your core energy on high-value-added tasks. Clearly differentiate between high- and low-value activities, while consistently practicing fundamental skills step-by-step.",
     "mandarin": "將主力時間挹注於高附加價值的業務上。嚴格區分高低價值工作，但絕不可輕忽基礎功夫，透過一次次的踏實執行奠定根基。",
-    "taiwanese": "將心神擺佇高附加價值的工作頂高，分清楚重頭戲佮冗雜差事；毋過底層的基本功夫萬萬袂使放鬆，一擺一擺踏實練，根基先扎穩。",
+    "taiwanese": "專心做價值懸的工課。學會得分清好空佮雜碎事的差別，毋過千萬莫看輕亦莫袂記扶持這寡工課的底層根基功夫。",
     "key": "364"
   },
   "Taking statistics, it may cheat by percentage, absolute number, and base number, unit fallacy. What’s reference": {
     "english": "Exercise critical thinking when interpreting statistical data: percentages, absolute numbers, base values, and unit fallacies can easily mislead. Always ask: 'What is the benchmark or reference standard?'",
     "mandarin": "解讀統計數據時須保持審慎批判思維：百分比、絕對值、基數與單位陷阱均可能造成誤導。務必追問：「對照基準與參考標的是什麼？」",
-    "taiwanese": "看統計數字愛動腦筋，百分比、絕對數、基數佮單位陷阱定定會騙人。看著數據愛追問到底：「這是提啥物做基準？佮啥物人抑啥物條件來比？」",
+    "taiwanese": "審核統計數字時陣，眼睛愛擘予金：數字定定會用百分比、絕對值佮相對值偷換觀念、換起頭基準、抑是借單位糊弄人。",
     "key": "365"
   },
   "A simple talks may ease some tension situation. Like talking weathers, sports. Holiday events": {
     "english": "Light small talk on neutral topics—such as the weather, sports, or upcoming holiday plans—can effectively de-escalate high-tension situations and build rapport.",
     "mandarin": "適時開啟閒聊（如天氣、體育賽事、節慶計畫等）能有效緩解緊張氛圍，迅速破冰並建立良好人際關係。",
-    "taiwanese": "氣氛若相繃，開講兩句輕鬆的閒仔話（講天時、聊運動、節日安排），會當破冰化解緊繃，人情做會開，代誌就好傾聽交流。",
+    "taiwanese": "佇氣氛硬梆梆的時陣，開喙講講日常閒話（像天公氣色抑運動球賽），上會解圍鬆筋、拉近逐家的距離。",
     "key": "372"
   },
   "Make fun for your job. Find new things. To grow your mind. Resilance": {
     "english": "Inject passion and fun into your routine work by proactively discovering new learning points. Nurture a growth mindset to cultivate psychological resilience.",
     "mandarin": "在日常工作中尋找樂趣與新意，積極汲取新知以提升認知格局，從而培養強大的心理韌性。",
-    "taiwanese": "佇例行公事內底揣新意佮趣味，定定充實新見解來拓寬眼界，自然會當磨出撲不倒、壓袂扁的心靈韌性。",
+    "taiwanese": "想辦法佇平時的工課中揣趣味佮好玄的心情。主動學新知，按呢大腦才袂生菇，心智持續成長。",
     "key": "373"
   },
   "Set a one-minute goal. ( MVP) P380": {
     "english": "Establish concise 'one-minute goals'—adopting a Minimum Viable Product (MVP) approach—to spark immediate execution without overthinking.",
     "mandarin": "設定簡潔明確的「一分鐘目標」，運用最小可行性產品（MVP）理念迅速起步，化想法為行動。",
-    "taiwanese": "設一个簡單清爽的「一分鐘目標」，用 MVP 最小可行架構先做看覓，莫拖沙，隨手掣落去化做行動。",
+    "taiwanese": "設「一分鐘微目標」（MVP 最小可行起頭），降低落手門檻來治好拖延的病根。",
     "key": "374"
   },
   "Stop telling people more than they need to know. P457": {
     "english": "Practice information restraint: avoid sharing details beyond what is strictly necessary for the audience and objective.",
     "mandarin": "學會資訊節制，切勿透露超出對方所需知悉範圍之外的冗餘細節。",
-    "taiwanese": "出嘴講話愛知輕重節制，對方無需要知影的冗雜細節，就袂使講傷濟，話留三分才袂招惹麻煩。",
+    "taiwanese": "喙角愛有度，適度留白。莫主動共邊仔人講甲過頭冗雜，別人毋免知影的秘密佮細節，恬恬就好。",
     "key": "376"
   },
   "=> don't reply email after 3:00 PM if it is not necessary. spend time on real output, learn new things/growth, documentation...etc. habit, positive words,=> just fine....just good.": {
     "english": "Unless urgent, avoid replying to non-critical emails after 3:00 PM. Instead, dedicate late afternoons to high-impact outputs, documentation, and skill acquisition. Build positive daily habits and maintain an optimistic mindset (e.g., framing outcomes as 'just fine' or 'good progress').",
     "mandarin": "非必要時，過午後三點應減少回覆非緊急郵件，將寶貴時間投入於實質產出、文件歸檔與自我進修。培養良好的正向習慣與心態（如以「挺好、順利」來積極看待成果）。",
-    "taiwanese": "若無火燒菇寮的急事，下晡三點了後莫一直覆電郵。共光陰提去做真正有產出的好代誌、整理檔案抑是進修。養成好習慣，定定用正面的話互相鼓勵，心頭自在大好。",
+    "taiwanese": "下晝三點過後若無火燒菇，盡量莫閣回批。將這段時間留予深度產出、整頓檔案抑進修新功夫。講話維持正向口氣，濟講「這無問題」、「攏真順利」。",
     "key": "377"
   },
   "always ready to leave Your current position. And learn a survival skill to work anywhere. Always pay you first. The abilities you can take away.": {
@@ -3362,43 +3362,43 @@
   "Learn read financial report from top managers and annual report for considering job security, what is the KPI for coming year. How to judge operation working fine or not. To see if your product is survived in the market? What is product life? Cycle time.": {
     "english": "Learn to read executive financial summaries and annual reports to evaluate company stability, identify key performance indicators (KPIs) for the upcoming year, and assess operational health. Analyze whether your product holds market longevity, understanding its life cycle and production lead times.",
     "mandarin": "學會解讀高層財務報告與公司年報，以評估企業營運風險、掌握年度關鍵績效指標（KPI）及判斷整體經營健康度。同時審視產品在市場上的競爭力、生命週期與作業週期。",
-    "taiwanese": "愛學會看高層財報佮公司年報，判斷公司體質敢有勇健、來年 KPI 是啥，家己的飯碗敢會安穩。同時審視產品佇市場頂的競爭力、壽命佮生產週期。",
+    "taiwanese": "學看大老闆的財務報告佮公司的年度算帳報表。這會鬥相共你推測頭路敢穩當、知曉明年的 KPI 目標、看清公司的經營好䆀，並且盤查你顧的產品佇市場上的壽命。",
     "key": "382"
   },
   "Don’t hesitate to use new tool or afraid of. Like Chatgpt, 電子筆記。And think where to find it next time quickly. Automation": {
     "english": "Embrace modern technology and tools (such as ChatGPT, electronic note-taking apps, and automation workflow tools) without fear. Systematize your information architecture so you can retrieve files quickly when needed.",
     "mandarin": "勇於擁抱新工具與新技術（如 ChatGPT、數位筆記與自動化工具），切勿排斥。同時建構清晰的資訊檢索邏輯，確保日後能快速查閱與複用。",
-    "taiwanese": "莫驚用新工具佮新科技（親像 ChatGPT、數位筆記佮自動化機制）。整理出清楚的檔案目錄，下一回需要用著的時陣，隨時揣會著、好調度。",
+    "taiwanese": "大膽試用新工具（像 ChatGPT、數位筆記）。仝時愛起好清楚的找揣邏輯，保證後回要用的時陣會當隨揣著。",
     "key": "383"
   },
   "Try to adaptive the thing you cannot change instead run away. Choose battle.": {
     "english": "Learn to adapt to unchangeable realities rather than fleeing. Strategically choose your battles and conserve energy for what truly matters.",
     "mandarin": "面對無法改變的客觀事實，與其逃避不如學會適應。學會精明地選擇戰場，將精力集中在關鍵戰役上。",
-    "taiwanese": "碰著無可挽回、無法度改變的定局，走避不如順應調適。愛知曉「擇戰」，共氣力留佇真正要緊、拼得贏的主戰場。",
+    "taiwanese": "碰著無塊好改的大環境，學會得適應順應，無就煞煞抽身離場。揀對戰場才去拚。",
     "key": "410"
   },
   "a template for meeting minutes, agenda. PAR problem action result. AAR": {
     "english": "Adopt structured templates for agendas and meeting minutes. Utilize established problem-solving frameworks such as PAR (Problem, Action, Result) and AAR (After Action Review) for consistent follow-through.",
     "mandarin": "建立結構化的會議議程與紀錄範本。導入 PAR（問題/行動/結果）與 AAR（事後檢視機制）等管報架構，確保決議有效落實。",
-    "taiwanese": "開會議程佮會議紀錄愛用定型的範本。套入 PAR（問題-行動-成果）佮 AAR（事後檢討）等分析框架，決議落實才袂走精。",
+    "taiwanese": "打造規矩的會議議程佮紀錄範本，導入 PAR（問題-行動-結果 抑 目的-行動-結果）的骨架格式。",
     "key": "415"
   },
   "Do we have an agreement on this? Directly ask": {
     "english": "Seek explicit alignment directly by asking: 'Do we have a mutual agreement on this point?'",
     "mandarin": "開誠佈公地主動確認共識：「針對這一點，大家是否已達成一致共識？」",
-    "taiwanese": "開門見山直接確認清楚：「針對這个點，咱逐家敢有達成一致的共識？」講白透解，省去後續猜疑摸索。",
+    "taiwanese": "會議收尾時陣，佮團隊眾人確認好勢：「針對這个下一步，咱逐家敢有一致的共識？」",
     "key": "418"
   },
   "Be aware of the holiday of foreign colleagues (WK52, WK01). Say thank you for greeting. Time zone, Europe US, Indian, Korean.": {
     "english": "Stay mindful of international holiday schedules (e.g., Week 52, Week 01) and time zones across regions like Europe, the US, India, and Korea. Always respond warmly to festive greetings and show respect for global collaboration.",
     "mandarin": "掌握跨國團隊的假期時程（如第 52 週與第 01 週）與時差（涵蓋歐美、印度、韓國等）。適時給予溫馨的節慶祝賀與感謝，促進跨國合作融洽。",
-    "taiwanese": "愛掌握外國同仁的放假時程（親像第 52 週佮第 1 週）佮時差（歐美、印度、韓國等）。拄著節日愛好禮相借問佮多謝，做夥做工課才和合圓滿。",
+    "taiwanese": "心內愛知影外國同事當地的放假日。若是人有心送來過節祝賀，著愛照禮數共人講多謝。",
     "key": "422"
   },
   "choose your battle; set a milestone for your projects ( long and short)": {
     "english": "Pick your strategic priorities wisely. Establish clear short-term and long-term milestones for all your ongoing projects.",
     "mandarin": "明智選擇著力的目標與戰場；為各項專案設定清晰的長短期階段性里程碑。",
-    "taiwanese": "著愛看準戰場才落場拚，莫見路就衝。專案愛定出長遠佮近期的關卡標竿，按部就班一步一步穩穩行。",
+    "taiwanese": "揀對家己真正重要的主戰場才去拚，莫共寶貴的氣力開佇無要緊的冤家衝突頂高。",
     "key": "424"
   },
   "Practice and improve your skill set every chance you get. Like presentation, speech.": {
@@ -3410,67 +3410,67 @@
   "Try to learn new things but not for everything. stay focus . Every year, do a special thing which you never do.": {
     "english": "Stay focused and select what you learn rather than trying to master everything. Make it a point to try something completely new and unique every year.",
     "mandarin": "保持專注，學習要有所選擇而非貪多。每年給自己規劃一項從未嘗試過的特別體驗或挑戰。",
-    "taiwanese": "做人著愛專心，學新物莫貪濟；每年替家己安排一項從來無做過的特別挑戰，開闊眼界。",
+    "taiwanese": "保持學新代誌的心胸，毋過愛鎖定佇家己的核心本事圈。自我要求每年去衝一件未曾做過的特殊大事，跳出舊模仔。",
     "key": "426"
   },
   "Non player characteristic /分人 / save your energy ; item424": {
     "english": "Adopt an observer mindset; refrain from taking things personally, delegate or categorize people appropriately, and conserve your energy.",
     "mandarin": "保持旁觀者（非玩家）的心態，學會看人與分工，避免無謂的情緒消耗以節省精力。",
-    "taiwanese": "保持局外人的客觀，莫共逐件代誌攏攬佇身軀。學會曉分工看人，省下無彩的氣力留去做正經代誌。（照參第 424 項）",
+    "taiwanese": "冷眼看職場紛紛擾擾，啟動「非玩家角色（NPC / 分人）」心態，留好精神氣力顧家己。",
     "key": "427"
   },
   "No more email reply during weekend. Close email alert in your cell phone": {
     "english": "Stop replying to emails over the weekend and turn off work email notifications on your mobile phone.",
     "mandarin": "週末不再回覆工作郵件，並關閉手機上的郵件即時通知。",
-    "taiwanese": "禮拜放假莫閣回覆公事的批信，手機仔的郵件通知共關掉。該歇睏的時陣著愛好好歇睏，才有氣力走長遠的路。",
+    "taiwanese": "禮拜六日絕不再回任何工課批信。共手機頂頭的郵件通知鈴聲通通關掉。",
     "key": "428"
   },
   "GET BACK UP! It's time to take control of your life! / buy your time back. (mind simulation / Scenario Simulation) If then policy change / earthquake / typhoon / war / electricity shut down / economic crisis / virus attach… If received an emotional email, delete them. If someone said negative things get out of there quickly. If stock goes down, re-read the sentence you likes. If schedule delayed If get sicked, take rests. If you feel unhappy (emotionally bad), ( why? go run ) combling. If you feel frustrated/stressed, cannot achieve what you want. If people don’t get your point, pause. If people get angry with you": {
     "english": "Stand up and reclaim control of your life! Buy back your personal time through mental and scenario simulations for contingencies (e.g., policy shifts, natural disasters, blackouts, economic downturns, or health crises). Establish automated 'If-Then' responses: delete emotionally charged emails; distance yourself immediately from negativity; re-read uplifting quotes when investments drop; rest when ill; run or practice self-care when feeling down; pause when misunderstood or facing conflict; and stay resilient under stress.",
     "mandarin": "振作起來！掌控自己的人生並贏回時間。平時做好情境模擬與預案（如政策變動、天災人禍、經濟危機等）。建立「若…就…」的心態機制：收到帶情緒的信件直接刪除，遇到負能量的人迅速遠離，股市下跌時重溫心靈語錄，生病時徹底休息，心情低落時去跑步解壓，溝通受阻或他人生氣時適時停頓，化解挫折與壓力。",
-    "taiwanese": "精神共振作起來！家己的人生家己做主，買轉家己的時間。平素先盤算好各種風浪變化的應變法（政策變、天災、景氣䆀）。心內定下套路：收著氣噗噗的信直接共刪掉，拄著破壞情緒的人閃離離，股票跌就讀愛讀的金句，破病就倒落好好睏，心內鬱卒就出門走鏢流汗，人無了解抑是發性地就先煞停。穩當應對，天袂烏暗。",
+    "taiwanese": "爬起來！共家己的人生主導權提倒轉來，買回寶貴的時間。用「若是按呢…著按怎…（If-Then）」來演練心智模擬，防範逐款危機（像政策變卦、地動、風颱、停電、景氣崩盤）。為平時狀況設好自動應對步驟：收到情緒化信件，著延後回覆；受人惡意抹黑，著莫理面子無免插伊；專案若延誤，著專注揣解法；心內若欻鬱，著去跑步流汗；別人若聽無，著換上淺白的話講予伊明。",
     "key": "430"
   },
   "Play with fun, it is hard but try.": {
     "english": "Approach your work and tasks with a sense of fun and playfulness; though challenging, it is worth trying.",
     "mandarin": "抱持玩樂與趣味的心態看待挑戰，雖然不容易，但值得努力嘗試。",
-    "taiwanese": "用趣味佮歡喜的心來看待挑戰；代誌雖然無簡單，猶是值得盡心試看覓。",
+    "taiwanese": "抱著緣投趣味佮歡喜的心來看待挑戰；代誌就算無簡單，猶是值得盡心來試看覓。",
     "key": "431"
   },
   "Invest your interest no matter spending money or time. Try to make it as part of profession. ( which project…)": {
     "english": "Invest time and money into your personal interests, and strive to integrate them into your professional skill set or career projects.",
     "mandarin": "無論投入時間或金錢，都要認真經營自己的興趣，並嘗試將其轉化為專業能力或實際專案的一環。",
-    "taiwanese": "無論是開錢抑是開時間，攏愛認真照顧家己的興趣，落底功夫共變做專業本領的一部分。",
+    "taiwanese": "大膽投資家己的趣味嗜好（不管開時間抑是開銀兩）。煞猛共伊鑽研到有一套專門的水準。",
     "key": "432"
   },
   "Spend time to be alone, listen music you like, scared time for working time or in private time. To do what you want to do. Or had time to develop other skill. 認捌家己, check your list.": {
     "english": "Reserve sacred, undisturbed quiet time—whether at work or in private—to be alone, listen to your favorite music, pursue personal goals, or develop new skills. Know yourself and regularly review your goals list.",
     "mandarin": "預留神聖的獨處時間（包含工作與私人時間），聽喜歡的音樂、做想做的事或開發第二專長。深入認識自己，定期檢視目標清單。",
-    "taiwanese": "留一段無人吵的神聖時間予家己，不管是做工課抑是私底下的時間。聽意愛的音樂、做想做的代誌、練第二項手藝。認捌家己，定時對照心內的目標清單。",
+    "taiwanese": "留出孤單一人的時段。無論工課抑是私底下，攏愛確保有一段無人抐擾的「神聖時間」，去做你愛做的事，抑是練就第二專長。",
     "key": "433"
   },
   "What if you got fired, how soon you can find another job?(投保月給6,8成, 晟養人數, 報稅) Or store your achievement with you? Do you have margin of error? How long can you survive, any resource? How many money you can get? Continuously improvement progress.": {
     "english": "Prepare for risk by evaluating your margin for error: If laid off, how quickly can you secure a new job? What are your government unemployment benefits (e.g., 60–80% of insured salary based on dependents)? Have you documented your track record of achievements? How long can your emergency funds and resources sustain you? Continually improve your readiness.",
     "mandarin": "隨時評估失業風險與容錯空間：若被解僱，多快能找到新工作？是否清楚失業給付（如按投保薪資6至8成發給、扶養親屬加給）及報稅狀況？個人的工作成就是否妥善歸檔帶走？個人資金與資源能支撐多久？持續優化自我轉職與避險能力。",
-    "taiwanese": "隨時盤算無頭路的風險佮退路：假使被辭頭路，偌緊會當揣著新頭路？失業給付（投保薪俸六至八成、晟養人數加成）佮報稅的規矩敢有熟似？家己的戰果成績敢有好好收好？身邊的本錢會當頂幾个月？定定鍛鍊跳槽佮避風浪的本事，臨渴才袂掘井。",
+    "taiwanese": "居安思危問家己：「若是今仔日予人開除，我敢有法度隨揣著下份工課？」平常時著愛共戰績成就留底備份。你的生活安全邊際敢有夠？手頭的本錢敢有法度予你頂得過？你閣有啥物人脈佮資源會使調動？",
     "key": "434"
   },
   "Increase the mobility. Use cellphone to get whatever information you need. Use tools in the cloud. ( be careful digital toxic, addition.)": {
     "english": "Enhance your operational mobility by leveraging mobile devices and cloud tools for quick information access, while remaining mindful of digital fatigue and addiction.",
     "mandarin": "提升行動與工作靈活性，善用手機與雲端工具隨時獲取資訊，但須注意避免數位成癮與資訊過載。",
-    "taiwanese": "善用手機仔佮雲端工具增加做事走跳的活絡；毋過著愛斟酌，莫予數位資訊綁死死、沉迷成癮，適時愛抽離出來。",
+    "taiwanese": "提高腳手行動力。善用雲端工具佮手機仔，確保無論佇佗位攏會當隨調出需要用的資料。",
     "key": "436"
   },
   "Don’t tell your boss whom you don’t like because they will feel. Let bullet fly.": {
     "english": "Never confide in your boss about colleagues you dislike—they will sense your bias anyway. Be patient and let situations play out naturally ('let the bullets fly').",
     "mandarin": "切勿向主管透露你厭惡誰，因為主管終究會察覺你的偏見。保持平靜，讓子彈飛一會兒，靜觀其變。",
-    "taiwanese": "千千萬萬莫向主管埋怨你佮意誰抑是看誰無合意，頭家心內早就有數。拄著是非爭執著愛沉著，讓子彈飛一時仔，靜靜看風向按怎變。",
+    "taiwanese": "千千萬萬莫共主管講你討厭佗一个同事，因為主管心神真利，一定會感覺著你的怨氣，這反轉傷著家己的職場格調。",
     "key": "437"
   },
   "Learn the way manager talks. 5 years plan": {
     "english": "Adopt the communication style and strategic perspective of management, including thinking in terms of long-term (e.g., 5-year) plans.",
     "mandarin": "學習管理者的思維模式與溝通話術，並養成以五年長期計畫構思全局的習慣。",
-    "taiwanese": "學主管管事講話的角度佮手腕；腦底愛有五年的長遠盤算，站得懸才看會闊。",
+    "taiwanese": "頂真看覓兼學習資深大主管的講話氣度、聲調口氣佮高段的溝通手路。",
     "key": "440"
   },
   "How many leaves and floating leaves / yearly plan / monthly": {
@@ -3488,7 +3488,7 @@
   "Find your battle. Same in 424": {
     "english": "Choose your battles wisely; focus energy only on high-leverage and high-priority challenges.",
     "mandarin": "選擇屬於你的主戰場，將資源與精力聚焦於最具價值的核心目標。",
-    "taiwanese": "揣著屬於家己的主戰場才去拚。氣力有限，愛集中用佇尚有價值、上要緊的刀口項。（照參第 424 項）",
+    "taiwanese": "揣出真正屬於你的主戰場，佇家己上內行、占贏面的所在集中氣力拚突破。",
     "key": "443"
   },
   "Spend more energy in time important things": {
@@ -3500,25 +3500,25 @@
   "Take one week off after Luⁿar new year .adjust children schedule. ( April, September) Travel plan or list to show the places wants to visit, need list the holiday plan. Check previous agenda. What can be added next time.": {
     "english": "Plan a one-week break after Lunar New Year to sync with children's key school milestones (e.g., April and September). Maintain a travel wishlist and vacation agenda, reviewing past trips to continuously improve future plans.",
     "mandarin": "農曆年後安排一週休假以調整孩子的新學期作息（關注四月與九月關鍵期）。列出旅遊願望清單與排假計畫，並回顧過往行程以持續優化。",
-    "taiwanese": "過年了後排歇假一禮拜，陪伴囡仔調節開學的作息（斟酌四月佮九月的關鍵期）。寫出想欲去走走去去迌的清單佮排假日程，檢討過往行程，後回出門才閣較四序。",
+    "taiwanese": "盤算好來排長假，親像過年後排假一禮拜陪伴囡仔調整作息，抑配合四月、九月開學時程來排休。",
     "key": "446"
   },
   "Try to move electrical notes obsidian in the office， into obsidian cloud sync.( GitHub)": {
     "english": "Migrate your digital notes (e.g., Obsidian) from office computers to a secure cloud synchronization tool or GitHub repository.",
     "mandarin": "將辦公室電腦中的 Obsidian 電子筆記同步至雲端（如 GitHub），建立可隨時調用的知識庫。",
-    "taiwanese": "將寫字房電腦內的 Obsidian 電子筆記做好雲端同步（親像 GitHub），起造隨時隨地翻查會著的智慧庫。",
+    "taiwanese": "共辦公室寫的 Obsidian 電子筆記同步到安全穩當的雲端庫，按呢無論何時何地攏會當調閱互通。",
     "key": "448"
   },
   "Check if there is an existing tool to fix the current question you encountered.": {
     "english": "Before building custom solutions, check whether existing tools or libraries already solve the problem.",
     "mandarin": "遇到問題時，先搜尋並評估市面上是否已有現成的工具或解決方案可直接運用。",
-    "taiwanese": "拄著難題先揣看覓敢有現成的工具會當借力，莫白費工夫重造輪仔，借力使力省氣力。",
+    "taiwanese": "遇到代誌進前，先巡看市面上抑公司內底敢有現成的工具、指令碼會使排解。莫閣重磨石磨仔造輪仔，省氣力。",
     "key": "451"
   },
   "What is the skill to be needed? In the future.": {
     "english": "Anticipate the market trends and identify key skills that will be required in the future.",
     "mandarin": "洞察未來趨勢，提前識別並布局未來必備的核心技能。",
-    "taiwanese": "看準未來的風向，提早查明並且苦練未來所欠缺的關鍵功夫佮本領。",
+    "taiwanese": "眼睛放遠思考：為著迎接後一代的新產品佮技術變化，家己到底需要提前款好啥物功夫？",
     "key": "453"
   },
   "BUILD UP CREDIT and relationship, stop gossip.": {
@@ -3530,13 +3530,13 @@
   "Don’t sent the results out before releasing. With clear statement.": {
     "english": "Do not distribute unverified or preliminary results before official release, and always attach clear qualification statements.",
     "mandarin": "產品或數據尚未正式發布前切勿擅自對外傳送，發布時須附上明確的聲明與範圍說明。",
-    "taiwanese": "成果抑是數據猶未正式公布進前，千千萬萬莫私自流出去；發布的時陣務必附帶清清楚楚的說明佮界限，才袂惹出誤會。",
+    "taiwanese": "數字資料在猶未正式複驗、審批核准發布進前，萬萬袂使私自偷送予外口抑是別組人馬。",
     "key": "455"
   },
   "Skip the work/email what suddenly throw to you. Do your job first. Avoid distraction.": {
     "english": "De-prioritize ad-hoc tasks or incoming emails that unexpectedly interrupt your workflow. Focus on your primary priorities first to avoid distraction.",
     "mandarin": "對於突然插進來的臨時郵件與雜務，先予擱置；優先完成既定的核心工作，避免被分心。",
-    "taiwanese": "突然掔過來的雜件郵件佮閒事先共掠一邊；家己當手頭頂的正經工課先做好，莫予外來的閒代誌分走神魂。",
+    "taiwanese": "面對突然掞過來、無要無緊的插隊工課抑批信，先共擲一邊。專心先做好家己排好的核心代誌。",
     "key": "456"
   },
   "5S rules &2 mins action save u.": {
