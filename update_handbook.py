@@ -148,10 +148,14 @@ def parse_existing_md(md_path):
         t_match = re.search(r"\*\s+\*\*台語 \(Taiwanese\)\*\*：(.*?)(?=\n\*|\n\[對照|\Z)", body)
         ref_match = re.search(r"`\[對照原項目：(.*?)\]`", body)
         
-        if m_match: mandarin = m_match.group(1).strip()
-        if e_match: english = e_match.group(1).strip()
-        if t_match: taiwanese = t_match.group(1).strip()
-        if ref_match: ref = ref_match.group(1).strip()
+        if m_match:
+            mandarin = re.sub(r"`?\[對照原項目：.*?\]`?", "", m_match.group(1)).strip()
+        if e_match:
+            english = re.sub(r"`?\[對照原項目：.*?\]`?", "", e_match.group(1)).strip()
+        if t_match:
+            taiwanese = re.sub(r"`?\[對照原項目：.*?\]`?", "", t_match.group(1)).strip()
+        if ref_match:
+            ref = ref_match.group(1).strip()
         
         # Clean ref brackets if any
         ref = ref.replace("[對照原項目：", "").replace("]", "").strip()
@@ -4967,6 +4971,14 @@ def main():
     odt_path = "工作原則整理與潤稿.odt"
     generate_odt_handbook(principles, final_items, odt_path, chapters=chapters)
     
+    # Generate Proofreading Handbook (DOCX, PDF, and XLSX)
+    try:
+        from generate_proofreading_doc import generate_proofreading_documents
+        print("\nStep 8: Generating Proofreading Handbooks (Word DOCX, PDF & Excel XLSX)...")
+        generate_proofreading_documents(principles, final_items, chapters)
+    except Exception as e:
+        print(f"Warning: Could not generate proofreading document: {e}")
+
     print("\nWorkflow completed successfully!")
 
 if __name__ == "__main__":

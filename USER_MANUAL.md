@@ -22,7 +22,15 @@
      python update_handbook.py
      ```
    - 腳本會優先讀取自訂覆蓋庫（`manual_overrides.json`）與快取資料庫（`translation_db.json`）。**手動自訂與舊項目完全不消耗 Token（0 Token）**；若有未翻譯的新增項目，才會自動呼叫 Gemini 進行三語翻譯，並同步重新產生手冊、出書排版檔與卡牌網頁。
-3. **手動自訂翻譯（選用）**：
+3. **三語校稿手冊與 Excel 反向同步（選用）**：
+   - 專案會自動產出 `工作的管見_三語對照校稿手冊.xlsx`（以及 `.docx` 與 `.pdf`）。
+   - 校對人員可在 Excel 中選取校對狀態，若有修改文字，請將狀態設為「**已修訂**」。
+   - 審閱完成後，執行反向同步命令即可將修訂內容自動寫回覆蓋庫：
+     ```bash
+     python generate_proofreading_doc.py --import-excel
+     ```
+   - 接著執行 `python update_handbook.py` 即可自動將修訂同步到全站手冊與卡牌網頁。
+4. **手動自訂翻譯（選用）**：
    - 若對特定卡牌或原則的中文/台語有專屬潤飾，可直接填入 `manual_overrides.json`（例如 `"12": {"taiwanese": "自訂台語..."}`），儲存後再次執行更新腳本即可生效。
 
 ### 第二部分：卡牌網頁操作
