@@ -99,6 +99,31 @@ def format_row_protection(row, is_header=False):
     trPr.append(parse_xml(f'<w:cantSplit {W_NS}/>'))
 
 
+def set_run_font(run, font_name="Microsoft JhengHei", size_pt=None, bold=None, italic=None, color=None, east_asia_font="Microsoft JhengHei"):
+    """Format run font, explicitly setting both Western (ascii/hAnsi) and East Asian (eastAsia) font families.
+    This prevents Word from falling back to Western punctuation metrics which visually compresses full-width punctuation.
+    """
+    run.font.name = font_name
+    rPr = run._r.get_or_add_rPr()
+    rFonts = rPr.find(qn('w:rFonts'))
+    if rFonts is None:
+        rFonts = OxmlElement('w:rFonts')
+        rPr.append(rFonts)
+    rFonts.set(qn('w:ascii'), font_name)
+    rFonts.set(qn('w:hAnsi'), font_name)
+    rFonts.set(qn('w:eastAsia'), east_asia_font)
+    rFonts.set(qn('w:cs'), east_asia_font)
+
+    if size_pt is not None:
+        run.font.size = Pt(size_pt)
+    if bold is not None:
+        run.font.bold = bold
+    if italic is not None:
+        run.font.italic = italic
+    if color is not None:
+        run.font.color.rgb = color
+
+
 def add_page_number_to_section(section):
     """Setup header and footer with dynamic page numbers and metadata."""
     # Header
@@ -106,41 +131,31 @@ def add_page_number_to_section(section):
     hp = header.paragraphs[0]
     hp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     hrun1 = hp.add_run("工作的管見（My Two Cents） — 職場生存與成長的避坑指南【三語對照校稿手冊】")
-    hrun1.font.name = "Microsoft JhengHei"
-    hrun1.font.size = Pt(8.5)
-    hrun1.font.color.rgb = RGBColor(100, 116, 139)
+    set_run_font(hrun1, font_name="Microsoft JhengHei", size_pt=8.5, color=RGBColor(100, 116, 139))
 
     # Footer
     footer = section.footer
     fp = footer.paragraphs[0]
     fp.alignment = WD_ALIGN_PARAGRAPH.LEFT
     frun1 = fp.add_run("□ 未校對    ☑ 校對完成    |    校對日期：______ 年 ___ 月 ___ 日    校對人：__________               ")
-    frun1.font.name = "Microsoft JhengHei"
-    frun1.font.size = Pt(8.5)
-    frun1.font.color.rgb = RGBColor(100, 116, 139)
+    set_run_font(frun1, font_name="Microsoft JhengHei", size_pt=8.5, color=RGBColor(100, 116, 139))
 
     frun2 = fp.add_run("第 ")
-    frun2.font.name = "Microsoft JhengHei"
-    frun2.font.size = Pt(8.5)
-    frun2.font.color.rgb = RGBColor(100, 116, 139)
+    set_run_font(frun2, font_name="Microsoft JhengHei", size_pt=8.5, color=RGBColor(100, 116, 139))
 
     fld1 = OxmlElement("w:fldSimple")
     fld1.set(qn("w:instr"), "PAGE")
     fp._p.append(fld1)
 
     frun3 = fp.add_run(" 頁 / 共 ")
-    frun3.font.name = "Microsoft JhengHei"
-    frun3.font.size = Pt(8.5)
-    frun3.font.color.rgb = RGBColor(100, 116, 139)
+    set_run_font(frun3, font_name="Microsoft JhengHei", size_pt=8.5, color=RGBColor(100, 116, 139))
 
     fld2 = OxmlElement("w:fldSimple")
     fld2.set(qn("w:instr"), "NUMPAGES")
     fp._p.append(fld2)
 
     frun4 = fp.add_run(" 頁")
-    frun4.font.name = "Microsoft JhengHei"
-    frun4.font.size = Pt(8.5)
-    frun4.font.color.rgb = RGBColor(100, 116, 139)
+    set_run_font(frun4, font_name="Microsoft JhengHei", size_pt=8.5, color=RGBColor(100, 116, 139))
 
 
 def get_chap_info(p_num):
@@ -170,29 +185,38 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
 
     add_page_number_to_section(section)
 
-    # Set document base font
-    doc.styles["Normal"].font.name = "Microsoft JhengHei"
-    doc.styles["Normal"].font.size = Pt(8.5)
-    doc.styles["Normal"].font.color.rgb = RGBColor(30, 41, 59)
+    # Prevent Word from automatically compressing CJK full-width punctuation
+    csc = OxmlElement('w:characterSpacingControl')
+    csc.set(qn('w:val'), 'doNotCompress')
+    doc.settings._element.append(csc)
+
+    # Set document base font with both Western and EastAsian font names
+    normal_style = doc.styles["Normal"]
+    normal_style.font.name = "Microsoft JhengHei"
+    normal_style.font.size = Pt(8.5)
+    normal_style.font.color.rgb = RGBColor(30, 41, 59)
+    rPr = normal_style._element.get_or_add_rPr()
+    rFonts = rPr.find(qn('w:rFonts'))
+    if rFonts is None:
+        rFonts = OxmlElement('w:rFonts')
+        rPr.append(rFonts)
+    rFonts.set(qn('w:ascii'), 'Microsoft JhengHei')
+    rFonts.set(qn('w:hAnsi'), 'Microsoft JhengHei')
+    rFonts.set(qn('w:eastAsia'), 'Microsoft JhengHei')
+    rFonts.set(qn('w:cs'), 'Microsoft JhengHei')
 
     # 2. Cover / Guide Block
     title_p = doc.add_paragraph()
     title_p.paragraph_format.space_before = Pt(4)
     title_p.paragraph_format.space_after = Pt(2)
     title_run = title_p.add_run("工作的管見（My Two Cents） — 職場生存與成長的避坑指南")
-    title_run.font.name = "Microsoft JhengHei"
-    title_run.font.size = Pt(18)
-    title_run.font.bold = True
-    title_run.font.color.rgb = RGBColor(30, 41, 59)
+    set_run_font(title_run, font_name="Microsoft JhengHei", size_pt=18, bold=True, color=RGBColor(30, 41, 59))
 
     sub_p = doc.add_paragraph()
     sub_p.paragraph_format.space_before = Pt(0)
     sub_p.paragraph_format.space_after = Pt(6)
     sub_run = sub_p.add_run("From the Floor: Practical Work Principles — 英文・中文・台文 三語對照校稿列印手冊（A4 橫向表格版）")
-    sub_run.font.name = "Microsoft JhengHei"
-    sub_run.font.size = Pt(11)
-    sub_run.font.bold = True
-    sub_run.font.color.rgb = RGBColor(79, 70, 229)
+    set_run_font(sub_run, font_name="Microsoft JhengHei", size_pt=11, bold=True, color=RGBColor(79, 70, 229))
 
     # Guide Box
     guide_table = doc.add_table(rows=1, cols=1)
@@ -206,10 +230,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
     gp.paragraph_format.space_before = Pt(2)
     gp.paragraph_format.space_after = Pt(2)
     g_title = gp.add_run("【紙本校稿指引與標記標準】\n")
-    g_title.font.name = "Microsoft JhengHei"
-    g_title.font.size = Pt(9.5)
-    g_title.font.bold = True
-    g_title.font.color.rgb = RGBColor(15, 23, 42)
+    set_run_font(g_title, font_name="Microsoft JhengHei", size_pt=9.5, bold=True, color=RGBColor(15, 23, 42))
 
     g_body = gp.add_run(
         "1. 收錄範圍：完整收錄六大篇章核心金句（53 則）、20 大核心原則，以及 458 張實務原則卡牌（Slide 1～Slide 9 全集）。\n"
@@ -223,9 +244,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
         "   校對總結：[  ] 全書審定通過    [  ] 需部分二校修訂    簽署：_______________    日期：2026 年 ___ 月 ___ 日\n"
         f"5. 產出時間：{datetime.now().strftime('%Y-%m-%d %H:%M')} | 總卡牌數：458 條 | 核心原則：20 條 | 篇章金句：53 則"
     )
-    g_body.font.name = "Microsoft JhengHei"
-    g_body.font.size = Pt(8.5)
-    g_body.font.color.rgb = RGBColor(51, 65, 85)
+    set_run_font(g_body, font_name="Microsoft JhengHei", size_pt=8.5, color=RGBColor(51, 65, 85))
 
     # Page break after Cover & Guidelines so Part 1 starts on Page 2
     doc.add_page_break()
@@ -235,10 +254,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
     p1_head.paragraph_format.space_before = Pt(8)
     p1_head.paragraph_format.space_after = Pt(4)
     p1_head_run = p1_head.add_run("第一部分：六大篇章核心指引金句與 20 大核心原則")
-    p1_head_run.font.name = "Microsoft JhengHei"
-    p1_head_run.font.size = Pt(13)
-    p1_head_run.font.bold = True
-    p1_head_run.font.color.rgb = RGBColor(30, 41, 59)
+    set_run_font(p1_head_run, font_name="Microsoft JhengHei", size_pt=13, bold=True, color=RGBColor(30, 41, 59))
 
     # Group principles by chapter
     chap_groups = {}
@@ -254,10 +270,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
         chap_p.paragraph_format.space_before = Pt(10)
         chap_p.paragraph_format.space_after = Pt(2)
         c_run = chap_p.add_run(f"■ {cdata['title']}")
-        c_run.font.name = "Microsoft JhengHei"
-        c_run.font.size = Pt(11)
-        c_run.font.bold = True
-        c_run.font.color.rgb = RGBColor(67, 56, 202)
+        set_run_font(c_run, font_name="Microsoft JhengHei", size_pt=11, bold=True, color=RGBColor(67, 56, 202))
 
         # Quotes for this chapter
         matched_chap = next((c for c in chapters if c['id'] == cid), None) if chapters else None
@@ -266,14 +279,9 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             qp.paragraph_format.space_before = Pt(0)
             qp.paragraph_format.space_after = Pt(4)
             q_lead = qp.add_run("【核心金句】 ")
-            q_lead.font.name = "Microsoft JhengHei"
-            q_lead.font.size = Pt(8.5)
-            q_lead.font.bold = True
-            q_lead.font.color.rgb = RGBColor(180, 83, 9) # Amber
+            set_run_font(q_lead, font_name="Microsoft JhengHei", size_pt=8.5, bold=True, color=RGBColor(180, 83, 9))
             q_txt = qp.add_run("   ".join(matched_chap['quotes']))
-            q_txt.font.name = "Microsoft JhengHei"
-            q_txt.font.size = Pt(8.5)
-            q_txt.font.color.rgb = RGBColor(120, 53, 15)
+            set_run_font(q_txt, font_name="Microsoft JhengHei", size_pt=8.5, color=RGBColor(120, 53, 15))
 
         # Principles Table for this chapter
         # Columns: 原則編號 (1.3 in) | 優化英文 (2.5 in) | 優化中文 (2.4 in) | 優化台文 (2.4 in) | 對照卡牌 (1.3 in) | 校對批註 (0.79 in)
@@ -294,10 +302,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             cp = cell.paragraphs[0]
             cp.alignment = WD_ALIGN_PARAGRAPH.CENTER
             r = cp.add_run(title)
-            r.font.name = "Microsoft JhengHei"
-            r.font.size = Pt(8.5)
-            r.font.bold = True
-            r.font.color.rgb = RGBColor(255, 255, 255)
+            set_run_font(r, font_name="Microsoft JhengHei", size_pt=8.5, bold=True, color=RGBColor(255, 255, 255))
 
         for row_idx, p_item in enumerate(cdata["items"]):
             row = p_table.add_row()
@@ -311,14 +316,9 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             set_cell_width(c0, col_widths_p[0])
             p0 = c0.paragraphs[0]
             r0_1 = p0.add_run(f"原則 {p_item['num']}\n")
-            r0_1.font.name = "Microsoft JhengHei"
-            r0_1.font.size = Pt(9)
-            r0_1.font.bold = True
-            r0_1.font.color.rgb = RGBColor(67, 56, 202)
+            set_run_font(r0_1, font_name="Microsoft JhengHei", size_pt=9, bold=True, color=RGBColor(67, 56, 202))
             r0_2 = p0.add_run(p_item['title'])
-            r0_2.font.name = "Microsoft JhengHei"
-            r0_2.font.size = Pt(8)
-            r0_2.font.color.rgb = RGBColor(51, 65, 85)
+            set_run_font(r0_2, font_name="Microsoft JhengHei", size_pt=8, color=RGBColor(51, 65, 85))
 
             # Col 1: 優化英文
             c1 = row.cells[1]
@@ -328,9 +328,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             p1 = c1.paragraphs[0]
             p1.paragraph_format.line_spacing = 1.15
             r1 = p1.add_run(p_item['english'])
-            r1.font.name = "Calibri"
-            r1.font.size = Pt(8.5)
-            r1.font.color.rgb = RGBColor(30, 41, 59)
+            set_run_font(r1, font_name="Calibri", size_pt=8.5, color=RGBColor(30, 41, 59), east_asia_font="Microsoft JhengHei")
 
             # Col 2: 優化中文
             c2 = row.cells[2]
@@ -340,9 +338,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             p2 = c2.paragraphs[0]
             p2.paragraph_format.line_spacing = 1.15
             r2 = p2.add_run(p_item['mandarin'])
-            r2.font.name = "Microsoft JhengHei"
-            r2.font.size = Pt(8.5)
-            r2.font.color.rgb = RGBColor(15, 23, 42)
+            set_run_font(r2, font_name="Microsoft JhengHei", size_pt=8.5, color=RGBColor(15, 23, 42))
 
             # Col 3: 優化台文
             c3 = row.cells[3]
@@ -352,9 +348,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             p3 = c3.paragraphs[0]
             p3.paragraph_format.line_spacing = 1.15
             r3 = p3.add_run(p_item['taiwanese'])
-            r3.font.name = "Microsoft JhengHei"
-            r3.font.size = Pt(8.5)
-            r3.font.color.rgb = RGBColor(15, 118, 110) # Deep Teal
+            set_run_font(r3, font_name="Microsoft JhengHei", size_pt=8.5, color=RGBColor(15, 118, 110))
 
             # Col 4: 對照卡牌
             c4 = row.cells[4]
@@ -364,9 +358,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             p4 = c4.paragraphs[0]
             p4.paragraph_format.line_spacing = 1.1
             r4 = p4.add_run(p_item['ref'])
-            r4.font.name = "Calibri"
-            r4.font.size = Pt(8)
-            r4.font.color.rgb = RGBColor(100, 116, 139)
+            set_run_font(r4, font_name="Calibri", size_pt=8, color=RGBColor(100, 116, 139), east_asia_font="Microsoft JhengHei")
 
             # Col 5: 校對批註
             c5 = row.cells[5]
@@ -376,9 +368,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             p5 = c5.paragraphs[0]
             p5.alignment = WD_ALIGN_PARAGRAPH.CENTER
             r5 = p5.add_run("□ 通過\n□ 待修\n──────")
-            r5.font.name = "Microsoft JhengHei"
-            r5.font.size = Pt(7.5)
-            r5.font.color.rgb = RGBColor(148, 163, 184)
+            set_run_font(r5, font_name="Microsoft JhengHei", size_pt=7.5, color=RGBColor(148, 163, 184))
 
         doc.add_paragraph().paragraph_format.space_after = Pt(4)
 
@@ -431,10 +421,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
         s_header_p.paragraph_format.space_before = Pt(8)
         s_header_p.paragraph_format.space_after = Pt(3)
         sh_run = s_header_p.add_run(f"【投影片 Slide {s_num}】 卡牌 No. {min_key} ～ No. {max_key}（共 {len(s_items)} 條）")
-        sh_run.font.name = "Microsoft JhengHei"
-        sh_run.font.size = Pt(10.5)
-        sh_run.font.bold = True
-        sh_run.font.color.rgb = RGBColor(15, 118, 110) # Teal
+        set_run_font(sh_run, font_name="Microsoft JhengHei", size_pt=10.5, bold=True, color=RGBColor(15, 118, 110))
 
         # Slide Table
         c_table = doc.add_table(rows=1, cols=6)
@@ -452,10 +439,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             cp = cell.paragraphs[0]
             cp.alignment = WD_ALIGN_PARAGRAPH.CENTER
             r = cp.add_run(title)
-            r.font.name = "Microsoft JhengHei"
-            r.font.size = Pt(8.5)
-            r.font.bold = True
-            r.font.color.rgb = RGBColor(255, 255, 255)
+            set_run_font(r, font_name="Microsoft JhengHei", size_pt=8.5, bold=True, color=RGBColor(255, 255, 255))
 
         for row_idx, item in enumerate(s_items):
             row = c_table.add_row()
@@ -480,22 +464,15 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             p0.alignment = WD_ALIGN_PARAGRAPH.CENTER
             
             r0_num = p0.add_run(f"No. {item['key']}\n")
-            r0_num.font.name = "Calibri"
-            r0_num.font.size = Pt(9.5)
-            r0_num.font.bold = True
-            r0_num.font.color.rgb = RGBColor(30, 41, 59)
+            set_run_font(r0_num, font_name="Calibri", size_pt=9.5, bold=True, color=RGBColor(30, 41, 59), east_asia_font="Microsoft JhengHei")
 
             r0_slide = p0.add_run(f"Slide {item['slide']}\n")
-            r0_slide.font.name = "Calibri"
-            r0_slide.font.size = Pt(7.5)
-            r0_slide.font.color.rgb = RGBColor(148, 163, 184)
+            set_run_font(r0_slide, font_name="Calibri", size_pt=7.5, color=RGBColor(148, 163, 184), east_asia_font="Microsoft JhengHei")
 
             if matched_principles:
                 pr_str = ", ".join(str(n) for n in matched_principles)
                 r0_pr = p0.add_run(f"原則 {pr_str}")
-                r0_pr.font.name = "Microsoft JhengHei"
-                r0_pr.font.size = Pt(7.5)
-                r0_pr.font.color.rgb = RGBColor(79, 70, 229)
+                set_run_font(r0_pr, font_name="Microsoft JhengHei", size_pt=7.5, color=RGBColor(79, 70, 229))
 
             # Col 1: 投影片原文
             c1 = row.cells[1]
@@ -505,10 +482,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             p1 = c1.paragraphs[0]
             p1.paragraph_format.line_spacing = 1.1
             r1 = p1.add_run(item.get('original', ''))
-            r1.font.name = "Calibri"
-            r1.font.size = Pt(8)
-            r1.font.italic = True
-            r1.font.color.rgb = RGBColor(71, 85, 105)
+            set_run_font(r1, font_name="Calibri", size_pt=8, italic=True, color=RGBColor(71, 85, 105), east_asia_font="Microsoft JhengHei")
 
             # Col 2: 優化英文
             c2 = row.cells[2]
@@ -518,9 +492,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             p2 = c2.paragraphs[0]
             p2.paragraph_format.line_spacing = 1.15
             r2 = p2.add_run(item.get('english', ''))
-            r2.font.name = "Calibri"
-            r2.font.size = Pt(8.5)
-            r2.font.color.rgb = RGBColor(30, 41, 59)
+            set_run_font(r2, font_name="Calibri", size_pt=8.5, color=RGBColor(30, 41, 59), east_asia_font="Microsoft JhengHei")
 
             # Col 3: 優化中文
             c3 = row.cells[3]
@@ -530,9 +502,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             p3 = c3.paragraphs[0]
             p3.paragraph_format.line_spacing = 1.15
             r3 = p3.add_run(item.get('mandarin', ''))
-            r3.font.name = "Microsoft JhengHei"
-            r3.font.size = Pt(8.5)
-            r3.font.color.rgb = RGBColor(15, 23, 42)
+            set_run_font(r3, font_name="Microsoft JhengHei", size_pt=8.5, color=RGBColor(15, 23, 42))
 
             # Col 4: 優化台文
             c4 = row.cells[4]
@@ -542,9 +512,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             p4 = c4.paragraphs[0]
             p4.paragraph_format.line_spacing = 1.15
             r4 = p4.add_run(item.get('taiwanese', ''))
-            r4.font.name = "Microsoft JhengHei"
-            r4.font.size = Pt(8.5)
-            r4.font.color.rgb = RGBColor(15, 118, 110) # Teal
+            set_run_font(r4, font_name="Microsoft JhengHei", size_pt=8.5, color=RGBColor(15, 118, 110))
 
             # Col 5: 校對狀態與批註
             c5 = row.cells[5]
@@ -554,9 +522,7 @@ def build_proofreading_docx(principles, final_items, chapters, docx_path):
             p5 = c5.paragraphs[0]
             p5.alignment = WD_ALIGN_PARAGRAPH.CENTER
             r5 = p5.add_run("□ 通過\n□ 待修\n──────")
-            r5.font.name = "Microsoft JhengHei"
-            r5.font.size = Pt(7.5)
-            r5.font.color.rgb = RGBColor(148, 163, 184)
+            set_run_font(r5, font_name="Microsoft JhengHei", size_pt=7.5, color=RGBColor(148, 163, 184))
 
         doc.add_paragraph().paragraph_format.space_after = Pt(6)
 
