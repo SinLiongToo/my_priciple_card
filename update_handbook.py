@@ -654,12 +654,14 @@ def main():
             --primary-hover: #4f46e5;
             --bg-dark: #0f172a;
             --bg-card: rgba(30, 41, 59, 0.7);
-            --bg-glass: rgba(15, 23, 42, 0.65);
+            --bg-glass: rgba(15, 23, 42, 0.92);
+            --bg-sticky: rgba(15, 23, 42, 0.92);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border: rgba(255, 255, 255, 0.08);
             --border-hover: rgba(99, 102, 241, 0.4);
             --glow: rgba(99, 102, 241, 0.15);
+            --header-offset: 102px;
         }}
 
         .light-mode {{
@@ -667,7 +669,8 @@ def main():
             --primary-hover: #3730a3;
             --bg-dark: #f8fafc;
             --bg-card: rgba(255, 255, 255, 0.85);
-            --bg-glass: rgba(241, 245, 249, 0.75);
+            --bg-glass: rgba(248, 250, 252, 0.94);
+            --bg-sticky: rgba(248, 250, 252, 0.94);
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border: rgba(0, 0, 0, 0.08);
@@ -689,7 +692,7 @@ def main():
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
+            overflow-x: clip;
             background-image: 
                 radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
@@ -907,7 +910,7 @@ def main():
             flex: 1;
             max-width: 1200px;
             width: 100%;
-            margin: 2rem auto;
+            margin: 0 auto 2rem auto;
             padding: 0 1.5rem;
         }}
 
@@ -917,20 +920,55 @@ def main():
 
         .section-view.active {{
             display: block;
-            animation: fadeIn 0.4s ease-out;
+            animation: fadeIn 0.3s ease-out;
+        }}
+
+        #view-random, #view-graph {{
+            padding-top: 1.5rem;
         }}
 
         @keyframes fadeIn {{
-            from {{ opacity: 0; transform: translateY(10px); }}
-            to {{ opacity: 1; transform: translateY(0); }}
+            from {{ opacity: 0; }}
+            to {{ opacity: 1; }}
+        }}
+
+        /* Sticky Top Controls for Principles & Slides (Filter tags + Autoplay Player Bar) */
+        .view-sticky-controls {{
+            position: sticky;
+            top: var(--header-offset, 102px);
+            z-index: 95;
+            padding: 0.85rem 0 0.9rem 0;
+            margin-bottom: 1.35rem;
+            background: transparent;
+        }}
+
+        .view-sticky-controls::before {{
+            content: '';
+            position: absolute;
+            top: -2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            background: var(--bg-sticky);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+            z-index: -1;
+            pointer-events: none;
+        }}
+
+        .light-mode .view-sticky-controls::before {{
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
         }}
 
         /* Filters */
         .filter-tags {{
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            gap: 0.45rem;
+            margin-bottom: 0.75rem;
         }}
 
         .filter-tag {{
@@ -1317,11 +1355,11 @@ def main():
         /* Slides Autoplay Player Bar */
         .slides-player-bar {{
             max-width: 1200px;
-            margin: 0 auto 1.5rem auto;
-            background: rgba(30, 41, 59, 0.75);
+            margin: 0 auto;
+            background: rgba(30, 41, 59, 0.85);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 0.75rem 1.25rem;
+            padding: 0.7rem 1.2rem;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -1333,8 +1371,13 @@ def main():
             transition: all 0.3s ease;
         }}
 
+        .slides-player-bar.playing-active {{
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 4px 24px rgba(99, 102, 241, 0.22);
+        }}
+
         .light-mode .slides-player-bar {{
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }}
 
@@ -2401,12 +2444,16 @@ def main():
                 max-width: 100%;
                 min-width: unset;
             }}
+            .view-sticky-controls {{
+                padding: 0.55rem 0 0.65rem 0;
+                margin-bottom: 0.9rem;
+            }}
             .filter-tags {{
                 overflow-x: auto;
                 flex-wrap: nowrap;
                 white-space: nowrap;
-                padding-bottom: 0.4rem;
-                margin-bottom: 1rem;
+                padding-bottom: 0.3rem;
+                margin-bottom: 0.55rem;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
             }}
@@ -2415,6 +2462,10 @@ def main():
             }}
             .filter-tag {{
                 flex-shrink: 0;
+            }}
+            .slides-player-bar {{
+                padding: 0.55rem 0.8rem;
+                gap: 0.5rem;
             }}
             .card-grid {{
                 grid-template-columns: 1fr;
@@ -2427,7 +2478,7 @@ def main():
                 font-size: 1.1rem;
             }}
             main {{
-                margin: 1.2rem auto;
+                margin: 0 auto 1.2rem auto;
                 padding: 0 1rem;
             }}
             .display-toggles-bar {{
@@ -2586,56 +2637,58 @@ def main():
     <main>
         <!-- VIEW 1: Core Principles (20) -->
         <section id="view-principles" class="section-view active">
-            <div class="filter-tags" id="principlesFilters">
-                <button class="filter-tag active" onclick="filterPrinciples('all')">全部章節</button>
-                <button class="filter-tag" onclick="filterPrinciples('1')">第一篇：效能與工具</button>
-                <button class="filter-tag" onclick="filterPrinciples('2')">第二篇：思考與決策</button>
-                <button class="filter-tag" onclick="filterPrinciples('3')">第三篇：溝通與協作</button>
-                <button class="filter-tag" onclick="filterPrinciples('4')">第四篇：職場生存與防線</button>
-                <button class="filter-tag" onclick="filterPrinciples('5')">第五篇：職涯與個人成長</button>
-                <button class="filter-tag" onclick="filterPrinciples('6')">第六篇：能量、韌性與生活平衡</button>
-            </div>
-
-            <!-- Principles Autoplay Player Bar -->
-            <div class="slides-player-bar principles-player-bar" id="principlesPlayerBar">
-                <div class="player-bar-left">
-                    <button class="player-btn-main" id="principlesPlayerBtnPlay" onclick="toggleAutoplay('principles')" title="依序自動連續朗讀當前核心原則之優化英文">
-                        <span>▶️</span> 自動連續播放
-                    </button>
-                    <button class="player-btn-secondary" id="principlesPlayerBtnStop" onclick="stopAllAudio()" title="停止語音朗讀">
-                        ⏹️ 停止
-                    </button>
-                    <button class="player-btn-secondary" id="principlesPlayerBtnPrev" onclick="prevAudioItem()" title="上一原則" disabled>
-                        ⏮️
-                    </button>
-                    <button class="player-btn-secondary" id="principlesPlayerBtnNext" onclick="nextAudioItem()" title="下一原則" disabled>
-                        ⏭️
-                    </button>
-                    <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted); margin-left: 0.25rem;">
-                        <span>語速：</span>
-                        <select class="player-rate-select" id="principlesPlayerRateSelect" onchange="changePlaybackRate(this.value)" title="調整語音朗讀速度">
-                            <option value="0.85">0.85x 慢速</option>
-                            <option value="1.0" selected>1.0x 標準</option>
-                            <option value="1.15">1.15x 快速</option>
-                        </select>
-                    </div>
-                    <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted);">
-                        <span>停頓：</span>
-                        <select class="player-rate-select" id="principlesPauseSelect" onchange="changePauseDuration(this.value)" title="調整朗讀間隔時間">
-                            <option value="500">0.5s</option>
-                            <option value="1000" selected>1.0s</option>
-                            <option value="1500">1.5s</option>
-                            <option value="2000">2.0s</option>
-                        </select>
-                    </div>
+            <div class="view-sticky-controls">
+                <div class="filter-tags" id="principlesFilters">
+                    <button class="filter-tag active" onclick="filterPrinciples('all')">全部章節</button>
+                    <button class="filter-tag" onclick="filterPrinciples('1')">第一篇：效能與工具</button>
+                    <button class="filter-tag" onclick="filterPrinciples('2')">第二篇：思考與決策</button>
+                    <button class="filter-tag" onclick="filterPrinciples('3')">第三篇：溝通與協作</button>
+                    <button class="filter-tag" onclick="filterPrinciples('4')">第四篇：職場生存與防線</button>
+                    <button class="filter-tag" onclick="filterPrinciples('5')">第五篇：職涯與個人成長</button>
+                    <button class="filter-tag" onclick="filterPrinciples('6')">第六篇：能量、韌性與生活平衡</button>
                 </div>
-                <div class="player-bar-status">
-                    <div class="player-status-badge" id="principlesPlayerStatusContainer">
-                        <span id="principlesPlayerStatusLabel">準備就緒</span>
-                        <span id="principlesPlayerStatusIndexWrap">(<input type="number" id="principlesPlayerJumpInput" class="player-jump-input" min="1" max="20" value="1" onchange="onPlayerJumpInputChange(this.value, 'principles')" onkeydown="if(event.key==='Enter')onPlayerJumpInputChange(this.value, 'principles')" title="輸入編號跳轉"> / <span id="principlesPlayerTotalCount">20</span>)</span>
+
+                <!-- Principles Autoplay Player Bar -->
+                <div class="slides-player-bar principles-player-bar" id="principlesPlayerBar">
+                    <div class="player-bar-left">
+                        <button class="player-btn-main" id="principlesPlayerBtnPlay" onclick="toggleAutoplay('principles')" title="依序自動連續朗讀當前核心原則之優化英文">
+                            <span>▶️</span> 自動連續播放
+                        </button>
+                        <button class="player-btn-secondary" id="principlesPlayerBtnStop" onclick="stopAllAudio()" title="停止語音朗讀">
+                            ⏹️ 停止
+                        </button>
+                        <button class="player-btn-secondary" id="principlesPlayerBtnPrev" onclick="prevAudioItem()" title="上一原則" disabled>
+                            ⏮️
+                        </button>
+                        <button class="player-btn-secondary" id="principlesPlayerBtnNext" onclick="nextAudioItem()" title="下一原則" disabled>
+                            ⏭️
+                        </button>
+                        <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted); margin-left: 0.25rem;">
+                            <span>語速：</span>
+                            <select class="player-rate-select" id="principlesPlayerRateSelect" onchange="changePlaybackRate(this.value)" title="調整語音朗讀速度">
+                                <option value="0.85">0.85x 慢速</option>
+                                <option value="1.0" selected>1.0x 標準</option>
+                                <option value="1.15">1.15x 快速</option>
+                            </select>
+                        </div>
+                        <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted);">
+                            <span>停頓：</span>
+                            <select class="player-rate-select" id="principlesPauseSelect" onchange="changePauseDuration(this.value)" title="調整朗讀間隔時間">
+                                <option value="500">0.5s</option>
+                                <option value="1000" selected>1.0s</option>
+                                <option value="1500">1.5s</option>
+                                <option value="2000">2.0s</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="player-progress-container" title="拖動或點擊跳轉進度">
-                        <input type="range" class="player-progress-slider" id="principlesPlayerSlider" min="1" max="20" value="1" oninput="onProgressSliderInput(this.value, 'principles')" onchange="onProgressSliderChange(this.value, 'principles')">
+                    <div class="player-bar-status">
+                        <div class="player-status-badge" id="principlesPlayerStatusContainer">
+                            <span id="principlesPlayerStatusLabel">準備就緒</span>
+                            <span id="principlesPlayerStatusIndexWrap">(<input type="number" id="principlesPlayerJumpInput" class="player-jump-input" min="1" max="20" value="1" onchange="onPlayerJumpInputChange(this.value, 'principles')" onkeydown="if(event.key==='Enter')onPlayerJumpInputChange(this.value, 'principles')" title="輸入編號跳轉"> / <span id="principlesPlayerTotalCount">20</span>)</span>
+                        </div>
+                        <div class="player-progress-container" title="拖動或點擊跳轉進度">
+                            <input type="range" class="player-progress-slider" id="principlesPlayerSlider" min="1" max="20" value="1" oninput="onProgressSliderInput(this.value, 'principles')" onchange="onProgressSliderChange(this.value, 'principles')">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2644,50 +2697,52 @@ def main():
 
         <!-- VIEW 2: Slide Items -->
         <section id="view-slides" class="section-view">
-            <div class="filter-tags" id="slidesFilters">
-                {slides_filter_html}
-            </div>
-
-            <!-- Slides Autoplay Player Bar -->
-            <div class="slides-player-bar" id="slidesPlayerBar">
-                <div class="player-bar-left">
-                    <button class="player-btn-main" id="playerBtnPlay" onclick="toggleAutoplay('slides')" title="依序自動連續朗讀當前卡牌之優化英文">
-                        <span>▶️</span> 自動連續播放
-                    </button>
-                    <button class="player-btn-secondary" id="playerBtnStop" onclick="stopAllAudio()" title="停止語音朗讀">
-                        ⏹️ 停止
-                    </button>
-                    <button class="player-btn-secondary" id="playerBtnPrev" onclick="prevAudioItem()" title="上一張卡牌" disabled>
-                        ⏮️
-                    </button>
-                    <button class="player-btn-secondary" id="playerBtnNext" onclick="nextAudioItem()" title="下一張卡牌" disabled>
-                        ⏭️
-                    </button>
-                    <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted); margin-left: 0.25rem;">
-                        <span>語速：</span>
-                        <select class="player-rate-select" id="playerRateSelect" onchange="changePlaybackRate(this.value)" title="調整語音朗讀速度">
-                            <option value="0.85">0.85x 慢速</option>
-                            <option value="1.0" selected>1.0x 標準</option>
-                            <option value="1.15">1.15x 快速</option>
-                        </select>
-                    </div>
-                    <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted);">
-                        <span>停頓：</span>
-                        <select class="player-rate-select" id="slidesPauseSelect" onchange="changePauseDuration(this.value)" title="調整朗讀間隔時間">
-                            <option value="500">0.5s</option>
-                            <option value="1000" selected>1.0s</option>
-                            <option value="1500">1.5s</option>
-                            <option value="2000">2.0s</option>
-                        </select>
-                    </div>
+            <div class="view-sticky-controls">
+                <div class="filter-tags" id="slidesFilters">
+                    {slides_filter_html}
                 </div>
-                <div class="player-bar-status">
-                    <div class="player-status-badge" id="slidesPlayerStatusContainer">
-                        <span id="playerStatusText">準備就緒</span>
-                        <span id="slidesPlayerStatusIndexWrap">(<input type="number" id="playerJumpInput" class="player-jump-input" min="1" max="458" value="1" onchange="onPlayerJumpInputChange(this.value, 'slides')" onkeydown="if(event.key==='Enter')onPlayerJumpInputChange(this.value, 'slides')" title="輸入編號跳轉"> / <span id="playerTotalCount">458</span>)</span>
+
+                <!-- Slides Autoplay Player Bar -->
+                <div class="slides-player-bar" id="slidesPlayerBar">
+                    <div class="player-bar-left">
+                        <button class="player-btn-main" id="playerBtnPlay" onclick="toggleAutoplay('slides')" title="依序自動連續朗讀當前卡牌之優化英文">
+                            <span>▶️</span> 自動連續播放
+                        </button>
+                        <button class="player-btn-secondary" id="playerBtnStop" onclick="stopAllAudio()" title="停止語音朗讀">
+                            ⏹️ 停止
+                        </button>
+                        <button class="player-btn-secondary" id="playerBtnPrev" onclick="prevAudioItem()" title="上一張卡牌" disabled>
+                            ⏮️
+                        </button>
+                        <button class="player-btn-secondary" id="playerBtnNext" onclick="nextAudioItem()" title="下一張卡牌" disabled>
+                            ⏭️
+                        </button>
+                        <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted); margin-left: 0.25rem;">
+                            <span>語速：</span>
+                            <select class="player-rate-select" id="playerRateSelect" onchange="changePlaybackRate(this.value)" title="調整語音朗讀速度">
+                                <option value="0.85">0.85x 慢速</option>
+                                <option value="1.0" selected>1.0x 標準</option>
+                                <option value="1.15">1.15x 快速</option>
+                            </select>
+                        </div>
+                        <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted);">
+                            <span>停頓：</span>
+                            <select class="player-rate-select" id="slidesPauseSelect" onchange="changePauseDuration(this.value)" title="調整朗讀間隔時間">
+                                <option value="500">0.5s</option>
+                                <option value="1000" selected>1.0s</option>
+                                <option value="1500">1.5s</option>
+                                <option value="2000">2.0s</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="player-progress-container" title="拖動或點擊跳轉進度">
-                        <input type="range" class="player-progress-slider" id="playerSlider" min="1" max="458" value="1" oninput="onProgressSliderInput(this.value, 'slides')" onchange="onProgressSliderChange(this.value, 'slides')">
+                    <div class="player-bar-status">
+                        <div class="player-status-badge" id="slidesPlayerStatusContainer">
+                            <span id="playerStatusText">準備就緒</span>
+                            <span id="slidesPlayerStatusIndexWrap">(<input type="number" id="playerJumpInput" class="player-jump-input" min="1" max="458" value="1" onchange="onPlayerJumpInputChange(this.value, 'slides')" onkeydown="if(event.key==='Enter')onPlayerJumpInputChange(this.value, 'slides')" title="輸入編號跳轉"> / <span id="playerTotalCount">458</span>)</span>
+                        </div>
+                        <div class="player-progress-container" title="拖動或點擊跳轉進度">
+                            <input type="range" class="player-progress-slider" id="playerSlider" min="1" max="458" value="1" oninput="onProgressSliderInput(this.value, 'slides')" onchange="onProgressSliderChange(this.value, 'slides')">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2914,8 +2969,50 @@ def main():
             }});
         }}
 
+        function updateStickyHeaderOffset() {{
+            const header = document.querySelector('header');
+            if (header) {{
+                const h = Math.ceil(header.getBoundingClientRect().height);
+                document.documentElement.style.setProperty('--header-offset', h + 'px');
+            }}
+        }}
+
+        function getStickyTopOffset() {{
+            const header = document.querySelector('header');
+            let offset = header ? header.offsetHeight : 0;
+            const activeSection = document.querySelector('.section-view.active');
+            if (activeSection) {{
+                const stickyControls = activeSection.querySelector('.view-sticky-controls');
+                if (stickyControls) {{
+                    offset += stickyControls.offsetHeight;
+                }}
+            }}
+            return offset;
+        }}
+
+        function scrollCardIntoVisibleArea(cardEl) {{
+            if (!cardEl) return;
+            const stickyOffset = getStickyTopOffset();
+            const cardRect = cardEl.getBoundingClientRect();
+            const cardAbsoluteTop = window.scrollY + cardRect.top;
+            const viewportHeight = window.innerHeight;
+            const visibleHeight = Math.max(180, viewportHeight - stickyOffset);
+            const desiredViewportTop = stickyOffset + Math.max(20, (visibleHeight - cardRect.height) / 2);
+            const targetScrollY = Math.max(0, cardAbsoluteTop - desiredViewportTop);
+            window.scrollTo({{
+                top: targetScrollY,
+                behavior: 'smooth'
+            }});
+        }}
+
         // Initialize UI
         document.addEventListener('DOMContentLoaded', () => {{
+            updateStickyHeaderOffset();
+            const headerEl = document.querySelector('header');
+            if (headerEl && window.ResizeObserver) {{
+                new ResizeObserver(updateStickyHeaderOffset).observe(headerEl);
+            }}
+            window.addEventListener('resize', updateStickyHeaderOffset);
             loadDisplaySettings();
             renderPrinciples();
             renderSlides();
@@ -2954,6 +3051,7 @@ def main():
                 searchQuery = '';
                 handleSearch();
             }}
+            updateStickyHeaderOffset();
 
             if (viewName === 'graph') {{
                 initOrResizeGraph();
@@ -3181,7 +3279,7 @@ def main():
             setTimeout(() => {{
                 const targetCard = document.getElementById(`card-slide-${{key}}`);
                 if (targetCard) {{
-                    targetCard.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
+                    scrollCardIntoVisibleArea(targetCard);
                     targetCard.classList.add('highlight-pulse');
                     setTimeout(() => {{
                         targetCard.classList.remove('highlight-pulse');
@@ -3206,7 +3304,7 @@ def main():
             setTimeout(() => {{
                 const targetCard = document.getElementById(`card-principle-${{num}}`);
                 if (targetCard) {{
-                    targetCard.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
+                    scrollCardIntoVisibleArea(targetCard);
                     targetCard.classList.add('highlight-pulse');
                     setTimeout(() => {{
                         targetCard.classList.remove('highlight-pulse');
@@ -3504,10 +3602,10 @@ def main():
                 b.innerHTML = '🔊';
             }});
 
-            // Smooth scroll & highlight card
+            // Smooth scroll & highlight card (accounting for sticky top header & player bar)
             const cardEl = document.getElementById(item.cardId);
             if (cardEl) {{
-                cardEl.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
+                scrollCardIntoVisibleArea(cardEl);
                 cardEl.classList.add('now-playing');
                 const btn = cardEl.querySelector('.audio-play-btn');
                 if (btn) {{
@@ -3714,6 +3812,9 @@ def main():
         }}
 
         function updatePlayerBarUI() {{
+            const pBar = document.getElementById('principlesPlayerBar');
+            const sBar = document.getElementById('slidesPlayerBar');
+
             // Principles controls
             const pPlayBtn = document.getElementById('principlesPlayerBtnPlay');
             const pStatusLabel = document.getElementById('principlesPlayerStatusLabel');
@@ -3742,6 +3843,8 @@ def main():
                 const label = currentItem ? currentItem.label : '';
 
                 if (autoplayMode === 'principles') {{
+                    if (pBar) pBar.classList.add('playing-active');
+                    if (sBar) sBar.classList.remove('playing-active');
                     if (pPlayBtn) {{
                         pPlayBtn.innerHTML = isPaused ? '<span>▶️</span> 繼續播放' : '<span>⏸️</span> 暫停播放';
                         pPlayBtn.title = isPaused ? '繼續播放' : '暫停播放';
@@ -3779,6 +3882,8 @@ def main():
                     if (sPrevBtn) sPrevBtn.disabled = true;
                     if (sNextBtn) sNextBtn.disabled = true;
                 }} else {{
+                    if (sBar) sBar.classList.add('playing-active');
+                    if (pBar) pBar.classList.remove('playing-active');
                     if (sPlayBtn) {{
                         sPlayBtn.innerHTML = isPaused ? '<span>▶️</span> 繼續播放' : '<span>⏸️</span> 暫停播放';
                         sPlayBtn.title = isPaused ? '繼續播放' : '暫停播放';
@@ -3817,6 +3922,8 @@ def main():
                     if (pNextBtn) pNextBtn.disabled = true;
                 }}
             }} else {{
+                if (pBar) pBar.classList.remove('playing-active');
+                if (sBar) sBar.classList.remove('playing-active');
                 if (pPlayBtn) pPlayBtn.innerHTML = '<span>▶️</span> 自動連續播放';
                 if (pStatusLabel) pStatusLabel.innerText = `準備就緒`;
                 if (pJumpInput) {{
