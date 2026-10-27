@@ -650,6 +650,7 @@ def main():
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {{
+            color-scheme: dark;
             --primary: #6366f1;
             --primary-hover: #4f46e5;
             --bg-dark: #0f172a;
@@ -665,6 +666,7 @@ def main():
         }}
 
         .light-mode {{
+            color-scheme: light;
             --primary: #4f46e5;
             --primary-hover: #3730a3;
             --bg-dark: #f8fafc;
@@ -1442,20 +1444,49 @@ def main():
         }}
 
         .player-rate-select {{
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 0.4rem 0.6rem;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: #f8fafc;
+            padding: 0.4rem 0.65rem;
             border-radius: 8px;
             font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
             outline: none;
             font-family: inherit;
+            color-scheme: dark;
+            transition: all 0.2s ease;
+        }}
+
+        .player-rate-select:hover, .player-rate-select:focus {{
+            border-color: var(--primary);
+            background: #334155;
+            box-shadow: 0 0 0 2px var(--glow);
+        }}
+
+        .player-rate-select option {{
+            background-color: #0f172a;
+            color: #f8fafc;
+            padding: 0.35rem 0.5rem;
         }}
 
         .light-mode .player-rate-select {{
-            background: rgba(0, 0, 0, 0.04);
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.16);
+            color: #0f172a;
+            color-scheme: light;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }}
+
+        .light-mode .player-rate-select:hover, .light-mode .player-rate-select:focus {{
+            border-color: var(--primary);
+            background: #f8fafc;
+            box-shadow: 0 0 0 2px var(--glow);
+        }}
+
+        .light-mode .player-rate-select option {{
+            background-color: #ffffff;
+            color: #0f172a;
         }}
 
         .player-bar-status {{
@@ -1486,24 +1517,26 @@ def main():
             font-weight: 700;
             text-align: center;
             color: var(--primary);
-            background: rgba(255, 255, 255, 0.08);
+            background: #1e293b;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 6px;
             outline: none;
             transition: all 0.2s ease;
             font-family: inherit;
+            color-scheme: dark;
         }}
 
         .player-jump-input:focus {{
             border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.15);
+            background: #334155;
             box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
         }}
 
         .light-mode .player-jump-input {{
             color: var(--primary);
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.15);
+            background: #ffffff;
+            border-color: rgba(0, 0, 0, 0.18);
+            color-scheme: light;
         }}
 
         .player-progress-container {{
