@@ -44,7 +44,8 @@
 - **自包含 (Self-contained)**：
   - 保持單一 HTML 檔案包含所有資料、樣式與腳本，無須 Node.js、npm 或後端伺服器即可離線或線上流暢運作。
 - **獨立欄位顯示開關 (Display Toggles)**：
-  - 必須支援「簡報原文」、「優化中文」、「優化英文」、「優化台文」與「對照原則」獨立開關。
+  - 必須支援「簡報原文」、「優化中文」、「優化英文」、「優化台文」、「白話字」與「對照原則」獨立開關。
+  - 白話字（POJ）由 `poj_convert.py`（taibun + 校正表）於建置時自動產生；讀錯的詞加進 `POJ_OVERRIDES`/`PHRASE_OVERRIDES`，單條可在 `manual_overrides.json` 用 `"poj"` 欄位手動指定。
   - 必須透過 `localStorage` 記住使用者瀏覽偏好。
 - **極致 RWD 體驗**：
   - 手機端 (< 768px)：章節篩選器與開關按鈕須維持橫向滑動膠囊（Horizontal Scroll Chips），禁止折行破壞版面。

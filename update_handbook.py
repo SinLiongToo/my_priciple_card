@@ -620,8 +620,27 @@ def main():
             
     print(f"Saved regenerated handbook: {md_path}")
     
+    # Pe̍h-ōe-jī (POJ) romanization of the Taiwanese text, generated at build time.
+    # manual_overrides.json may pin a hand-corrected value: {"12": {"poj": "..."}}
+    # or {"原則 3": {"poj": "..."}}.
+    try:
+        from poj_convert import to_poj, AVAILABLE as POJ_AVAILABLE
+    except Exception:
+        to_poj, POJ_AVAILABLE = (lambda t: ""), False
+    if not POJ_AVAILABLE:
+        print("  [WARN] taibun 未安裝 (pip install taibun)，白話字欄位將留空。")
+    for item in final_items:
+        ov = overrides.get(item['key'])
+        manual = ov.get('poj') if isinstance(ov, dict) else None
+        item['poj'] = manual or ("" if item['taiwanese'].startswith("[TBD]") else to_poj(item['taiwanese']))
+    for p in principles:
+        ov = (overrides.get(f"原則 {p['num']}") or overrides.get(f"原則_{p['num']}")
+              or overrides.get(f"原則{p['num']}"))
+        manual = ov.get('poj') if isinstance(ov, dict) else None
+        p['poj'] = manual or to_poj(p['taiwanese'])
+
     print("\nStep 6: Generating HTML card deck web application...")
-    
+
     # We serialize slides and principles as JSON variables in HTML
     principles_json = json.dumps(principles, ensure_ascii=False)
     slides_json = json.dumps(final_items, ensure_ascii=False)
@@ -1611,6 +1630,23 @@ def main():
 
         .lang-txt {{
             color: var(--text-main);
+        }}
+
+        .lang-poj {{
+            margin-top: 0.35rem;
+            font-family: "Charis SIL", "Gentium Plus", "Noto Serif", "Times New Roman", serif;
+            font-size: 0.92em;
+            line-height: 1.6;
+            color: var(--text-muted);
+            overflow-wrap: anywhere;
+        }}
+
+        .lang-poj:empty {{
+            display: none;
+        }}
+
+        body.hide-poj .lang-poj {{
+            display: none !important;
         }}
 
         .original-eng {{
@@ -2650,6 +2686,9 @@ def main():
                         <button class="toggle-chip active" id="toggle-taiwanese" onclick="toggleField('taiwanese')" title="顯示/關閉優化台文">
                             <span class="chip-dot"></span> 優化台文
                         </button>
+                        <button class="toggle-chip active" id="toggle-poj" onclick="toggleField('poj')" title="顯示/關閉台文白話字（Pe̍h-ōe-jī）">
+                            <span class="chip-dot"></span> 白話字
+                        </button>
                         <button class="toggle-chip active" id="toggle-principles" onclick="toggleField('principles')" title="顯示/關閉核心原則標籤與對照連結">
                             <span class="chip-dot"></span> 對照原則
                         </button>
@@ -2829,6 +2868,7 @@ def main():
                                 <div class="lang-section lang-taiwanese" id="randomBackTaiwaneseSection">
                                     <span class="lang-label">優化台文 (Taiwanese)</span>
                                     <p class="lang-txt" id="randomBackTaiwanese">台語漢字智慧</p>
+                                    <p class="lang-poj" lang="nan-Latn" id="randomBackPoj"></p>
                                 </div>
                                 <div class="all-hidden-notice">⚠️ 所有三語翻譯欄位均已關閉，請由上方「顯示切換」開啟</div>
                             </div>
@@ -2913,6 +2953,7 @@ def main():
                             <div class="lang-section lang-taiwanese">
                                 <span class="lang-label">台語 (Taiwanese)</span>
                                 <p class="lang-txt" id="drawerTaiwanese"></p>
+                                <p class="lang-poj" lang="nan-Latn" id="drawerPoj"></p>
                             </div>
 
                             <div class="drawer-connected-section">
@@ -2951,7 +2992,8 @@ def main():
             principles: true,
             mandarin: true,
             english: true,
-            taiwanese: true
+            taiwanese: true,
+            poj: true
         }};
 
         let displaySettings = {{ ...DEFAULT_DISPLAY }};
@@ -2980,18 +3022,18 @@ def main():
 
         function applyPreset(type) {{
             if (type === 'all') {{
-                displaySettings = {{ original: true, principles: true, mandarin: true, english: true, taiwanese: true }};
+                displaySettings = {{ original: true, principles: true, mandarin: true, english: true, taiwanese: true, poj: true }};
             }} else if (type === 'trilingual') {{
-                displaySettings = {{ original: false, principles: true, mandarin: true, english: true, taiwanese: true }};
+                displaySettings = {{ original: false, principles: true, mandarin: true, english: true, taiwanese: true, poj: displaySettings.poj }};
             }} else if (type === 'original_only') {{
-                displaySettings = {{ original: true, principles: true, mandarin: false, english: false, taiwanese: false }};
+                displaySettings = {{ original: true, principles: true, mandarin: false, english: false, taiwanese: false, poj: false }};
             }}
             saveDisplaySettings();
             applyDisplayClasses();
         }}
 
         function applyDisplayClasses() {{
-            const fields = ['original', 'principles', 'mandarin', 'english', 'taiwanese'];
+            const fields = ['original', 'principles', 'mandarin', 'english', 'taiwanese', 'poj'];
             fields.forEach(f => {{
                 const btn = document.getElementById(`toggle-${{f}}`);
                 if (displaySettings[f]) {{
@@ -3209,6 +3251,7 @@ def main():
                         <div class="lang-section lang-taiwanese">
                             <span class="lang-label">台語 (Taiwanese)</span>
                             <p class="lang-txt">${{p.taiwanese}}</p>
+                            <p class="lang-poj" lang="nan-Latn">${{p.poj || ''}}</p>
                         </div>
                         <div class="all-hidden-notice">⚠️ 所有三語翻譯欄位均已關閉</div>
                         <div class="ref-items-container">
@@ -3249,6 +3292,7 @@ def main():
                     s.mandarin.toLowerCase().includes(searchQuery) ||
                     s.english.toLowerCase().includes(searchQuery) ||
                     s.taiwanese.toLowerCase().includes(searchQuery) ||
+                    (s.poj || '').toLowerCase().includes(searchQuery) ||
                     matchesPrincipleSearch;
                 return matchesSlide && matchesSearch;
             }});
@@ -3288,6 +3332,7 @@ def main():
                     <div class="lang-section lang-taiwanese">
                         <span class="lang-label">優化台文 (Taiwanese)</span>
                         <p class="lang-txt">${{s.taiwanese}}</p>
+                        <p class="lang-poj" lang="nan-Latn">${{s.poj || ''}}</p>
                     </div>
                     <div class="all-hidden-notice">⚠️ 簡報原文與三語翻譯均已關閉</div>
                 `;
@@ -3527,7 +3572,8 @@ def main():
                     p.title.toLowerCase().includes(searchQuery) ||
                     p.mandarin.toLowerCase().includes(searchQuery) ||
                     p.english.toLowerCase().includes(searchQuery) ||
-                    p.taiwanese.toLowerCase().includes(searchQuery);
+                    p.taiwanese.toLowerCase().includes(searchQuery) ||
+                    (p.poj || '').toLowerCase().includes(searchQuery);
                 return matchesChapter && matchesSearch;
             }});
         }}
@@ -3551,6 +3597,7 @@ def main():
                     s.mandarin.toLowerCase().includes(searchQuery) ||
                     s.english.toLowerCase().includes(searchQuery) ||
                     s.taiwanese.toLowerCase().includes(searchQuery) ||
+                    (s.poj || '').toLowerCase().includes(searchQuery) ||
                     matchesPrincipleSearch;
                 return matchesSlide && matchesSearch;
             }});
@@ -4028,6 +4075,7 @@ def main():
                 document.getElementById('randomBackMandarin').innerText = cardData.mandarin;
                 document.getElementById('randomBackEnglish').innerText = cardData.english;
                 document.getElementById('randomBackTaiwanese').innerText = cardData.taiwanese;
+                document.getElementById('randomBackPoj').textContent = cardData.poj || '';
                 
                 // Update matched principles badges
                 const matched = getMatchedPrinciples(cardData.key);
@@ -4598,6 +4646,7 @@ def main():
             document.getElementById('drawerMandarin').innerText = node.data.mandarin;
             document.getElementById('drawerEnglish').innerText = node.data.english;
             document.getElementById('drawerTaiwanese').innerText = node.data.taiwanese;
+            document.getElementById('drawerPoj').textContent = node.data.poj || '';
             const drawerAudioBtn = document.getElementById('drawerAudioBtn');
             if (drawerAudioBtn) {{
                 drawerAudioBtn.classList.remove('speaking');
@@ -4671,6 +4720,7 @@ def main():
             document.getElementById('drawerMandarin').innerText = node.data.mandarin || '無中文潤稿';
             document.getElementById('drawerEnglish').innerText = node.data.english || node.data.original || '';
             document.getElementById('drawerTaiwanese').innerText = node.data.taiwanese || '無台文潤稿';
+            document.getElementById('drawerPoj').textContent = node.data.poj || '';
             const drawerAudioBtn = document.getElementById('drawerAudioBtn');
             if (drawerAudioBtn) {{
                 drawerAudioBtn.classList.remove('speaking');
