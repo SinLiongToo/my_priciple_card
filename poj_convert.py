@@ -67,7 +67,7 @@ PHRASE_OVERRIDES = {
     "相信": "siong-sìn", "鬥相共": "tàu-sio-kāng", "共識": "kiōng-sek",
     "共通": "kiōng-thong", "共贏": "kiōng-iâⁿ", "上班": "siōng-pan",
     "下班": "hā-pan", "落班": "lo̍h-pan", "頂懸": "téng-koân",
-    "學會": "o̍h-ē", "沉澱": "tîm-tiān", "蜥蜴腦": "sek-ia̍h-náu",
+    "學會": "o̍h-ē", "會使用": "ē-sái ēng", "沉澱": "tîm-tiān", "蜥蜴腦": "sek-ia̍h-náu",
     "步驟": "pō͘-chō͘", "嗜好": "sī-hòⁿ", "惦惦": "tiām-tiām",
     "恬恬": "tiām-tiām", "憨憨": "khám-khám", "憋氣": "pih-khùi",
     "汲取": "kip-chhú", "隔閡": "keh-gāi", "癒": "jú", "療癒": "liâu-jú",
