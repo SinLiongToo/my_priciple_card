@@ -111,8 +111,10 @@ def parse_existing_md(md_path):
     with open(md_path, "r", encoding="utf-8-sig") as f:
         content = f.read()
         
-    parts = content.split("## 第二部分：簡報對照與逐條潤稿 (簡報版)")
-    part1_content = parts[0]
+    # Accept both half-width and full-width parentheses (the writer emits full-width);
+    # cut at the FIRST Part 2 heading so stale duplicated Part 2 copies are dropped.
+    parts = re.split(r"## 第二部分：簡報對照與逐條潤稿\s*[(（]簡報版[)）]", content, maxsplit=1)
+    part1_content = re.sub(r"\s*---\s*$", "", parts[0])
     
     # Parse chapters and their golden quotes
     chapters = []
