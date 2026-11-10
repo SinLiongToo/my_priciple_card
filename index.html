@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>工作的管見 (My Two Cents) - 工作原則卡牌</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="工作的管見">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
     <meta name="description" content="工作的管見 (My Two Cents)：From the Floor: My Two Cents on Practical Work Principles - 職場生存與成長的避坑指南">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
@@ -799,6 +807,116 @@
         .player-btn-secondary:disabled {
             opacity: 0.35;
             cursor: not-allowed;
+        }
+
+        .player-extra-row {
+            flex-basis: 100%;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .player-extra-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            white-space: nowrap;
+        }
+
+        .player-btn-secondary.is-on {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .pl-status-extra {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .player-extra-row {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 2px;
+            }
+            .player-extra-row::-webkit-scrollbar {
+                display: none;
+            }
+            .player-extra-row > * {
+                flex-shrink: 0;
+            }
+        }
+
+        .speech-hint {
+            position: fixed;
+            left: 50%;
+            bottom: 16px;
+            transform: translateX(-50%);
+            width: min(420px, calc(100vw - 32px));
+            z-index: 3000;
+            background: var(--bg-glass);
+            color: var(--text-main);
+            border: 1px solid var(--primary);
+            border-radius: 14px;
+            padding: 0.85rem 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            font-size: 0.88rem;
+            line-height: 1.55;
+        }
+
+        .speech-hint-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .speech-hint-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            cursor: pointer;
+            padding: 0.2rem 0.4rem;
+        }
+
+        .speech-hint ul {
+            margin: 0;
+            padding-left: 1.2rem;
+        }
+
+        .player-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translateX(-50%) translateY(20px);
+            max-width: calc(100vw - 32px);
+            z-index: 2900;
+            background: var(--bg-glass);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            border-radius: 99px;
+            padding: 0.55rem 1.1rem;
+            font-size: 0.85rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .player-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
 
         .player-rate-select {
@@ -1986,7 +2104,7 @@
             <div class="brand-block">
                 <div class="brand-title-row">
                     <h1 class="brand-title">工作的管見 <span class="en-title">My Two Cents</span></h1>
-                    <span class="update-badge" title="最後更新：2026-11-09 05:23">🕒 2026-11-09 05:23</span>
+                    <span class="update-badge" title="最後更新：2026-11-10 09:24">🕒 2026-11-10 09:24</span>
                 </div>
                 <p class="brand-sub">
                     <span>職場生存與成長的避坑指南 (三語對照)</span>
@@ -2062,7 +2180,7 @@
                 <!-- Principles Autoplay Player Bar -->
                 <div class="slides-player-bar principles-player-bar" id="principlesPlayerBar">
                     <div class="player-bar-left">
-                        <button class="player-btn-main" id="principlesPlayerBtnPlay" onclick="toggleAutoplay('principles')" title="依序自動連續朗讀當前核心原則之優化英文">
+                        <button class="player-btn-main" id="principlesPlayerBtnPlay" onclick="toggleAutoplay('principles')" title="依序自動連續朗讀目前列出的核心原則（朗讀語言可在下方選擇）">
                             <span>▶️</span> 自動連續播放
                         </button>
                         <button class="player-btn-secondary" id="principlesPlayerBtnStop" onclick="stopAllAudio()" title="停止語音朗讀">
@@ -2077,9 +2195,11 @@
                         <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted); margin-left: 0.25rem;">
                             <span>語速：</span>
                             <select class="player-rate-select" id="principlesPlayerRateSelect" onchange="changePlaybackRate(this.value)" title="調整語音朗讀速度">
+                                <option value="0.75">0.75x 很慢</option>
                                 <option value="0.85">0.85x 慢速</option>
-                                <option value="1.0" selected>1.0x 標準</option>
+                                <option value="1" selected>1.0x 標準</option>
                                 <option value="1.15">1.15x 快速</option>
+                                <option value="1.3">1.3x 很快</option>
                             </select>
                         </div>
                         <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted);">
@@ -2089,6 +2209,8 @@
                                 <option value="1000" selected>1.0s</option>
                                 <option value="1500">1.5s</option>
                                 <option value="2000">2.0s</option>
+                                <option value="3000">3.0s</option>
+                                <option value="5000">5.0s</option>
                             </select>
                         </div>
                     </div>
@@ -2100,6 +2222,28 @@
                         <div class="player-progress-container" title="拖動或點擊跳轉進度">
                             <input type="range" class="player-progress-slider" id="principlesPlayerSlider" min="1" max="20" value="1" oninput="onProgressSliderInput(this.value, 'principles')" onchange="onProgressSliderChange(this.value, 'principles')">
                         </div>
+                    </div>
+                    <div class="player-extra-row">
+                        <label class="player-extra-item">🗣️ 朗讀
+                            <select class="player-rate-select pl-lang" onchange="setReadLang(this.value)" title="選擇朗讀語言">
+                                <option value="en">English</option>
+                                <option value="zh">中文</option>
+                                <option value="both">中＋英</option>
+                            </select>
+                        </label>
+                        <button type="button" class="player-btn-secondary pl-shuffle" onclick="toggleShuffle()" aria-pressed="false" title="隨機順序播放">🔀 隨機</button>
+                        <button type="button" class="player-btn-secondary pl-loop" onclick="toggleLoop()" aria-pressed="false" title="播完從頭再播">🔁 循環</button>
+                        <label class="player-extra-item">⏲ 定時
+                            <select class="player-rate-select pl-timer" onchange="setSleepTimer(this.value)" title="定時自動停止">
+                                <option value="0">關閉</option>
+                                <option value="10">10 分</option>
+                                <option value="20">20 分</option>
+                                <option value="30">30 分</option>
+                                <option value="60">60 分</option>
+                            </select>
+                        </label>
+                        <button type="button" class="player-btn-secondary" onclick="applySleepMode()" title="語速 0.85x、停頓 5 秒、20 分鐘後自動停止">🌙 睡前模式</button>
+                        <span class="pl-status-extra" aria-live="polite"></span>
                     </div>
                 </div>
             </div>
@@ -2125,7 +2269,7 @@
                 <!-- Slides Autoplay Player Bar -->
                 <div class="slides-player-bar" id="slidesPlayerBar">
                     <div class="player-bar-left">
-                        <button class="player-btn-main" id="playerBtnPlay" onclick="toggleAutoplay('slides')" title="依序自動連續朗讀當前卡牌之優化英文">
+                        <button class="player-btn-main" id="playerBtnPlay" onclick="toggleAutoplay('slides')" title="依序自動連續朗讀目前列出的卡牌（朗讀語言可在下方選擇）">
                             <span>▶️</span> 自動連續播放
                         </button>
                         <button class="player-btn-secondary" id="playerBtnStop" onclick="stopAllAudio()" title="停止語音朗讀">
@@ -2140,9 +2284,11 @@
                         <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted); margin-left: 0.25rem;">
                             <span>語速：</span>
                             <select class="player-rate-select" id="playerRateSelect" onchange="changePlaybackRate(this.value)" title="調整語音朗讀速度">
+                                <option value="0.75">0.75x 很慢</option>
                                 <option value="0.85">0.85x 慢速</option>
-                                <option value="1.0" selected>1.0x 標準</option>
+                                <option value="1" selected>1.0x 標準</option>
                                 <option value="1.15">1.15x 快速</option>
+                                <option value="1.3">1.3x 很快</option>
                             </select>
                         </div>
                         <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted);">
@@ -2152,6 +2298,8 @@
                                 <option value="1000" selected>1.0s</option>
                                 <option value="1500">1.5s</option>
                                 <option value="2000">2.0s</option>
+                                <option value="3000">3.0s</option>
+                                <option value="5000">5.0s</option>
                             </select>
                         </div>
                     </div>
@@ -2163,6 +2311,28 @@
                         <div class="player-progress-container" title="拖動或點擊跳轉進度">
                             <input type="range" class="player-progress-slider" id="playerSlider" min="1" max="458" value="1" oninput="onProgressSliderInput(this.value, 'slides')" onchange="onProgressSliderChange(this.value, 'slides')">
                         </div>
+                    </div>
+                    <div class="player-extra-row">
+                        <label class="player-extra-item">🗣️ 朗讀
+                            <select class="player-rate-select pl-lang" onchange="setReadLang(this.value)" title="選擇朗讀語言">
+                                <option value="en">English</option>
+                                <option value="zh">中文</option>
+                                <option value="both">中＋英</option>
+                            </select>
+                        </label>
+                        <button type="button" class="player-btn-secondary pl-shuffle" onclick="toggleShuffle()" aria-pressed="false" title="隨機順序播放">🔀 隨機</button>
+                        <button type="button" class="player-btn-secondary pl-loop" onclick="toggleLoop()" aria-pressed="false" title="播完從頭再播">🔁 循環</button>
+                        <label class="player-extra-item">⏲ 定時
+                            <select class="player-rate-select pl-timer" onchange="setSleepTimer(this.value)" title="定時自動停止">
+                                <option value="0">關閉</option>
+                                <option value="10">10 分</option>
+                                <option value="20">20 分</option>
+                                <option value="30">30 分</option>
+                                <option value="60">60 分</option>
+                            </select>
+                        </label>
+                        <button type="button" class="player-btn-secondary" onclick="applySleepMode()" title="語速 0.85x、停頓 5 秒、20 分鐘後自動停止">🌙 睡前模式</button>
+                        <span class="pl-status-extra" aria-live="polite"></span>
                     </div>
                 </div>
             </div>
@@ -2207,7 +2377,7 @@
                                 <div class="lang-section lang-english" id="randomBackEnglishSection">
                                     <div class="lang-header">
                                         <span class="lang-label">優化英文 (Polished English)</span>
-                                        <button class="audio-play-btn" id="randomBackAudioBtn" onclick="playRandomCardAudio(event, this)" title="播放優化英文語音">🔊</button>
+                                        <button class="audio-play-btn" id="randomBackAudioBtn" onclick="playRandomCardAudio(event, this)" title="朗讀這一則（語言依播放列設定）">🔊</button>
                                     </div>
                                     <p class="lang-txt" id="randomBackEnglish">English polished text</p>
                                 </div>
@@ -2292,7 +2462,7 @@
                             <div class="lang-section lang-english">
                                 <div class="lang-header">
                                     <span class="lang-label">English</span>
-                                    <button class="audio-play-btn" id="drawerAudioBtn" onclick="playDrawerEnglishAudio(event, this)" title="播放優化英文語音">🔊</button>
+                                    <button class="audio-play-btn" id="drawerAudioBtn" onclick="playDrawerEnglishAudio(event, this)" title="朗讀這一則（語言依播放列設定）">🔊</button>
                                 </div>
                                 <p class="lang-txt" id="drawerEnglish"></p>
                             </div>
@@ -2319,7 +2489,7 @@
     </main>
 
     <footer>
-        <p>© 2026 工作的管見 - 避坑指南與商務工作原則整理與潤稿系統 · 最後更新：2026-11-09 05:23</p>
+        <p>© 2026 工作的管見 - 避坑指南與商務工作原則整理與潤稿系統 · 最後更新：2026-11-10 09:24</p>
     </footer>
 
     <script>
@@ -2437,6 +2607,7 @@
             }
             window.addEventListener('resize', updateStickyHeaderOffset);
             loadDisplaySettings();
+            loadPlayerSettings();
             renderPrinciples();
             renderSlides();
             drawRandomCard();
@@ -2590,7 +2761,7 @@
                         <div class="lang-section lang-english">
                             <div class="lang-header">
                                 <span class="lang-label">English</span>
-                                <button class="audio-play-btn" onclick="playPrincipleAudio(event, this, ${p.num})" title="播放優化英文語音">🔊</button>
+                                <button class="audio-play-btn" onclick="playPrincipleAudio(event, this, ${p.num})" title="朗讀這一則（語言依播放列設定）">🔊</button>
                             </div>
                             <p class="lang-txt">${p.english}</p>
                         </div>
@@ -2671,7 +2842,7 @@
                     <div class="lang-section lang-english">
                         <div class="lang-header">
                             <span class="lang-label">優化英文 (Polished English)</span>
-                            <button class="audio-play-btn" onclick="playSlideAudio(event, this, '${s.key}')" title="播放優化英文語音">🔊</button>
+                            <button class="audio-play-btn" onclick="playSlideAudio(event, this, '${s.key}')" title="朗讀這一則（語言依播放列設定）">🔊</button>
                         </div>
                         <p class="lang-txt">${s.english}</p>
                     </div>
@@ -2766,12 +2937,29 @@
         }
 
         // ==========================================
-        // Speech Synthesis & Slides Autoplay Engine
+        // Speech Synthesis & Autoplay Engine (phone-safe)
+        //  - only cancel() while something is speaking/pending (Safari/Android)
+        //  - first speak() runs synchronously inside the click (iPhone gesture rule)
+        //  - per-utterance timeout so a lost onend never hangs the queue
+        //  - long texts split into sentences (Chrome cuts utterances after ~15 s)
+        //  - in-page hint (no browser alert dialogs) when nothing can be heard
         // ==========================================
-        const speechSynth = window.speechSynthesis;
+        if (/\bLine\//i.test(navigator.userAgent) && !/[?&]openExternalBrowser=1/.test(location.search)) {
+            location.replace(location.pathname + '?openExternalBrowser=1' + location.hash);
+        }
+
+        const speechSynth = window.speechSynthesis || null;
+        const NOVELTY_VOICE = /^(albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|ralph|fred|kathy|grandma|grandpa|eddy|flo|reed|rocko|sandy|shelley)\b/i;
+        const IS_MOBILE = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        const PLAYER_KEY = 'work_principles_player_v1';
+        let enVoices = [], zhVoices = [];
         let speechVoice = null;
         let playbackRate = 1.0;
         let autoplayPauseDuration = 1000;
+        let readLang = 'en';          // 'en' | 'zh' | 'both'
+        let shuffleOn = false;
+        let loopOn = false;
+        let sleepTimerMin = 0, sleepTimerEnd = 0, sleepTimerId = null, sleepTickId = null;
         let isAutoplaying = false;
         let isPaused = false;
         let autoplayMode = 'principles'; // 'principles' or 'slides'
@@ -2779,69 +2967,305 @@
         let currentQueueIndex = -1;
         let currentlyPlayingCardId = null;
         let currentRandomCard = null;
+        let playToken = 0;
+        let speechOk = false;
+        let wakeLock = null;
+        let lastPositions = {};        // mode -> last played key (resume point)
+
+        function loadVoices() {
+            if (!speechSynth) return;
+            try {
+                const all = speechSynth.getVoices() || [];
+                enVoices = all.filter(v => /^en[-_]/i.test(v.lang) && !NOVELTY_VOICE.test(v.name));
+                zhVoices = all.filter(v => /^(zh|cmn)[-_]/i.test(v.lang) && !NOVELTY_VOICE.test(v.name));
+                speechVoice = pickVoice('en');
+            } catch (e) {}
+        }
+
+        function pickVoice(lang) {
+            const list = lang === 'zh' ? zhVoices : enVoices;
+            if (!list.length) return null;   // let the browser choose; utterance.lang is still set
+            const local = list.filter(v => v.localService !== false);
+            if (lang === 'zh') {
+                const isTW = v => /(zh|cmn)[-_](TW|Hant)/i.test(v.lang);
+                const pool = local.filter(isTW).length ? local.filter(isTW)
+                           : list.filter(isTW).length ? list.filter(isTW)
+                           : (local.length ? local : list);
+                return pool.find(v => v.default) || pool[0];
+            }
+            const isUS = v => /en[-_]US/i.test(v.lang);
+            if (!IS_MOBILE) {
+                // Desktop: the Google / Natural voices sound best and work reliably.
+                const nice = list.find(v => isUS(v) && /Google|Natural/i.test(v.name));
+                if (nice) return nice;
+            }
+            const pool = local.filter(isUS).length ? local.filter(isUS) : (local.length ? local : list);
+            return pool.find(v => v.default) || pool[0];
+        }
 
         function initSpeechVoices() {
             if (!speechSynth) return;
-            const updateVoice = () => {
-                try {
-                    const voices = speechSynth.getVoices();
-                    if (!voices || voices.length === 0) return;
-                    // Preference order: Google US English, Natural en-US, Samantha/Alex, any en-US, any en
-                    speechVoice = voices.find(v => v.lang === 'en-US' && (v.name.includes('Google') || v.name.includes('Natural'))) ||
-                                  voices.find(v => v.name.includes('Samantha') || v.name.includes('Alex')) ||
-                                  voices.find(v => v.lang === 'en-US') ||
-                                  voices.find(v => v.lang.startsWith('en')) ||
-                                  voices[0];
-                } catch(e) {}
-            };
-            updateVoice();
-            if (speechSynth.onvoiceschanged !== undefined) {
-                speechSynth.onvoiceschanged = updateVoice;
-            }
+            loadVoices();
+            if (speechSynth.onvoiceschanged !== undefined) speechSynth.onvoiceschanged = loadVoices;
         }
         initSpeechVoices();
 
-        function stopAllAudio() {
-            if (speechSynth) {
-                try { speechSynth.cancel(); } catch(e) {}
+        const waitMs = ms => new Promise(r => setTimeout(r, ms));
+
+        function splitForSpeech(text) {
+            const s = String(text || '').replace(/\s+/g, ' ').trim();
+            if (!s) return [];
+            const parts = s.match(/[^.!?。！？；;]+[.!?。！？；;]*[)"」）]*\s*/g) || [s];
+            const out = [];
+            let buf = '';
+            for (const p of parts) {
+                if (buf && (buf + p).length > 180) { out.push(buf.trim()); buf = p; }
+                else buf += p;
             }
+            if (buf.trim()) out.push(buf.trim());
+            return out;
+        }
+
+        function speakOne(text, lang) {
+            return new Promise(resolve => {
+                if (!speechSynth) { showSpeechHint(); resolve(); return; }
+                if (!text) { resolve(); return; }
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = lang === 'zh' ? 'zh-TW' : 'en-US';
+                const v = pickVoice(lang);
+                if (v) u.voice = v;
+                u.rate = playbackRate;
+                let done = false, started = false;
+                const finish = () => { if (!done) { done = true; resolve(); } };
+                u.onstart = () => { started = true; speechOk = true; };
+                u.onend = finish;
+                u.onerror = finish;
+                const perChar = lang === 'zh' ? 330 : 110;
+                setTimeout(finish, 4000 + text.length * perChar / (u.rate || 1));
+                setTimeout(() => { if (!started && !speechOk && !done) showSpeechHint(); }, 2500);
+                if (speechSynth.paused) speechSynth.resume();
+                speechSynth.speak(u);
+            });
+        }
+
+        // Speaks [{text, lang}] in order. Resolves true when finished, false when cancelled.
+        // The first speakOne() call happens synchronously (no await before it).
+        async function speakSequence(parts, token) {
+            for (let i = 0; i < parts.length; i++) {
+                const chunks = splitForSpeech(parts[i].text);
+                for (const chunk of chunks) {
+                    if (token !== playToken) return false;
+                    await speakOne(chunk, parts[i].lang);
+                }
+                if (token !== playToken) return false;
+                if (i < parts.length - 1) await waitMs(400);
+            }
+            return token === playToken;
+        }
+
+        function partsFor(en, zh) {
+            if (readLang === 'zh') return zh ? [{ text: zh, lang: 'zh' }] : [{ text: en, lang: 'en' }];
+            if (readLang === 'both') return [zh && { text: zh, lang: 'zh' }, en && { text: en, lang: 'en' }].filter(Boolean);
+            return [{ text: en || zh, lang: en ? 'en' : 'zh' }];
+        }
+
+        function cancelSpeech() {
+            playToken++;
+            if (speechSynth && (speechSynth.speaking || speechSynth.pending)) {
+                try { speechSynth.cancel(); } catch (e) {}
+            }
+        }
+
+        // ---------- in-page hint & toast ----------
+        let speechHintShown = false;
+        function showSpeechHint() {
+            if (speechHintShown) return;
+            speechHintShown = true;
+            const ua = navigator.userAgent;
+            const inApp = /\bLine\/|FBAN|FBAV|Instagram|MicroMessenger/i.test(ua);
+            const ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            const tips = [];
+            if (!speechSynth) tips.push('這個瀏覽器不支援語音朗讀，請改用 Chrome（Android／電腦）或 Safari（iPhone）。');
+            if (inApp) tips.push('您正在 LINE／Facebook／IG 的內建瀏覽器中，請按右上角「⋯」→「用瀏覽器開啟」。');
+            if (ios) tips.push('iPhone 請把側邊的「靜音」開關關掉。');
+            tips.push('把手機的「媒體」音量調大。');
+            tips.push('Android 若仍無聲，請到「設定 → 文字轉語音」安裝英文／中文語音。');
+            const el = document.createElement('div');
+            el.className = 'speech-hint';
+            el.setAttribute('role', 'alert');
+            el.innerHTML = `<div class="speech-hint-head"><strong>🔇 聽不到聲音嗎？</strong><button type="button" class="speech-hint-close" aria-label="關閉">✕</button></div><ul>${tips.map(t => `<li>${t}</li>`).join('')}</ul>`;
+            el.querySelector('.speech-hint-close').onclick = () => el.remove();
+            document.body.appendChild(el);
+        }
+
+        let playerToastTimer = null;
+        function playerToast(msg) {
+            let el = document.getElementById('playerToast');
+            if (!el) {
+                el = document.createElement('div');
+                el.id = 'playerToast';
+                el.className = 'player-toast';
+                el.setAttribute('role', 'status');
+                document.body.appendChild(el);
+            }
+            el.textContent = msg;
+            el.classList.add('show');
+            clearTimeout(playerToastTimer);
+            playerToastTimer = setTimeout(() => el.classList.remove('show'), 2800);
+        }
+
+        // ---------- screen wake lock (keeps the phone awake while auto-playing) ----------
+        async function requestWakeLock() {
+            if (!('wakeLock' in navigator) || wakeLock) return;
+            try {
+                wakeLock = await navigator.wakeLock.request('screen');
+                wakeLock.addEventListener('release', () => { wakeLock = null; updatePlayerExtrasUI(); });
+            } catch (e) { wakeLock = null; }
+            updatePlayerExtrasUI();
+        }
+        function releaseWakeLock() {
+            if (wakeLock) { try { wakeLock.release(); } catch (e) {} wakeLock = null; }
+            updatePlayerExtrasUI();
+        }
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible' && isAutoplaying && !isPaused) requestWakeLock();
+        });
+
+        // ---------- sleep timer ----------
+        function clearSleepTimer() {
+            clearTimeout(sleepTimerId);
+            clearInterval(sleepTickId);
+            sleepTimerId = null; sleepTickId = null; sleepTimerEnd = 0;
+        }
+        function startSleepTimer() {
+            clearSleepTimer();
+            if (!sleepTimerMin) { updatePlayerExtrasUI(); return; }
+            sleepTimerEnd = Date.now() + sleepTimerMin * 60000;
+            sleepTimerId = setTimeout(() => {
+                stopAllAudio();
+                playerToast('⏲ 定時時間到，已停止播放');
+            }, sleepTimerMin * 60000);
+            sleepTickId = setInterval(updatePlayerExtrasUI, 15000);
+            updatePlayerExtrasUI();
+        }
+        function setSleepTimer(v) {
+            sleepTimerMin = parseInt(v) || 0;
+            savePlayerSettings();
+            if (isAutoplaying) startSleepTimer(); else updatePlayerExtrasUI();
+        }
+        function applySleepMode() {
+            playbackRate = 0.85;
+            autoplayPauseDuration = 5000;
+            sleepTimerMin = 20;
+            savePlayerSettings();
+            syncPlayerControls();
+            if (isAutoplaying) startSleepTimer();
+            playerToast('🌙 睡前模式：語速 0.85x、停頓 5 秒、20 分鐘後自動停止');
+        }
+
+        // ---------- settings ----------
+        function savePlayerSettings() {
+            try {
+                localStorage.setItem(PLAYER_KEY, JSON.stringify({
+                    rate: playbackRate, pause: autoplayPauseDuration, lang: readLang,
+                    shuffle: shuffleOn, loop: loopOn, timer: sleepTimerMin, pos: lastPositions
+                }));
+            } catch (e) {}
+        }
+        function loadPlayerSettings() {
+            try {
+                const s = JSON.parse(localStorage.getItem(PLAYER_KEY) || 'null');
+                if (s) {
+                    playbackRate = parseFloat(s.rate) || 1.0;
+                    autoplayPauseDuration = parseInt(s.pause) || 1000;
+                    readLang = ['en', 'zh', 'both'].includes(s.lang) ? s.lang : 'en';
+                    shuffleOn = !!s.shuffle;
+                    loopOn = !!s.loop;
+                    sleepTimerMin = parseInt(s.timer) || 0;
+                    lastPositions = (s.pos && typeof s.pos === 'object') ? s.pos : {};
+                }
+            } catch (e) {}
+            syncPlayerControls();
+        }
+        function setSelectValue(sel, val) {
+            if (!sel) return;
+            const v = String(val);
+            const has = Array.from(sel.options).some(o => o.value === v);
+            if (!has) {
+                const o = document.createElement('option');
+                o.value = v; o.textContent = v;
+                sel.appendChild(o);
+            }
+            sel.value = v;
+        }
+        function syncPlayerControls() {
+            ['principlesPlayerRateSelect', 'playerRateSelect'].forEach(id => setSelectValue(document.getElementById(id), playbackRate));
+            ['principlesPauseSelect', 'slidesPauseSelect'].forEach(id => setSelectValue(document.getElementById(id), autoplayPauseDuration));
+            document.querySelectorAll('.pl-lang').forEach(s => setSelectValue(s, readLang));
+            document.querySelectorAll('.pl-timer').forEach(s => setSelectValue(s, sleepTimerMin));
+            document.querySelectorAll('.pl-shuffle').forEach(b => { b.classList.toggle('is-on', shuffleOn); b.setAttribute('aria-pressed', String(shuffleOn)); });
+            document.querySelectorAll('.pl-loop').forEach(b => { b.classList.toggle('is-on', loopOn); b.setAttribute('aria-pressed', String(loopOn)); });
+            updatePlayerExtrasUI();
+        }
+        function updatePlayerExtrasUI() {
+            const bits = [];
+            if (wakeLock) bits.push('🔆 螢幕保持開啟');
+            if (sleepTimerEnd) bits.push(`⏲ ${Math.max(1, Math.ceil((sleepTimerEnd - Date.now()) / 60000))} 分後停止`);
+            document.querySelectorAll('.pl-status-extra').forEach(el => { el.textContent = bits.join('　'); });
+        }
+        function setReadLang(v) {
+            readLang = ['en', 'zh', 'both'].includes(v) ? v : 'en';
+            savePlayerSettings();
+            syncPlayerControls();
+            if (isAutoplaying && !isPaused) playCurrentQueueItem();
+        }
+        function toggleShuffle() {
+            shuffleOn = !shuffleOn;
+            savePlayerSettings();
+            syncPlayerControls();
+            playerToast(shuffleOn ? '🔀 隨機播放：開（下次按播放生效）' : '🔀 隨機播放：關（下次按播放生效）');
+        }
+        function toggleLoop() {
+            loopOn = !loopOn;
+            savePlayerSettings();
+            syncPlayerControls();
+            updatePlayerBarUI();
+        }
+
+        function resetAudioButtons() {
+            document.querySelectorAll('.audio-play-btn').forEach(btn => {
+                btn.classList.remove('speaking');
+                btn.innerHTML = '🔊';
+                btn.title = '朗讀這一則（語言依播放列設定）';
+            });
+        }
+
+        function stopAllAudio() {
+            cancelSpeech();
             isAutoplaying = false;
             isPaused = false;
             currentlyPlayingCardId = null;
             currentQueueIndex = -1;
-
-            // Reset all audio buttons
-            document.querySelectorAll('.audio-play-btn').forEach(btn => {
-                btn.classList.remove('speaking');
-                btn.innerHTML = '🔊';
-                btn.title = '播放優化英文語音';
-            });
-
-            // Remove card now-playing highlight
-            document.querySelectorAll('.principle-card.now-playing').forEach(c => {
-                c.classList.remove('now-playing');
-            });
-
+            clearSleepTimer();
+            releaseWakeLock();
+            resetAudioButtons();
+            document.querySelectorAll('.principle-card.now-playing').forEach(c => c.classList.remove('now-playing'));
             updatePlayerBarUI();
         }
 
-        function playEnglishAudio(evt, btn, text, cardId) {
+        // Single-card 🔊 (also used by random card & graph drawer)
+        function playEnglishAudio(evt, btn, text, cardId, zhText) {
             if (evt) evt.stopPropagation();
-            if (!speechSynth) {
-                alert('您的瀏覽器不支援 Web Speech API 語音發音功能。');
-                return;
-            }
+            if (!speechSynth) { showSpeechHint(); return; }
+            if (!text && !zhText) return;
 
-            if (!text || text.trim() === '') return;
-
-            // If this card is already playing, clicking again stops it
-            if (currentlyPlayingCardId === cardId && speechSynth.speaking) {
+            // Same button again = stop
+            if (currentlyPlayingCardId === cardId && !isAutoplaying) {
                 stopAllAudio();
                 return;
             }
-
-            // Stop any autoplay or other card playing
             stopAllAudio();
+            const my = playToken;
 
             currentlyPlayingCardId = cardId;
             if (btn) {
@@ -2849,64 +3273,42 @@
                 btn.innerHTML = '⏹️';
                 btn.title = '點擊停止語音';
             }
-
-            // Highlight card in slides or principles view
             const cardNum = String(cardId).replace(/^p/, '');
-            let cardEl = document.getElementById(`card-slide-${cardId}`) || document.getElementById(`card-principle-${cardNum}`);
+            const cardEl = document.getElementById(`card-slide-${cardId}`) || document.getElementById(`card-principle-${cardNum}`);
             if (cardEl) cardEl.classList.add('now-playing');
 
-            const utterance = new SpeechSynthesisUtterance(text);
-            if (speechVoice) utterance.voice = speechVoice;
-            utterance.lang = 'en-US';
-            utterance.rate = playbackRate;
-
-            utterance.onend = () => {
+            speakSequence(partsFor(text, zhText), my).then(() => {
+                if (my !== playToken) return;
                 if (btn) {
                     btn.classList.remove('speaking');
                     btn.innerHTML = '🔊';
-                    btn.title = '播放優化英文語音';
+                    btn.title = '朗讀這一則（語言依播放列設定）';
                 }
                 if (cardEl) cardEl.classList.remove('now-playing');
                 currentlyPlayingCardId = null;
-            };
-
-            utterance.onerror = () => {
-                if (btn) {
-                    btn.classList.remove('speaking');
-                    btn.innerHTML = '🔊';
-                    btn.title = '播放優化英文語音';
-                }
-                if (cardEl) cardEl.classList.remove('now-playing');
-                currentlyPlayingCardId = null;
-            };
-
-            speechSynth.speak(utterance);
+            });
         }
 
         function playSlideAudio(evt, btn, key) {
             const item = SLIDES.find(s => s.key === key);
-            if (item) {
-                playEnglishAudio(evt, btn, item.english || item.original, key);
-            }
+            if (item) playEnglishAudio(evt, btn, item.english || item.original, key, item.mandarin);
         }
 
         function playPrincipleAudio(evt, btn, num) {
             const p = PRINCIPLES.find(pr => pr.num === num);
-            if (p) {
-                playEnglishAudio(evt, btn, p.english, 'p' + num);
-            }
+            if (p) playEnglishAudio(evt, btn, p.english, 'p' + num, p.mandarin);
         }
 
         function playRandomCardAudio(evt, btn) {
             if (currentRandomCard) {
-                playEnglishAudio(evt, btn, currentRandomCard.english || currentRandomCard.original, currentRandomCard.key);
+                playEnglishAudio(evt, btn, currentRandomCard.english || currentRandomCard.original, currentRandomCard.key, currentRandomCard.mandarin);
             }
         }
 
         function playDrawerEnglishAudio(evt, btn) {
             if (selectedNode && selectedNode.data) {
                 const text = selectedNode.data.english || selectedNode.data.original || '';
-                playEnglishAudio(evt, btn, text, 'drawer-' + selectedNode.id);
+                playEnglishAudio(evt, btn, text, 'drawer-' + selectedNode.id, selectedNode.data.mandarin || '');
             }
         }
 
@@ -2914,7 +3316,7 @@
             return PRINCIPLES.filter(p => {
                 const chapterId = getChapterId(p.num);
                 const matchesChapter = (principlesFilter === 'all' || principlesFilter === chapterId);
-                const matchesSearch = !searchQuery || 
+                const matchesSearch = !searchQuery ||
                     p.title.toLowerCase().includes(searchQuery) ||
                     p.mandarin.toLowerCase().includes(searchQuery) ||
                     p.english.toLowerCase().includes(searchQuery) ||
@@ -2937,7 +3339,7 @@
                            p.title.toLowerCase().includes(searchLower);
                 });
 
-                const matchesSearch = !searchQuery || 
+                const matchesSearch = !searchQuery ||
                     s.key.toLowerCase().includes(searchQuery) ||
                     s.original.toLowerCase().includes(searchQuery) ||
                     s.mandarin.toLowerCase().includes(searchQuery) ||
@@ -2949,66 +3351,79 @@
             });
         }
 
+        function buildQueue(mode) {
+            if (mode === 'principles') {
+                return getCurrentlyFilteredPrinciples().map(p => ({
+                    mode: 'principles',
+                    key: 'p' + p.num,
+                    label: `原則 ${p.num}`,
+                    en: p.english,
+                    zh: p.mandarin,
+                    cardId: `card-principle-${p.num}`
+                }));
+            }
+            return getCurrentlyFilteredSlides().map(s => ({
+                mode: 'slides',
+                key: s.key,
+                label: `No. ${s.key}`,
+                en: s.english || s.original || '',
+                zh: s.mandarin,
+                cardId: `card-slide-${s.key}`
+            }));
+        }
+
+        function shuffledCopy(arr) {
+            const a = arr.slice();
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
         // ==========================================
         // Unified Autoplay Controller (Principles & Slides)
         // ==========================================
         function toggleAutoplay(mode) {
             mode = mode || (currentActiveView === 'principles' ? 'principles' : 'slides');
             if (isAutoplaying && autoplayMode === mode) {
-                if (isPaused) {
-                    resumeAutoplay();
-                } else {
-                    pauseAutoplay();
-                }
+                if (isPaused) resumeAutoplay();
+                else pauseAutoplay();
             } else {
                 startAutoplay(mode);
             }
         }
 
-        function startAutoplay(mode, startIndex = 0) {
-            if (!speechSynth) {
-                alert('您的瀏覽器不支援 Web Speech API 語音發音功能。');
+        // startIndex omitted = resume from the last played card of this mode (if still in the list)
+        function startAutoplay(mode, startIndex) {
+            if (!speechSynth) { showSpeechHint(); return; }
+            mode = mode || (currentActiveView === 'principles' ? 'principles' : 'slides');
+            let queue = buildQueue(mode);
+            if (queue.length === 0) {
+                playerToast(mode === 'principles' ? '目前沒有符合條件的核心原則可播放。' : '目前沒有符合條件的卡牌可播放。');
                 return;
             }
-
-            mode = mode || (currentActiveView === 'principles' ? 'principles' : 'slides');
-            let queue = [];
-            if (mode === 'principles') {
-                const principles = getCurrentlyFilteredPrinciples();
-                if (principles.length === 0) {
-                    alert('當前無符合條件的核心原則可供播放。');
-                    return;
-                }
-                queue = principles.map(p => ({
-                    mode: 'principles',
-                    key: 'p' + p.num,
-                    label: `原則 ${p.num}`,
-                    text: p.english,
-                    cardId: `card-principle-${p.num}`
-                }));
-            } else {
-                const slides = getCurrentlyFilteredSlides();
-                if (slides.length === 0) {
-                    alert('當前無符合條件的卡牌可供播放。');
-                    return;
-                }
-                queue = slides.map(s => ({
-                    mode: 'slides',
-                    key: s.key,
-                    label: `No. ${s.key}`,
-                    text: s.english || s.original || '',
-                    cardId: `card-slide-${s.key}`
-                }));
+            let idx = 0;
+            if (typeof startIndex === 'number') {
+                idx = startIndex;
+            } else if (lastPositions[mode]) {
+                idx = Math.max(0, queue.findIndex(q => q.key === lastPositions[mode]));
+            }
+            idx = Math.max(0, Math.min(idx, queue.length - 1));
+            if (shuffleOn) {
+                const first = queue[idx];
+                queue = [first].concat(shuffledCopy(queue.filter(q => q !== first)));
+                idx = 0;
             }
 
             stopAllAudio();
-
             autoplayMode = mode;
             autoplayQueue = queue;
-            currentQueueIndex = Math.max(0, Math.min(startIndex || 0, queue.length - 1));
+            currentQueueIndex = idx;
             isAutoplaying = true;
             isPaused = false;
-
+            startSleepTimer();
+            requestWakeLock();
             updatePlayerBarUI();
             playCurrentQueueItem();
         }
@@ -3018,19 +3433,16 @@
                 stopAllAudio();
                 return;
             }
-
+            cancelSpeech();
+            const my = playToken;
             const item = autoplayQueue[currentQueueIndex];
             currentlyPlayingCardId = item.key;
+            lastPositions[item.mode] = item.key;
+            savePlayerSettings();
             updatePlayerBarUI();
 
-            // Clear previous highlights
             document.querySelectorAll('.principle-card.now-playing').forEach(c => c.classList.remove('now-playing'));
-            document.querySelectorAll('.audio-play-btn.speaking').forEach(b => {
-                b.classList.remove('speaking');
-                b.innerHTML = '🔊';
-            });
-
-            // Smooth scroll & highlight card (accounting for sticky top header & player bar)
+            resetAudioButtons();
             const cardEl = document.getElementById(item.cardId);
             if (cardEl) {
                 scrollCardIntoVisibleArea(cardEl);
@@ -3042,52 +3454,46 @@
                 }
             }
 
-            const utterance = new SpeechSynthesisUtterance(item.text);
-            if (speechVoice) utterance.voice = speechVoice;
-            utterance.lang = 'en-US';
-            utterance.rate = playbackRate;
-
-            utterance.onend = () => {
-                if (!isAutoplaying || isPaused) return;
+            speakSequence(partsFor(item.en, item.zh), my).then(ok => {
+                if (!ok || my !== playToken || !isAutoplaying || isPaused) return;
                 setTimeout(() => {
-                    if (!isAutoplaying || isPaused) return;
-                    currentQueueIndex++;
-                    if (currentQueueIndex < autoplayQueue.length) {
-                        playCurrentQueueItem();
-                    } else {
-                        stopAllAudio();
-                    }
+                    if (my !== playToken || !isAutoplaying || isPaused) return;
+                    advanceQueue();
                 }, autoplayPauseDuration);
-            };
+            });
+        }
 
-            utterance.onerror = () => {
-                if (!isAutoplaying || isPaused) return;
-                setTimeout(() => {
-                    if (!isAutoplaying || isPaused) return;
-                    currentQueueIndex++;
-                    if (currentQueueIndex < autoplayQueue.length) {
-                        playCurrentQueueItem();
-                    } else {
-                        stopAllAudio();
-                    }
-                }, 500);
-            };
-
-            speechSynth.speak(utterance);
+        function advanceQueue() {
+            if (currentQueueIndex < autoplayQueue.length - 1) {
+                currentQueueIndex++;
+                playCurrentQueueItem();
+                return;
+            }
+            if (loopOn && autoplayQueue.length) {
+                if (shuffleOn) autoplayQueue = shuffledCopy(autoplayQueue);
+                currentQueueIndex = 0;
+                playCurrentQueueItem();
+                return;
+            }
+            delete lastPositions[autoplayMode];
+            savePlayerSettings();
+            stopAllAudio();
+            playerToast('✅ 已全部播放完畢');
         }
 
         function pauseAutoplay() {
             if (!isAutoplaying || isPaused) return;
-            if (speechSynth) speechSynth.pause();
             isPaused = true;
+            cancelSpeech();
+            releaseWakeLock();
             updatePlayerBarUI();
         }
 
         function resumeAutoplay() {
             if (!isAutoplaying || !isPaused) return;
-            if (speechSynth) speechSynth.resume();
             isPaused = false;
-            updatePlayerBarUI();
+            requestWakeLock();
+            playCurrentQueueItem();   // replays the current card from its start
         }
 
         function nextAudioItem() {
@@ -3095,10 +3501,12 @@
                 startAutoplay(currentActiveView === 'principles' ? 'principles' : 'slides');
                 return;
             }
-            if (speechSynth) speechSynth.cancel();
+            isPaused = false;
             if (currentQueueIndex < autoplayQueue.length - 1) {
                 currentQueueIndex++;
-                isPaused = false;
+                playCurrentQueueItem();
+            } else if (loopOn) {
+                currentQueueIndex = 0;
                 playCurrentQueueItem();
             } else {
                 stopAllAudio();
@@ -3107,14 +3515,9 @@
 
         function prevAudioItem() {
             if (!isAutoplaying) return;
-            if (speechSynth) speechSynth.cancel();
-            if (currentQueueIndex > 0) {
-                currentQueueIndex--;
-                isPaused = false;
-                playCurrentQueueItem();
-            } else {
-                playCurrentQueueItem();
-            }
+            isPaused = false;
+            if (currentQueueIndex > 0) currentQueueIndex--;
+            playCurrentQueueItem();
         }
 
         // Backward compatibility aliases
@@ -3128,22 +3531,15 @@
 
         function changePlaybackRate(rate) {
             playbackRate = parseFloat(rate) || 1.0;
-            const pSel = document.getElementById('principlesPlayerRateSelect');
-            const sSel = document.getElementById('playerRateSelect');
-            if (pSel) pSel.value = String(playbackRate);
-            if (sSel) sSel.value = String(playbackRate);
-            if (speechSynth && speechSynth.speaking && isAutoplaying) {
-                speechSynth.cancel();
-                playCurrentQueueItem();
-            }
+            savePlayerSettings();
+            syncPlayerControls();
+            if (isAutoplaying && !isPaused) playCurrentQueueItem();
         }
 
         function changePauseDuration(val) {
             autoplayPauseDuration = parseInt(val) || 1000;
-            const pPause = document.getElementById('principlesPauseSelect');
-            const sPause = document.getElementById('slidesPauseSelect');
-            if (pPause) pPause.value = String(autoplayPauseDuration);
-            if (sPause) sPause.value = String(autoplayPauseDuration);
+            savePlayerSettings();
+            syncPlayerControls();
         }
 
         function updateSliderTrackStyle(slider, val, max) {
@@ -3183,30 +3579,7 @@
             mode = mode || (currentActiveView === 'principles' ? 'principles' : 'slides');
 
             let queue = (isAutoplaying && autoplayMode === mode && autoplayQueue && autoplayQueue.length > 0) ? autoplayQueue : null;
-            if (!queue) {
-                if (mode === 'principles') {
-                    const principles = getCurrentlyFilteredPrinciples();
-                    if (principles.length === 0) return;
-                    queue = principles.map(p => ({
-                        mode: 'principles',
-                        key: 'p' + p.num,
-                        label: `原則 ${p.num}`,
-                        text: p.english,
-                        cardId: `card-principle-${p.num}`
-                    }));
-                } else {
-                    const slides = getCurrentlyFilteredSlides();
-                    if (slides.length === 0) return;
-                    queue = slides.map(s => ({
-                        mode: 'slides',
-                        key: s.key,
-                        label: `No. ${s.key}`,
-                        text: s.english || s.original || '',
-                        cardId: `card-slide-${s.key}`
-                    }));
-                }
-            }
-
+            if (!queue) queue = buildQueue(mode);
             if (!queue || queue.length === 0) return;
 
             const valStr = String(val).trim();
@@ -3291,7 +3664,7 @@
                         updateSliderTrackStyle(pSlider, curr, total);
                     }
                     if (pPrevBtn) pPrevBtn.disabled = currentQueueIndex <= 0;
-                    if (pNextBtn) pNextBtn.disabled = currentQueueIndex >= total - 1;
+                    if (pNextBtn) pNextBtn.disabled = currentQueueIndex >= total - 1 && !loopOn;
 
                     // Idle slides player
                     if (sPlayBtn) sPlayBtn.innerHTML = '<span>▶️</span> 自動連續播放';
@@ -3330,7 +3703,7 @@
                         updateSliderTrackStyle(sSlider, curr, total);
                     }
                     if (sPrevBtn) sPrevBtn.disabled = currentQueueIndex <= 0;
-                    if (sNextBtn) sNextBtn.disabled = currentQueueIndex >= total - 1;
+                    if (sNextBtn) sNextBtn.disabled = currentQueueIndex >= total - 1 && !loopOn;
 
                     // Idle principles player
                     if (pPlayBtn) pPlayBtn.innerHTML = '<span>▶️</span> 自動連續播放';
@@ -4494,6 +4867,13 @@
             } else {
                 graphAnimationId = null;
             }
+        }
+
+        // PWA: installable + offline (network-first service worker)
+        if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(() => {});
+            });
         }
     </script>
 </body>

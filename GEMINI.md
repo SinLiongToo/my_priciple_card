@@ -50,6 +50,11 @@
 - **極致 RWD 體驗**：
   - 手機端 (< 768px)：章節篩選器與開關按鈕須維持橫向滑動膠囊（Horizontal Scroll Chips），禁止折行破壞版面。
   - 抽卡模式背面文字若超出高度，必須支援卡片內部平滑滾動（`-webkit-overflow-scrolling: touch`）。
+- **Web App（PWA）與自動播放**：
+  - `manifest.webmanifest`、`sw.js`、`icons/` 為手寫靜態檔（不由 `update_handbook.py` 產生）。`sw.js` 採網路優先、離線才用快取；修改預先快取清單時要把 `CACHE` 版本號加一。
+  - 播放器（核心原則／簡報卡牌兩條播放列共用）：朗讀語言 English／中文／中＋英、隨機、循環、定時停止、🌙 睡前模式、自動播放時以 Screen Wake Lock 保持螢幕開啟、記住設定與上次位置（`localStorage` key `work_principles_player_v1`）。
+  - 手機語音規則：只在 `speaking || pending` 時才 `cancel()`；第一句 `speak()` 必須在點擊事件內同步呼叫；每句有逾時保護；聽不到時顯示頁內提示（禁用 `alert()`）；LINE 內建瀏覽器自動加 `?openExternalBrowser=1`。
+  - ⚠️ HTML 模板是一般（非 raw）Python f-string：JS 裡的反斜線要寫成 `\\`（例如 `\\b`、`\\s`），否則 `\b` 會變成退格字元，regex 悄悄失效。
 
 ---
 
